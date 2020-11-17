@@ -1,0 +1,92 @@
+<app-banner [tittle]="bannerTittle" [bannerMsj]="bannerText">
+</app-banner>
+
+<!--Home component-->
+<section class="home__component">
+    <h1>Mini súper Topacio</h1>
+    <div class="home__component__list">
+        <div class="home__component__cont">
+            <img src="https://cdn.pixabay.com/photo/2015/09/02/12/25/basket-918416_1280.jpg"
+                alt="imagen minisuper topacio">
+            <div class="home__component__text">
+                <h2>Productos</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi quam vitae voluptatum voluptates
+                    omnis
+                    ratione error
+                    officia pariatur illum repellat. Odit velit repellat eaque laboriosam, sint aliquam totam officia,
+                    sapiente tempore
+                    placeat magni quibusdam nisi, soluta voluptate temporibus ex architecto!
+                </p>
+            </div>
+        </div>
+        <h3>Algunas de las marcas que vendemos</h3>
+        <app-productlist></app-productlist>
+    </div>
+
+    <div class="divider">
+            <svg class="clouds" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100"
+                viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M-5 100 Q 0 20 5 100 Z
+                             M0 100 Q 5 0 10 100
+                             M5 100 Q 10 30 15 100
+                             M10 100 Q 15 10 20 100
+                             M15 100 Q 20 30 25 100
+                             M20 100 Q 25 -10 30 100
+                             M25 100 Q 30 10 35 100
+                             M30 100 Q 35 30 40 100
+                             M35 100 Q 40 10 45 100
+                             M40 100 Q 45 50 50 100
+                             M45 100 Q 50 20 55 100
+                             M50 100 Q 55 40 60 100
+                             M55 100 Q 60 60 65 100
+                             M60 100 Q 65 50 70 100
+                             M65 100 Q 70 20 75 100
+                             M70 100 Q 75 45 80 100
+                             M75 100 Q 80 30 85 100
+                             M80 100 Q 85 20 90 100
+                             M85 100 Q 90 50 95 100
+                             M90 100 Q 95 25 100 100
+                             M95 100 Q 100 15 105 100 Z"></path>
+            </svg>
+    </div>
+
+    <div class="home__form">
+        <div class="home__form__img">
+            <!--
+
+            <form class="home__form__card">
+                <span class="home__form__tittle">Tu opinión nos importa</span>
+
+                <div class="home__form__element">
+                    <label for="first__name">Nombre <span class="asterisk__red">*</span></label>
+                    <input type="text" id="first__name" name="first__name" placeholder="Escribe tu nombre">
+                </div>
+
+                <div class="home__form__element">
+                    <label for="email">Correo Electrónico <span class="asterisk__red">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Escribe tu email">
+                </div>
+
+                <div class="home__form__element">
+                    <label for="message">Mensaje <span class="asterisk__red">*</span></label>
+                    <textarea name="message" id="message" cols="20" rows="2"
+                        placeholder="Escribe el mensaje o comentario (máximo 255 carácteres)"></textarea>
+                </div>
+
+                <button type="submit">Enviar comentarios</button>
+            </form>
+            -->
+            <div class="home__form__comments">
+                <span>Escribenos tus comentarios</span>
+                <p>
+                    {{commentString}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!--End home component-->

@@ -1,0 +1,24 @@
+/*Fonts*/
+@import url(https://fonts.googleapis.com/css2?family=Domine&display=swap);
+$domine: 'Domine', serif;
+
+/*Colors*/
+$white: #FFFFFF;
+$black: #010101;
+$vermilion: #E41912;
+$darkPurple: #23001E;
+$mintCream: #EDF9F5;
+$buttons: #3483fa;
+
+/*Font-types*/
+$font-weights: (
+    "regular": 400,
+    "medium": 500,
+    "bold": 700
+);
+
+/*Images*/
+$breakfastsBanner: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
+$servicesBanner: "https://images.unsplash.com/photo-1500576992153-0271099def59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+$aboutBanner: "https://images.unsplash.com/photo-1464869372688-a93d806be852?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+$productsBanner: "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80";

@@ -1,0 +1,70 @@
+/*Breakfasts component responsive*/
+/*Large tablet*/
+@mixin breakfastsLargeTablet {
+    margin: 0 3rem;
+        #{&}__head {
+            .description {
+                width: 67%;
+                p{
+                   font-size: 1rem; 
+                }
+            }
+            .tittle {
+                margin-left: 0rem;
+                p{
+                    font-size: 1.4rem;
+                }
+            }
+        }
+}
+/*Large tablets and small tables*/
+@mixin breakfastsTabletandsmallTablet {
+    padding-top: 3rem;
+        #{&}__food {
+            padding-top: 2rem;
+        }
+        #{&}__head {
+            @include flex-dir(column);
+            .description {
+                width: 80%;
+            }
+        }
+}
+
+@mixin breakfastsLargeAndMediumPhone {
+    hr {
+        width: 12rem;
+    }
+    #{&}__head {
+        .description {
+            width: 95%;
+        }
+    }
+    #{&}__food {
+        h3 {
+            font-size: 2rem;
+        }
+    }
+}
+
+@mixin breakfastsPhoneAndSmallPhone {
+    hr {
+        width: 9rem;
+    }
+    #{&}__head {
+        .tittle {
+            width: 16rem;
+        }
+    }
+    #{&}__food {
+        padding-top: 1rem;
+        h3 {
+            font-size: 1.8rem;
+        }
+    }
+}
+/*End Breakfasts component responsive*/
+
+/*desertItem component responsive*/
+
+/*End desertItem component responsive*/

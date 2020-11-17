@@ -1,0 +1,1347 @@
+/* You can add global styles to this file, and also import other style files */
+@import './variables';
+@import '../scss/mixins';
+@import '../scss/functions';
+@import '../scss/breakpoints';
+@import '../scss/responsive';
+
+body {
+    background-color: $mintCream;
+    font-family: $domine;
+}
+
+/*SCSS NavBar Component*/
+
+/*Mobile*/
+.nav__mobile {
+    display: none;
+    background-color: $vermilion;
+    text-align: end;
+    padding: 1rem;
+    #options {
+        display: none;
+    }
+    #{&}__menu {
+        margin: auto;
+        padding: 1rem 2rem;
+        font-size: 4rem;
+        cursor: pointer;
+    }
+    #{&}__logo {
+        justify-content: center;
+        display: flex;
+        img {
+            @include center();
+            position: absolute;
+            width: 8rem;
+        }
+    }
+    #{&}__options {
+        list-style-type: none;
+        background-color: $darkPurple;
+        position: absolute;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        padding: 31px;
+        text-align: center;
+        z-index: 100;
+        a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: $mintCream;
+            line-height: 5rem;
+        }
+    }
+    @include media('<=phone') {
+        #{&}__menu {
+            padding: 0rem 0.8rem;
+            font-size: 2rem;
+        }
+        #{&}__logo img {
+            width: 5rem;
+        }
+    }
+    @include media('>phone', '<=558px') {
+        #{&}__menu {
+            padding: 1rem 1rem;
+            font-size: 2.5rem;
+        }
+        #{&}__logo img {
+            width: 6rem;
+        }
+    }
+    @include media('<=tablet') {
+        display: block;
+    }
+}
+/*End Mobile*/
+
+/*Desktop*/
+.nav__desktop {
+    font-weight: font-weights(bold);
+    background-color: $vermilion;
+    font-size: 1em;
+
+    .nav__content {
+        @include flex-dir(row);
+    }
+
+    .nav__color-band {
+        min-height: 10px;
+        background-color: $darkPurple;
+    }
+
+    .nav__logo {
+        @include center();
+        img {
+            width: 8rem;
+        }
+    }
+
+    .nav__location {
+        @include center();
+        a{
+            font-weight: font-weights(regular);
+            text-decoration: none;
+            color: $mintCream;
+            &:hover {
+                color: $white;
+                text-decoration: underline;
+                transition: ease-in 0.2s;
+            }
+        }
+        i {
+            color: $darkPurple;
+            font-size: 1.5rem;
+            margin-right: 6px;
+        }
+    }
+
+    ul {
+        @include flex-dir(row);
+        list-style-type: none;
+        justify-content: center;
+        height: 90px;
+        margin: 0;
+        margin-top: 2rem;
+    }
+
+    li {
+        padding-top: 3.5rem;
+        height: 1rem;
+    }
+
+    li a{
+        padding: 0.95rem;
+        text-decoration: none;
+        color: $mintCream;
+        &:hover {
+            @include buttonOver();
+        }
+    }
+
+    @include media('<=tablet') {
+        display: none;
+    }
+}
+/*End Desktop*/
+/*End NavBar SCSS component*/
+
+/*Banner SCCS Component*/
+.banner__breakfasts {
+    background-image: url($breakfastsBanner);
+}
+.banner__services {
+    background-image: url($servicesBanner);
+}
+.banner__about {
+    background-image: url($aboutBanner);
+}
+.banner__products {
+    background-image: url($productsBanner);
+  }
+.banner {
+    background-color: $darkPurple;
+    background-size: cover;
+    background-position: center;
+    height: 20rem;
+    #{&}__content {
+        text-align: center;
+        color: $mintCream;
+        padding: 7rem;
+        h2 {
+            -webkit-text-stroke: 1.5px black;
+            font-size: 5rem;
+            margin: 0;
+        }
+    }
+    @include media('<=tablet') {
+        height: 15rem;
+        #{&}__content {
+            padding: 3rem;
+        }
+    }
+    @include media('>=phone', '<=534px') {
+        height: 11rem;
+        #{&}__content {
+            padding: 2rem;
+            h2 {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+/*End banner SCCS component*/
+
+/*Covid-19 banner*/
+.covid__banner{
+    background: rgb(255,115,118);
+    background: radial-gradient(circle, rgba(255,115,118,1) 0%, rgba(255,54,58,1) 100%); 
+    text-align: center;
+    #{&}__tittle {
+        @include flex-dir(row);
+        justify-content: center;
+    }
+    #{&}__content {
+        padding: 1rem;
+        h3 {
+            text-align: center;
+            color: $mintCream;
+            font-size: 1rem;
+            margin: 0;
+        }
+        p {
+            text-align: justify;
+            color: $mintCream;
+            padding: 0.5rem;
+            margin: auto;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            width: 61%;
+        }
+        a {
+            text-align: center;
+            text-decoration: none;
+            background-color: $darkPurple;
+            color: $mintCream;
+            border: 1px solid $mintCream;
+            padding: 0.5rem;
+            font-size: 0.7rem;
+            &:hover {
+                transition: ease-in 0.2s;
+                background-color: $vermilion;
+                border: 1px solid $darkPurple;
+            }
+        }
+    }
+    #{&}__icon {
+        position: absolute;
+        right: 15rem;
+        i {
+            &:hover {
+                transition: ease-in 0.2s;
+                cursor: pointer;
+                color: $mintCream;
+                background-color: $darkPurple;
+            }
+        }
+    }
+    @include media ('>=tablet', '<=1336px') {
+        #{&}__icon {
+            right: 6rem;
+        }
+    }
+    @include media ('<=tablet') {
+        #{&}__icon {
+            right: 5%;
+        }
+        #{&}__content {
+            p {
+                width: 95%;
+            }
+        }
+    }
+}
+/*End Covid-19 banner*/
+
+/*Breakfasts SCSS component*/
+.breakfasts {
+    @include flex-dir(column);
+    justify-content: center;
+    margin: 0 8rem;
+    padding-top: 5rem;
+
+    hr {
+        width: 20rem;
+        height: 3px;
+        border: none;
+        background-color: red;
+        margin-bottom: 3rem;
+    }
+
+    #{&}__head {
+        @include flex-dir (row);
+        .tittle {
+            margin-left: 4rem;
+            width: 22rem;
+            h2{
+                font-size: 1rem;
+                color: $vermilion; 
+            }
+            p{
+                margin: 0;
+                font-size: 2rem;
+                font-weight: font-weights(bold);
+                color: $darkPurple;
+            }
+        }
+        .description {
+            padding: 1rem 0;
+            width: 50%;
+            p {
+                font-size: 1.3rem;
+                color: $darkPurple;
+                text-align: justify;
+                font-weight: font-weights(medium);
+            }
+        }
+    }
+
+    #{&}__food {
+        padding-top: 5rem;
+        h3{
+            font-size: 3rem;
+            text-align: center;
+            margin: 0;
+            color: $darkPurple;
+        }
+    }
+
+    #{&}__food__list{
+        @include flex-dir(row);
+        margin-left: 2rem;
+        margin-right: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    @include media('>=tablet', '<=1054px') {
+        @include breakfastsLargeTablet;
+    }
+
+    @include media('<=tablet') {
+        @include breakfastsLargeTablet;
+        @include breakfastsTabletandsmallTablet;
+    }
+
+    @include media('>=phone' , '<=540px') {
+        @include breakfastsLargeAndMediumPhone;
+    }
+
+    @include media('>=phone', '<=400px') {
+        @include breakfastsPhoneAndSmallPhone;
+    }
+}
+/*End breakfasts SCCS component*/
+
+/*Desertitem SCCS component*/
+.food-item {
+    @include center();
+    margin: 3rem;
+    text-align: center;
+    background-color: $white;
+    padding: 2.3rem;
+    width: 14rem;
+    border: 1px solid;
+    border-radius: 4px;
+    &:hover{
+        transition: ease-in 0.2s;
+        @include shadow;
+    }
+    img {
+        width: 10rem;
+    }
+    .precio {
+        span{
+            font-weight: font-weights(bold);
+        }
+    }
+
+    @include media('<=1506px') {
+        margin: 1rem;
+    }
+
+    @include media('>=tablet', '<=1313px'){
+        width: 11rem;
+        padding: 1.5rem;
+    }
+
+    @include media('>=tablet', '<=932px') {
+        margin: 0.5rem;
+        padding: 1.2rem;
+    }
+
+    @include media('>=tablet', '<=855px') {
+        margin: 2rem;
+        padding: 1.5rem;
+    }
+
+    @include media('>=phone', '<tablet') {
+        padding: 1.6rem;
+        width: 12rem;
+    }
+}
+/*End desertitem SCCS component*/
+
+/*About us component*/
+.section__center {
+    margin: auto;
+    width: 80%;
+}
+
+.about__section {
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+    #{&}__chunk {
+        h2 {
+            color: $vermilion;
+            font-size: 1.7rem;        
+        }
+        p {
+            margin-bottom: 2rem;
+        }
+       .about__section__chunk__img {
+            img {
+                @include center;
+                width: 25rem;
+            }
+            hr {
+                background-color: $vermilion;
+                height: 0.2rem;
+                border: none;
+                width: 15rem;
+                margin-top: 1.1rem;
+            }
+            p {
+                text-align: center;
+            }
+        }
+    }
+
+    @include media('>=phone', '<=642px') {
+        width: 90%;
+        #{&}__chunk {
+            .about__section__chunk__img {
+                img {
+                    width: 21rem;
+                }
+            }
+        }
+    }
+
+    @include media('>=phone', '<=421px') {
+        #{&}__chunk {
+            .about__section__chunk__img {
+                img {
+                    width: 100%;
+                }
+                p {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+}
+/*End About us component*/
+
+/*Footer component*/
+.footer__component {
+    hr {
+        background-color: $darkPurple;
+        height: 0.1rem;
+        border: none;
+    }
+    background-color: $vermilion;
+    .footer__col__boxes{
+        @include flex-dir(row);
+        padding: 2rem;
+        .links {
+            margin-left: 10rem;
+        }
+        ul {
+            list-style-type: none;
+            display: contents;
+            a {
+                text-decoration: none;
+                color: $mintCream;
+                i {
+                    margin-right: 0.5rem;
+                }
+            }
+            li {
+                padding: 0.15rem;
+            }
+        }
+        .brand{
+            width: 30rem;
+        }
+        .underline{
+            width: 6rem;
+            margin: 0;
+            margin-bottom: 0.4rem;
+            height: 0.15rem;
+        }
+        h3 {
+            font-weight: font-weights(bold);
+            color: $darkPurple;
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+        p {
+            margin-top: 0.5rem;
+            color: $mintCream;
+            font-weight: font-weights(regular);
+        }
+    }
+    .footer__rights {
+        margin: auto;
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        color: $mintCream;    
+    }
+
+    @include media('>=tablet', '<=902px'){
+        .footer__col__boxes {
+            .links {
+                margin-left: 1rem;
+            }
+            p {
+                width: 80%;
+            }
+            .brand {
+                width: 26rem;
+            }
+        }
+    }
+
+    @include media('<=tablet') {
+        .footer__col__boxes {
+            .links{
+                margin-left: 0;
+            }
+            .brand {
+                width: 23rem;
+            }
+        }
+    }
+    @include media('>=phone', '<=596px') {
+        .footer__col__boxes {
+            @include flex-dir(column);
+            .brand {
+                width: 23rem;
+                margin: auto;
+            }
+            .links {
+                margin: auto;
+                width: 23rem;
+            }
+        }
+    }
+    @include media('>=phone', '<=438px'){
+        .footer__col__boxes {
+            .brand {
+               width: 15rem; 
+            }
+            .links {
+                width: 15rem;
+            }
+        }
+        .footer__rights {
+            font-size: 0.65rem;
+        }
+    }
+}
+/*End footer component*/
+
+/*ProductList component (Carousel)*/
+.carousel {
+    margin: auto;
+    width: 50%;
+    @mixin arrows__carousel {
+        position: absolute;
+        outline: none;
+        top: 50%;
+        z-index: 2;
+    }
+    &__list {
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+    }
+    &__container {
+        position: relative;
+    }
+    &__element {
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem;
+        img {
+            width: 7rem;
+            margin: auto;
+        }
+        span {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+    }
+    &__prev {
+        @include arrows__carousel;
+        left: 0;
+    }
+    &__next {
+        @include arrows__carousel;
+        right: 0;
+    }
+    button {
+        background-color: transparent;
+        border: none;
+        opacity: 30%;
+        &:hover {
+            cursor: pointer;
+            opacity: 100%;
+            transition: ease-in 0.3s;
+        }
+    }
+    @include media ('<=1305px') {
+        &__element {
+            img {
+                width: 5rem;
+            }
+        }
+    }
+    @include media ('<=1000px') {
+        width: 60% !important;
+    }
+}
+/*End ProductList compoent*/
+
+/*Home component*/
+
+.home__component {
+    h1 {
+        text-align: center;
+        font-size: 3rem;
+        padding: 2rem;
+    }
+    &__list {
+        text-align: center;
+        margin-bottom: 2rem;
+        h3 {
+            font-size: 1.5rem;
+            width: max-content;
+            margin: auto;
+            &::after {
+                content: "";
+                @include flex-dir(column);
+                background-color: $vermilion;
+                height: 1.5px;
+                width: 80%;
+                margin: auto;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+    &__text {
+        h2 {
+            margin: 0;
+            display: flex;
+            font-size: 2.4rem;
+        }
+        p {
+            font-size: 1.2rem;
+            text-align: left;
+        }
+        @include flex-dir(column);
+        width: 30%;
+        margin: 3rem;
+        margin-top: 0;
+    }
+    &__cont{
+        justify-content: center;
+        margin: auto;
+        @include flex-dir(row);
+        margin-bottom: 3rem;
+        img {
+            width: 30rem;
+            border-radius: 10px;
+        }
+    }
+
+    @include media('<=890px'){
+        &__cont {
+            img {
+               width: 25rem;
+               height: 25rem;
+               margin-left: 2rem; 
+            }
+        }
+        &__text {
+            p {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    @include media ('<=680px') {
+        &__cont {
+            flex-direction: column;
+            img {
+                margin: auto;
+                width: 19rem;
+                height: 19rem;
+                margin-bottom: 2rem;
+            }
+        }
+        &__text {
+            margin: auto;
+            width: 80%;
+        }
+    }
+
+    @include media ('<=525px') {
+        h1 {
+            font-size: 2rem;
+        }
+        &__list {
+            h3 {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    @include media ('<=372px') {
+        h1 {
+            font-size: 1.64rem;
+        }
+    }
+
+    .home__form {
+        background-image: url("https://cdn.pixabay.com/photo/2017/05/31/23/44/email-marketing-2362038_1280.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        z-index: 1;
+        &__img {
+            background-color: rgba($color: $vermilion, $alpha: 0.35);
+            width: 100%;
+            justify-content: center;
+            padding: 4rem 0;
+            @include flex-dir(row);
+        }
+        &__card {
+            @include flex-dir(column);
+            width: 20rem;
+            height: 21rem;
+            background-color: $mintCream;
+            padding: 2rem;
+            border-radius: 5px;
+            position: relative;
+            margin: 0 3rem;
+            .asterisk__red {
+                color: $vermilion;
+            }
+            button {
+                border: 3px solid $darkPurple;
+                background-color: transparent;
+                font-size: 1.2rem;
+                height: 2.5rem;
+                width: max-content;
+                position: absolute;
+                bottom: 1rem;
+                right: 2rem;
+                &:hover {
+                    cursor: pointer;
+                    background-color: $darkPurple;
+                    border-color: $mintCream;
+                    color: $mintCream;
+                    transition: ease-in 0.4s;
+                }
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                background: #D42709;
+                background: -webkit-linear-gradient(top left, #D42709, #FFFFFF);
+                background: -moz-linear-gradient(top left, #D42709, #FFFFFF);
+                background: linear-gradient(to bottom right, #D42709, #FFFFFF);
+                height: 6rem;
+                width: 6rem;
+                border-radius: 50%;
+                left: -4rem;
+                top: -2rem;
+                z-index: -1;
+            }
+            &::after{
+                content: "";
+                position: absolute;
+                background: #D42709;
+                background: -webkit-linear-gradient(bottom right, #D42709, #FFFFFF);
+                background: -moz-linear-gradient(bottom right, #D42709, #FFFFFF);
+                background: linear-gradient(to top left, #D42709, #FFFFFF);
+                height: 12rem;
+                width: 12rem;
+                border-radius: 50%;
+                bottom: -3rem;
+                right: -1rem;
+                z-index: -1;
+            }
+        }
+        &__tittle {
+            font-size: 1.5rem;
+            &::after {
+                content: "";
+                @include flex-dir(column);
+                background-color: $darkPurple;
+                height: 4px;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                width: 60%;
+                border-radius: 3px;
+            }
+        }
+        &__element {
+            @include flex-dir(column);
+            padding-top: 1rem;
+            input {
+                height: 2rem;
+                @include form-elm();
+                overflow: hidden;
+                &:focus {
+                    opacity: 100%;
+                    transition: ease-in 0.3s;
+                    padding-bottom: 0.1rem;
+                }
+            }
+            textarea {
+                @include form-elm();
+                resize: none;
+                &:focus {
+                    opacity: 100%;
+                    transition: ease-in 0.3s;
+                    padding-bottom: 0.1rem;
+                }
+            }
+        }
+        &__comments {
+            margin-left: 3rem;
+            span {
+                color: $darkPurple;
+                font-size: 3rem;
+                font-weight: font-weights(bold);
+            }
+            p {
+                color: $mintCream;
+                font-size: 1.5rem;
+            }
+        }
+        @include media ('<=1286px'){
+            &__tittle {
+                font-size: 1.3rem;
+            }
+            &__comments {
+                margin-left: 0;
+                span {
+                    font-size: 2.2rem;
+                }
+                p {
+                    font-size: 1.3rem;
+                    line-height: 40px;
+                }
+            }
+            &__element {
+                textarea {
+                    font-size: 1rem;
+                }
+            }
+        }
+        @include media ('<tablet') {
+            &__card {
+                margin: 0 2rem;
+            }
+            .clouds {
+                bottom: -1px;
+            }
+        }
+        @include media('<=676px') {
+            &__img {
+                flex-direction: column-reverse;
+            }
+            &__comments {
+                text-align: center;
+                span {
+                    font-size: 2.5rem;
+                }
+                p {
+                    width: 80%;
+                    margin: auto;
+                    text-align: left;
+                    margin-top: 1rem;
+                }
+                margin-bottom: 2rem;
+            }
+            &__card {
+                margin: 0 auto;
+            }
+        }
+        @include media('<=572px'){
+            &__comments {
+                span {
+                    font-size: 1.4rem;
+                }
+                p {
+                    font-size: 1rem;
+                    width: 85%;
+                    line-height: 20px;
+                }
+            }
+            &__card {
+                width: 15rem;
+            }
+            &__element {
+                textarea {
+                    font-size: 0.95rem; 
+                }
+                input {
+                    font-size: 0.95rem; 
+                }
+            }
+        }
+    }
+}
+
+/*End homer component*/
+
+/*Services component*/
+.services {
+    &__info {
+        #first__bg {
+           @include backgroundServices();
+        }
+        #second__bg {
+            background-color: $mintCream;
+            position: relative;
+            z-index: 2;
+            &::after {
+                content: "\f0a7";
+                font-family: FontAwesome;
+                width: 3rem;
+                border-radius: 50%;
+                position: absolute;
+                background-image: linear-gradient(to right bottom, #23001e, #45032e, #6d0037, #950038, #ba0030, #c90129, #d70b20, #e41912, #e41912, #e41912, #e41912, #e41912);
+                top: -2rem;
+                text-align: center;
+                padding: 1rem;
+                font-size: 2.5rem;
+                color: $mintCream;
+            }
+        }
+        .card__services__container {
+            display: flex;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+        .first__service {
+            margin-bottom: 3rem;
+        }
+        &__element {
+            @include flex-dir(row);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 0.5px solid $darkPurple;
+            width: 80%;
+            background-color: $mintCream;
+            position: relative;
+            &::after {
+                content: "";
+                height: 100%;
+                width: 100%;
+                background-color: $darkPurple;
+                position: absolute;
+                z-index: -1;
+                border-radius: 7px;
+                bottom: -8px;
+                right: -9px;
+                opacity: 0.4;
+            }
+        }
+        &__image {
+            margin: 0 3%;
+            img {
+                width: 25rem;
+            }
+        }
+        &__content {
+            width: 60%;
+            z-index: 1;
+            position: relative;
+            h3 {
+                margin: 0;
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1.5rem;
+                margin: 10px 0;
+            }
+            .link__button {
+                background: $vermilion;
+                padding: 0.8rem;
+                color: $mintCream;
+                text-decoration: none;
+                display: block;
+                width: max-content;
+                border-radius: 4px;
+                margin-top: 1.5rem;
+                position: relative;
+                &:hover {
+                    color: $darkPurple;
+                    border: 0.5px solid $darkPurple;
+                    background-color: $mintCream;
+                    transition: ease-in 0.3s;
+                }
+                &::after {
+                    content: "";
+                    height: 2rem;
+                    background-color: $darkPurple;
+                    width: 8rem;
+                    position: absolute;
+                    opacity: 0.2;
+                    z-index: -1;
+                    bottom: -4px;
+                    right: -4px;
+                }
+            }
+            .welcome__creditcards{
+                padding: 1rem 0;
+                span {
+                    margin: 0 7px;
+                }
+                img {
+                    width: 2.3rem;
+                } 
+            }
+        }
+    }
+    @include media ('<=1200px') {
+        &__info {
+            &__image {
+                img {
+                    width: 20rem;
+                }
+            }
+            &__content {
+                p {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+    @include media ('<=911px') {
+        &__info {
+            &__image img {
+                padding: 1rem 0;
+            }
+            &__content {
+                p {
+                    font-size: 1rem;
+                }
+                h3 {
+                    font-size: 2rem;
+                }
+                .link__button {
+                    margin-top: 1rem;
+                    padding: 0.6rem;
+                }
+            }
+        }
+    }
+    @include media ('<=700px') {
+        &__info {
+            &__content {
+                width: 90%;
+                margin: auto;
+            }
+            &__element {
+                flex-direction: column;
+            }
+            &__image {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    @include media ('<=400px') {
+        &__info {
+            &__content {
+                h3 {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}
+/*End services component*/
+
+/*Product card component*/
+.product__card__container{
+    @include flex-dir(row);
+    flex-wrap: wrap;
+    padding: 1rem 4rem;
+    justify-content: flex-start;
+
+    @include media ('<=848px') {
+        padding: 1rem 0rem;
+    }
+}
+.product__card {
+    width: 17.5rem;
+    height: 20rem;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    position: relative;
+    &__content {
+        margin: auto;
+        width: 80%;
+        text-align: left;
+    }
+    &__name {
+        font-weight: 700;
+    }
+    &__price {
+        font-size: 0.9rem;
+    }
+    &__description {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+    &__image {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            color: grey;
+            height: 0.7px;
+            width: 100%;
+            background-color: grey;
+            opacity: 0.1;
+            bottom: 0;
+            left: 0;
+        }
+        img {
+            width: 10rem;
+            height: 9rem;
+        }
+    }
+    &__button {
+        button {
+            background-color: $buttons;
+            height: 2.3rem;
+            border: none;
+            border-radius: 6px;
+            color: $mintCream;
+            position: absolute;
+            bottom: 14px;
+            left: 79px;
+            &:hover {
+                background-color: #1a6be6;
+                cursor: pointer;
+                transition: 0.4s ease;
+            }
+        }
+    }
+    @include media ('<=1504px') {
+        &__container {
+            justify-content: center;
+        }
+    }
+
+    @include media ('<=1160px') {
+        width: 12rem;
+        margin: 0.5rem;
+        &__button {
+            button {
+                left: 36px;
+            }
+        }
+        &__name {
+            font-size: 14px;
+        }
+        &__image {
+            img {
+                width: 8rem;
+                height: 7rem;
+            }
+        }
+    }
+
+    @include media ('<=480px') {
+        width: 9rem;
+        &__name {
+            font-size: 11px;
+        }
+        &__description {
+            font-size: 0.7rem;
+        }
+        &__button {
+            button {
+                left: 21px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    @include media ('<=384px') {
+        width: 15rem;
+        &__button {
+            button {
+                left: 68px;
+            }
+        }
+        &__name {
+            font-size: 15px;
+        }
+        &__description {
+            font-size: 0.9rem;
+        }
+    }
+}
+/*End product card component*/
+
+/*Search component*/
+.search {
+    position: relative;
+    height: 4rem;
+    &__component {
+        @include flex-dir(row);
+        background-color: white;
+        width: 20rem;
+        right: 55px;
+        top: 17px;
+        position: absolute;
+    }
+    &__field {
+        width: 17rem;
+        height: 2.5rem;
+        padding: 3px;
+        border: none;
+        background: transparent;
+    }
+    &__button {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        opacity: 0.7;
+        &:hover {
+            cursor: pointer;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            height: 28px;
+            width: 1px;
+            background-color: #23001E;
+            left: -3px;
+            top: -5px;
+            opacity: 0.4;
+        }
+    }
+    @include media ('<=501px') {
+        padding: 1rem 0rem;
+        &__component {
+            position: static;
+            margin: auto;
+            width: 17rem;  
+        }
+        &__field {
+            width: 14.3rem;
+            font-size: 14px;
+        }
+    }
+}
+/*End search component*/
+
+/*Products container*/
+.products__container {
+    h4 {
+        font-size: 2rem;
+        margin: 1rem 4rem 1rem;
+        span {
+            position: relative;
+            &::after {
+                content: "";
+                background-color: $vermilion;
+                width: 100%;
+                height: 1.7px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                top: 40px
+            }  
+        }
+        
+    }
+    @include media ('<=tablet') {
+        h4 {
+            font-size: 1.2rem;
+            margin: 1rem 2rem 1rem;
+        }
+    }
+}
+/*End products container*/
+
+/*Loading container*/
+.loading {
+    @include flex-dir(column);
+    justify-content: center;
+    text-align: center;
+    padding: 10rem;
+    &__image {
+        width: 10rem;
+        margin: auto;
+    }
+    &__text {
+        font-size: 1.3rem;
+    }
+    @include media('<=460px') {
+        padding: 5rem;
+    }
+}
+/*End loading container*/
+
+/*Separators styles*/
+.clouds {
+    fill: $vermilion;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    opacity: 0.7;
+}
+
+.curve {
+    fill: $mintCream;
+    position: absolute;
+    bottom: 0;
+}
+
+.divider {
+    width: 100%;
+    position: relative;
+}
+

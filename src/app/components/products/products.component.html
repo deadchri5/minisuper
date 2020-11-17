@@ -1,0 +1,37 @@
+<div class="search">
+    <div class="search__component">
+
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+            <input class="search__field" id="search" type="text" aria-label="Ingresa lo que deseas buscar"
+                formControlName="search" placeholder="Busca algún producto o marca...">
+
+            <button type="submit" [disabled]="searchForm.invalid" class="search__button"><i class="fa fa-search"
+                    aria-hidden="true"></i></button>
+        </form>
+
+
+    </div>
+</div>
+
+<div class="products__container">
+    <div *ngIf="products != undefined; else loadingProducts">
+
+        <h4>
+            <span>
+                {{searchText}}
+            </span>
+        </h4>
+
+        <app-productcard [products]="products" class="product__card__container"></app-productcard>
+
+
+    </div>
+
+    <ng-template #loadingProducts>
+        <div class="loading">
+            <img class="loading__image" src="../../../assets/gifs/loading.gif" alt="cargando...">
+            <span class="loading__text">Cargando...</span>
+        </div>
+    </ng-template>
+
+</div>

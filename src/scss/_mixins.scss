@@ -1,0 +1,43 @@
+/*Buttons Over*/
+@mixin buttonOver {
+    background-color: $darkPurple;
+    transition: ease-in 0.2s;
+}
+
+@mixin center {
+    margin: auto;
+    display: block;
+}
+
+/*Flex direction function*/
+@mixin flex-dir ($dir){
+    display: flex;
+    flex-direction: $dir;
+}
+
+/*Form elements*/
+@mixin form-elm {
+    font-size: 1.2rem;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid $darkPurple;
+    opacity: 50%;
+    padding-bottom: 0;
+    margin-top: 0.2rem;
+}
+
+@mixin shadow {
+    -webkit-box-shadow: -1px -1px 21px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px -1px 21px -1px rgba(0,0,0,0.75);
+    box-shadow: -1px -1px 21px -1px rgba(0,0,0,0.75);
+}
+
+/*SVG backgrounds*/
+@mixin backgroundServices {
+    background-color: #e41912;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23d8140e' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23cd0f0b' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23c10a07' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23b60504' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23A00' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    z-index: 0;
+    position: relative;
+}

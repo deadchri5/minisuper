@@ -1,0 +1,38 @@
+<nav class="nav__desktop">
+    <aside class="nav__color-band"></aside>
+    <div class="nav__content">
+        <span class="nav__logo">
+            <img src="../../../assets/images/logoMobile.png" alt="Logo">
+        </span>
+        <ul>
+            <li> <a routerLink="/" routerLinkActive="active">Inicio</a> </li>
+            <li> <a routerLink="/products" routerLinkActive="active">Productos</a> </li>
+            <li> <a routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
+            <li> <a routerLink="/services" routerLinkActive="active">Servicios</a> </li>
+            <li> <a routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
+        </ul>
+        <span class="nav__location">
+            <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Localiza nuestra tienda</a>
+        </span>
+    </div>
+</nav>
+
+<!--Mobile nav bar-->
+
+<nav class="nav__mobile">
+    <span class="nav__mobile__logo">
+        <img src="../../../assets/images/logoMobile.png" alt="Logo">
+    </span>
+    <span class="nav__mobile__menu" (click)="mostrarMenu()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </span>
+    <ul id="options" class="animate__animated">
+        <li> <a routerLink="/" routerLinkActive="active">Inicio</a> </li>
+        <li> <a routerLink="/products" routerLinkActive="active">Productos</a> </li>
+        <li> <a routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
+        <li> <a routerLink="/services" routerLinkActive="active">Servicios</a> </li>
+        <li> <a routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
+    </ul>
+</nav>
+
+<!--End mobile nav bar-->
