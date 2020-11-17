@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Author: Christian Yesael Ochoa Hernandez
+ * Author: OCHOA HERNANDEZ CHRISTIAN YESAEL
  * Web page: champrogrammers.github.io/web 
 */
 
@@ -43,7 +43,7 @@ class UserController extends Controller {
             $validateToken = new \JwtAuth();
             $validateToken = $validateToken->signIn($params->email, 
                                                             $params->password);
-            return response()->json($validateToken, $validateToken['code']);
+            return response()->json($validateToken, 200);
         }
         else {
             $response = array (
@@ -118,7 +118,7 @@ class UserController extends Controller {
         $JwtAuth = new \JwtAuth();
         $getToken = $JwtAuth->checkToken($token);
         
-        if ($getToken){
+        if ($getToken) {
             $json = $request->input('json', null);
             $params = json_decode($json, true);
             
@@ -138,7 +138,7 @@ class UserController extends Controller {
                 unset($params['FK_TypeUser']);
                 unset($params['Password']);
                 
-                if (!$validate->fails()){
+                if (!$validate->fails()) {
                     $userUpdate = User::where('ID', $userLoggedData->id)->update($params);
                     //update data
                     $response = array (
@@ -148,7 +148,7 @@ class UserController extends Controller {
                     );
                 }
                 else {
-                    echo 'hay errores';
+                    echo 'The entry data is not correct please fill again.';
                     die();
                     return response()->json($validate->errors(), 400);
                 }

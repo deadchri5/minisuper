@@ -17,12 +17,12 @@ class JwtAuth {
 
     //Secret key for JWT
     private $key;
-    
+
     public function __construct() {
         $this->key = '20110469_CET_PWD_SECRET_ENCRYPTION';
     }
-    
-      /**
+
+    /**
      * 
      * @param type $password
      * this function need encrypted password of user as param for decrypt
@@ -34,12 +34,11 @@ class JwtAuth {
         try {
             $decryptPassword = Crypt::decryptString($password);
             return $decryptPassword;
-        } 
-        catch (DecryptException $e) {
+        } catch (DecryptException $e) {
             return response()->json($e, 400);
         }
     }
-    
+
     /**
      * 
      * @param type $email is the email of user
@@ -48,59 +47,56 @@ class JwtAuth {
      * token
      */
     public function signIn($email, $password) {
-        
+
         $user = User::where('Email', $email)->first();
-        
+
         if (!is_null($user)) {
-            
-            
-            if ($password === $this->decryptPassword($user->Password) ) {
-                
-                $payload = array (
-                    'id'        => $user->ID,
-                    'name'      => $user->Name,
-                    'lastName'  => $user->LastName,
-                    'email'     => $user->Email,
-                    'phone'     => $user->Phone,
-                    'password'  => $password,
-                    'iat'       => time(),
-                    'exp'       => time() + (24*60*60)
+
+
+            if ($password === $this->decryptPassword($user->Password)) {
+
+                $payload = array(
+                    'id' => $user->ID,
+                    'name' => $user->Name,
+                    'lastName' => $user->LastName,
+                    'email' => $user->Email,
+                    'phone' => $user->Phone,
+                    'password' => $password,
+                    'iat' => time(),
+                    'exp' => time() + (24 * 60 * 60)
                 );
-                
+
                 $jwt = JWT::encode($payload, $this->key);
-                
-                $response = array (
-                    'message' => 'Welcome back '.$user->Name.' '.$user->LastName,
-                    'status'  => 'success',
-                    'code'    => 200,
-                    'token'   => $jwt
+
+                $response = array(
+                    'message' => 'Welcome back ' . $user->Name . ' ' . $user->LastName,
+                    'status' => 'success',
+                    'code' => 200,
+                    'token' => $jwt
                 );
-                
+
                 return response()->json($response, $response['code']);
-            } 
-            else {
-                $response = array (
+            } else {
+                $response = array(
                     'message' => 'The email or password are incorrect please '
-                                                        . 'verify the fields',
+                    . 'verify the fields',
                     'status' => 'error',
                     'code' => 400
                 );
-                
+
                 return response()->json($response, $response['code']);
             }
-            
-        }      
-        else {
-            $response = array (
+        } else {
+            $response = array(
                 'message' => 'The email is not registed already',
-                'status'  => 'error',
-                'code'    => 400
+                'status' => 'error',
+                'code' => 400
             );
-            
+
             return response()->json($response, $response['code']);
         }
     }
-    
+
     /**
      * 
      * @param string $jwt is the web token
@@ -108,36 +104,74 @@ class JwtAuth {
      *                         data that contains the token.
      * @return boolean return flag that says if the token is valid or not
      */
-    
-    public function checkToken($jwt, $userAuth='') {
+    public function checkToken($jwt, $userAuth = '') {
         $flag = false;
-        $decoded = null;
-        
+        $decoded = '';
+
         if (isset($userAuth) && $userAuth != '') {
             if ($userAuth != true) {
                 $userAuth = false;
             }
-        }
-        else {
+        } else {
             $userAuth = false;
         }
-        
+
         try {
-        $decoded = JWT::decode($jwt, $this->key, array('HS256'));
-        }
-        catch (\UnexpectedValueException $e) {
+            $decoded = JWT::decode($jwt, $this->key, array('HS256'));
+        } catch (\UnexpectedValueException $e) {
+            $flag = false;
+        } catch (\Exception $e) {
             $flag = false;
         }
-        
+
         if (is_object($decoded) && !is_null($decoded) && isset($decoded->id)) {
             $flag = true;
         }
-        
+
         if ($userAuth != false && $flag == true) {
             return $decoded;
         }
+
+        return $flag;
+    }
+
+    /**
+     * 
+     * @param type $jwt this function a jwt to verify
+     * @return boolean return a flag that says if the user is admin or not
+     */
+    public function isAdmin($jwt) {
+        
+        $flag = false;
+        
+        if (!is_null($jwt)) {
+            
+            $decodedToken = '';
+
+            try {
+                $decodedToken = JWT::decode($jwt, $this->key, array('HS256'));
+            } catch (\UnexpectedValueException $e) {
+                $flag = false;
+            } catch (\Exception $e) {
+                $flag = false;
+            }
+            
+            if (isset($decodedToken->id)) {
+                $id = $decodedToken->id;
+                $query = User::where('ID', $id)->first();
+                $userType =  $query->FK_TypeUser;
+                if ($userType === 1) {
+                    $flag = true;
+                }
+            }
+            
+        }
+        else {
+            $flag = false;
+        }
         
         return $flag;
+        
     }
 
 }

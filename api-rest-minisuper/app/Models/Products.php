@@ -9,6 +9,9 @@ class Products extends Model
 {
     use HasFactory;
     
+    //Ignore update_at and created_at fields in db
+    public $timestamps = false;
+    
     protected $table = 'product';
     
     /*Many to One relations*/
