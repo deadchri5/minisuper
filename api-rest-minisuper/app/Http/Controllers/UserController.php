@@ -176,5 +176,27 @@ class UserController extends Controller {
         
         return response()->json($response, $response['code']);
     }
+    
+    public function getUserData(Request $request) {
+        $token = $request->header('Authorization', null);
+        $JwtAuth = new \JwtAuth();
+        $getToken = $JwtAuth->checkToken($token, true);
+        
+        if (!empty($getToken)) {
+            $response = array (
+                'message'   => 'success',
+                'code'      => '200',
+                'user'      => $getToken
+            );
+        }
+        else {
+            $response = array (
+                'message'   => 'Cannot verify the user token',
+                'code'      => '400'
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
 
 }

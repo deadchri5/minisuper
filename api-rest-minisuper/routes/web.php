@@ -18,6 +18,7 @@ Route::post('api/userRegister', [UserController::class, 'registerUser']);
 Route::post('api/signIn', [UserController::class, 'signIn']);
 Route::post('api/login', [UserController::class, 'login']);
 Route::put('api/user/update', [UserController::class, 'updateUser']);
+Route::get('api/user/getData', [UserController::class, 'getUserData']);
 
 //Products routes
 Route::get('api/products/show/{category?}', [ProductController::class, 'showProducts']);
