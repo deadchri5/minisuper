@@ -17,6 +17,8 @@ import { BannercovidComponent } from './components/bannercovid/bannercovid.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductlistComponent } from './components/productlist/productlist.component';
 import { ProductcardComponent } from './components/productcard/productcard.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserinfoComponent } from './components/userinfo/userinfo.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ProductcardComponent } from './components/productcard/productcard.compo
     BannercovidComponent,
     FooterComponent,
     ProductlistComponent,
-    ProductcardComponent
+    ProductcardComponent,
+    LoginComponent,
+    UserinfoComponent
   ],
   imports: [
     BrowserModule,

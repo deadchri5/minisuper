@@ -1,0 +1,20 @@
+<div class="userinfo">
+    <div class="userinfo__container">
+
+        <h2>Tu información</h2>
+        <form class="userinfo__form" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+            <label for="name">Nombre</label>
+            <input class="userinfo__input" type="text" placeholder="Ingresa tu nombre" formControlName="Name" value="xd">
+            <label for="lastname">Apellido</label>
+            <input class="userinfo__input" type="text" placeholder="Ingresa tu apellido" formControlName="LastName">
+            <label for="email">Email</label>
+            <input class="userinfo__input" type="text" placeholder="Correo electrónico" formControlName="Email">
+            <label for="phone">Telefóno</label>
+            <input class="userinfo__input" type="number" placeholder="Ingresa tu telefóno" formControlName="Phone">
+            <label for="address">Dirección</label>
+            <input class="userinfo__input" type="text" placeholder="Dirección de entrega" formControlName="Address">
+            <button class="userinfo__btn" type="submit" [disabled]="formGroup.invalid">Guardar</button>
+        </form>
+
+    </div>
+</div>
