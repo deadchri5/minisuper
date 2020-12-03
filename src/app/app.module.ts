@@ -19,6 +19,9 @@ import { ProductlistComponent } from './components/productlist/productlist.compo
 import { ProductcardComponent } from './components/productcard/productcard.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserinfoComponent } from './components/userinfo/userinfo.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdmincardComponent } from './components/admincard/admincard.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { UserinfoComponent } from './components/userinfo/userinfo.component';
     ProductlistComponent,
     ProductcardComponent,
     LoginComponent,
-    UserinfoComponent
+    UserinfoComponent,
+    RegisterComponent,
+    AdminComponent,
+    AdmincardComponent
   ],
   imports: [
     BrowserModule,

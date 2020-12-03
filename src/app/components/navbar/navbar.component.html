@@ -1,3 +1,4 @@
+<!--Desktop navbar-->
 <nav class="nav__desktop">
     <aside class="nav__color-band"></aside>
     <div class="nav__content">
@@ -5,19 +6,45 @@
             <img src="../../../assets/images/logoMobile.png" alt="Logo">
         </span>
         <ul>
-            <li> <a routerLink="/" routerLinkActive="active">Inicio</a> </li>
-            <li> <a routerLink="/products" routerLinkActive="active">Productos</a> </li>
-            <li> <a routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
-            <li> <a routerLink="/services" routerLinkActive="active">Servicios</a> </li>
-            <li> <a routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
+            <li class="li-element"> <a class="a_elem" routerLink="/" routerLinkActive="active">Inicio</a> </li>
+            <li class="li-element"> <a class="a_elem" routerLink="/products" routerLinkActive="active">Productos</a> </li>
+            <li class="li-element"> <a class="a_elem" routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
+            <li class="li-element"> <a class="a_elem" routerLink="/services" routerLinkActive="active">Servicios</a> </li>
+            <li class="li-element"> <a class="a_elem" routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
         </ul>
+        
         <span class="nav__location">
-            <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+            <div *ngIf="this.user == undefined; else loggedUser">
+                <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+            </div>
+
+            <ng-template #loggedUser>
+                <div class="userUtilities">
+                    <button class="userUtilities__button" (click)="showUtilities()">
+                        <span class="userUtilities__info">
+                            {{this.user.name}}
+                        </span>
+                    </button>
+                  <ul id="list-utilities" class="dont-show">
+                    <li><a routerLink="/userinfo" routerLinkActive="active">Mi información</a></li>
+                    <div *ngIf="this.user.type == 1">
+                        <li><a routerLink="/admin" routerLinkActive="active">Panel de administración</a></li>
+                    </div>
+                    <li>Carrito</li>
+                    <li><span (click)="logOut()">Cerrar sesión</span></li>
+                  </ul>  
+                </div>
+                
+            </ng-template>
+            
         </span>
+
     </div>
 </nav>
 
-<!--Mobile nav bar-->
+<!--End Desktop navbar-->
+
+<!--Mobile navbar-->
 
 <nav class="nav__mobile">
     <span class="nav__mobile__logo">
@@ -27,7 +54,13 @@
         <i class="fa fa-bars" aria-hidden="true"></i>
     </span>
     <ul id="options" class="animate__animated">
-        <li> <a routerLink="login" routerLinkActive="active">Inicia sesión</a> </li>
+        <div *ngIf="this.user == undefined; else loggedUserMovile">
+            <li><a routerLink="/login" routerLinkActive="active">Iniciar sesión</a></li>
+        </div>
+        <ng-template #loggedUserMovile>
+            <li> <a routerLink="/userinfo" routerLinkActive="active">{{this.user.name}}</a> </li>
+        </ng-template>
+        
         <li> <a routerLink="/" routerLinkActive="active">Inicio</a> </li>
         <li> <a routerLink="/products" routerLinkActive="active">Productos</a> </li>
         <li> <a routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
@@ -36,4 +69,4 @@
     </ul>
 </nav>
 
-<!--End mobile nav bar-->
+<!--End mobile navbar-->

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
-import { resolve } from 'url';
 
 @Component({
   selector: 'app-userinfo',

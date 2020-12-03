@@ -39,7 +39,7 @@ body {
     #{&}__options {
         list-style-type: none;
         background-color: $darkPurple;
-        position: absolute;
+        position: fixed;
         right: 0;
         width: 40%;
         height: 100%;
@@ -105,16 +105,6 @@ body {
             font-weight: font-weights(regular);
             text-decoration: none;
             color: $mintCream;
-            &:hover {
-                color: $white;
-                text-decoration: underline;
-                transition: ease-in 0.2s;
-            }
-        }
-        i {
-            color: $darkPurple;
-            font-size: 1.5rem;
-            margin-right: 6px;
         }
     }
 
@@ -127,12 +117,12 @@ body {
         margin-top: 2rem;
     }
 
-    li {
+    .li-element {
         padding-top: 3.5rem;
         height: 1rem;
     }
 
-    li a{
+    li .a_elem{
         padding: 0.95rem;
         text-decoration: none;
         color: $mintCream;
@@ -145,6 +135,71 @@ body {
         display: none;
     }
 }
+
+/*List utilities*/
+.userUtilities {
+    color: $mintCream;
+    position: relative;
+    font-weight: 200;
+    &__info {
+        &::before {
+            font-family: FontAwesome;
+            content: "\f2be";
+            position: absolute;
+            font-size: 20px;
+            top: 7px;
+            left: 12px;
+        }
+        &::after {
+            font-family: FontAwesome;
+            content: "\f0dd";
+            position: absolute;
+            top: 7px;
+            right: 10px;
+        }
+    }
+    &__button {
+        height: 2.5rem;
+        width: 13rem;
+        border-radius: 5px;
+        border: 1px solid $mintCream;
+        background-color: $vermilion;
+        color: mintcream;
+        position: relative;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .show-utilities {
+        visibility: visible !important;
+    }
+
+    .dont-show {
+        visibility: hidden;
+    }
+
+    ul {
+        @include flex-dir(column);
+        position: absolute;
+        background-color: $darkPurpleShaded;
+        margin: auto;
+        font-size: 14px;
+        z-index: 100;
+        width: 100%;
+        li {
+            margin: auto;
+            width: 100%;
+            margin-left: -32px;
+            span {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
 /*End Desktop*/
 /*End NavBar SCSS component*/
 
@@ -1309,8 +1364,8 @@ body {
 /*login component*/
 .login__background{
     background: #ED4264;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #FFEDBC, #ED4264);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #FFEDBC, #ED4264); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #FFEDBC, #ED4264);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFEDBC, #ED4264); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     height: 40rem;
     position: relative;
@@ -1407,6 +1462,153 @@ background: linear-gradient(to right, #FFEDBC, #ED4264); /* W3C, IE 10+/ Edge, F
     }
 }
 /*End userinfo component*/
+
+/*Register component*/
+.register {
+    background-image: url(../assets/images/backgrounds/barthelemy-de-mazenod-ISPiuu_g6s8-unsplash-min.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $mintCream;
+    &__bg {
+        background-color: rgba(255, 0, 0, 0.205);
+        padding: 3rem;
+    }
+    &__form {
+        background-color: $darkPurpleShaded;
+        width: 28rem;
+        padding: 2rem;
+        border-radius: 8px;
+    }
+}
+/*End register component*/
+
+/*Admin component*/
+/*https://www.flaticon.com/free-icon/administration_994273*/
+.admin {
+    &__container {
+        @include flex-dir(row);
+        margin: auto;
+    }
+    &__options {
+        border: black 1px solid;
+        background-color: mintcream;
+        position: relative;
+        display: flex;
+        ul {
+           list-style-type: none; 
+           padding: 0.5rem;
+        }
+        li {
+            margin: 1rem auto;
+        }
+        button {
+            background-color: transparent;
+            color: black;
+            width: 100%;
+            border: none;
+            &:hover {
+                cursor: pointer;
+                background-color: $vermilion;
+                transition: 0.3s ease-in;
+                color: $mintCream;
+            }
+        }
+    }
+    &__list {
+        width: 100%;
+        height: auto;
+        background-color: rgb(63, 63, 63);
+        padding: 1.5rem;
+    }
+    &__icon {
+        width: 3rem;
+    }
+    &__tools {
+        background-color: $darkPurpleShaded;
+        color: $mintCream;
+        position: absolute;
+        height: 100%;
+        .ul__tools {
+            list-style: none;
+            padding: 1rem;
+            li {
+                font-size: 0.8rem;
+                margin: 1rem auto;
+                &:hover {
+                    cursor: pointer;
+                    color: $buttons;
+                    transition: 0.3s ease-in;
+                }
+            }
+        }
+    }
+    &__task {
+        margin-right: 80%;
+        color: $mintCream;
+        width: 16rem;
+    }
+    &__stuff {
+        @include flex-dir(row);
+    }
+}
+/*End admin component*/
+
+/*card admin component*/
+.admin__wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.products__admin {
+    border-radius: 5px;
+    background-color: rgb(48, 48, 48);
+    margin: 1rem 0.5rem;
+    width: 427px;
+    &__name {
+        margin: auto;
+        color: $mintCream;
+        @include flex-dir(column);
+        .adm_n {
+            padding: 0.5rem 0;
+            color: $vermilion;
+        }
+    }
+    &__card {
+        @include flex-dir(row);
+    }
+    &__img {
+        padding: 1rem;
+        img {
+            width: 6rem;
+            border-radius: 50%;
+        }
+    }
+    &__buttons {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: right;
+        .edit {
+            background-color:#ffcc00;
+        }
+        .delete {
+            background-color: #cc3300;
+        }
+        button {
+            border: 1px solid black;
+            border-radius: 6px;
+            font-size: 1.5rem;
+            height: 3rem;
+            width: 8rem;
+            &:hover {
+                cursor: pointer;
+                transition: 0.2s ease-in;
+                background-color: $buttons;
+                color: $mintCream;
+            }
+        }
+    }
+}
+/*card */
 
 /*Loading container*/
 .loading {

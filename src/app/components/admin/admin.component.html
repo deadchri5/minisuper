@@ -1,0 +1,61 @@
+<div class="admin">
+    <div class="admin__container">
+        <div class="admin__options">
+            <ul class="options">
+                <li>
+                    <button (click)="showProductsTool()">
+                        <img class="admin__icon" src="../../../assets/images/icons/box.svg"
+                            alt="Icono Productos">Productos
+                    </button>
+                </li>
+                <li>
+                    <button (click)="showUsersTool()">
+                        <img class="admin__icon" src="../../../assets/images/icons/administration.svg"
+                            alt="Icono Usuarios">Usuarios
+                    </button>
+                </li>
+            </ul>
+            <div *ngIf="this.flagProductsTool">
+                <div class="admin__tools animate__animated animate__fadeInLeft">
+                    <ul class="ul__tools">
+                        <li><span (click)="showProducts()">Ver Productos</span></li>
+                        <li><span (click)="showAddProductForm()">Agregar Producto</span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div *ngIf="this.flagUsersTool">
+                <div class="admin__tools animate__animated animate__fadeInLeft">
+                    <ul class="ul__tools">
+                        <li><span (click)="showUsers()">Ver Usuarios</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="admin__list">
+
+            <div class="admin__stuff">
+                <h3 class="admin__task">{{this.sectionTaskName}}</h3>
+
+                <div class="search">
+                    <div class="search__component">
+
+                        <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+                            <input class="search__field" id="search" type="text"
+                                aria-label="Ingresa lo que deseas buscar" formControlName="search"
+                                placeholder="Buscar...">
+
+                            <button type="submit" [disabled]="searchForm.invalid" class="search__button"><i
+                                    class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+                <app-admincard class="admin__wrap" [products]="products"></app-admincard>
+
+        </div>
+    </div>
+</div>

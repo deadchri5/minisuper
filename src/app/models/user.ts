@@ -7,8 +7,9 @@ export class User {
     public email: string;
     public phone: number;
     public password: string;
+    public typeUser: number;
 
-    constructor(ID, Name, LastName, Age, Address, Email, Phone, Password) {
+    constructor(ID, Name, LastName, Age, Address, Email, Phone, Password, FK_TypeUser) {
         this.id = ID;
         this.name = Name;
         this.lastName = LastName;
@@ -17,5 +18,6 @@ export class User {
         this.email = Email;
         this.phone = Phone;
         this.password = Password;
+        this.typeUser = FK_TypeUser;
     }
 }

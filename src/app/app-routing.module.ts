@@ -1,6 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 
 //Componentes
 import { HomeComponent } from './components/home/home.component';
@@ -10,6 +9,8 @@ import { BreakfastsComponent } from './components/breakfasts/breakfasts.componen
 import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserinfoComponent } from './components/userinfo/userinfo.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AdminComponent }  from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +19,10 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'about', component: AboutusComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'userinfo', component: UserinfoComponent }
+  { path: 'userinfo', component: UserinfoComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: '**', component: ProductsComponent }
 ];
 
 @NgModule({

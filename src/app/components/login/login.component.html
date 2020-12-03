@@ -7,6 +7,7 @@
             <label for="password">Contraseña</label>
             <input class="login__input" type="password" placeholder="Contraseña" formControlName="password">
             <button type="submit" [disabled]="searchForm.invalid">Iniciar sesión</button>
+            <a routerLink="/register" routerLinkActive="active">Registrate</a>
             <a href="#">¿Olvidaste tu contraseña?</a>
         </form>
     </div>

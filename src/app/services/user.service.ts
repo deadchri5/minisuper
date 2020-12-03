@@ -21,6 +21,12 @@ export class UserService {
     return this.http.post(this.url+'signIn', params);
   }
 
+  registerUser(data: Object): Observable<any> {
+    let json = JSON.stringify(data);
+    let params = new HttpParams().set('json', json);
+    return this.http.post(this.url+'userRegister', params);
+  }
+
   updateUser(user: Object):Observable<any> {
     let json = JSON.stringify(user);
     let params = new HttpParams().set('json', json);
