@@ -1,0 +1,28 @@
+<div class="add__product">
+
+    <form [formGroup]="addProductForm" (ngSubmit)="onSubmit(addProductForm.value)" class="login__form">
+        <label for="id-product">ID</label>
+        <input type="number" placeholder="Ingresa el ID del producto" formControlName="id" class="login__input">
+        <label for="stock-product">Stock</label>
+        <input type="number" placeholder="Ingresa el stock del producto" formControlName="stock" class="login__input">
+        <label for="name-product">Nombre</label>
+        <input type="text" placeholder="Ingresa el nombre del producto" formControlName="name" class="login__input">
+        <label for="price-product">Precio</label>
+        <input type="number" placeholder="Ingresa el precio del producto" formControlName="price" class="login__input">
+        <label for="description-product">Descripción</label>
+        <textarea formControlName="description" placeholder="Ingresa una descripción del producto" cols="30" rows="3" class="login__input"></textarea>
+        <label for="Category">Categoría</label>
+        <select name="Category"s formControlName="fk_category" class="login__input">
+            <option value="1">Bebidas</option>
+            <option value="2">Botanas</option>
+            <option value="3">Panaderia</option>
+            <option value="4">Lacteos</option>
+            <option value="5">Salchichoneria</option>
+            <option value="6">Bebidas Alcoholicas</option>
+            <option value="7">Abarrotes</option>
+            <option value="8">Alimentos Básicos</option>
+        </select>
+        <button type="submit" [disabled]="addProductForm.invalid">Agregar producto</button>
+    </form>
+
+</div>

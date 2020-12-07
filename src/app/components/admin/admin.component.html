@@ -53,8 +53,16 @@
                     </div>
                 </div>
             </div>
+
+                <div *ngIf="this.products != undefined">
+                    <app-admincard class="admin__wrap" [products]="products"></app-admincard>
+                </div>
+
+                <div *ngIf="this.addProductComponentFlag == true">
+                    <app-addproduct></app-addproduct>
+                </div>
             
-                <app-admincard class="admin__wrap" [products]="products"></app-admincard>
+                
 
         </div>
     </div>

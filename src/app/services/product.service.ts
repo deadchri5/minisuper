@@ -26,4 +26,18 @@ export class ProductService {
         return this.http.post(this.url+'products/search', params);
     }
 
+    addProducts(product: Object): Observable<any> {
+        let json = JSON.stringify(product);
+        let params = new HttpParams().set('json', json);
+        let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+        return this.http.put(`${this.url}products/insert`, params, {headers: headers});
+    }
+
+    deleteProduct(productID: Object): Observable<any> {
+        let json = JSON.stringify(productID);
+        let params = new HttpParams().set('json', json);
+        let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+        return this.http.delete(`${this.url}products/delete`, {params: params, headers: headers});
+    }
+
 }

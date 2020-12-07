@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -24,6 +25,7 @@ export class AdminComponent implements OnInit {
   //Flags
   flagProductsTool: boolean;
   flagUsersTool: boolean;
+  addProductComponentFlag: boolean;
   showProductsCounter: number;
   showUsersCounter: number;
 
@@ -33,6 +35,7 @@ export class AdminComponent implements OnInit {
   ) { 
     this.flagProductsTool = false;
     this.flagUsersTool = false;
+    this.addProductComponentFlag = false;
     this.showProductsCounter = 0;
     this.showUsersCounter = 0;
     this.sectionTaskName = "Panel de administración";
@@ -76,16 +79,29 @@ export class AdminComponent implements OnInit {
 
   showProducts() {
     this.sectionTaskName = 'Productos';
-    this._productService.getProducts().subscribe(
-      response => {
-        this.products = response.products;
-        console.log(this.products);
-      }
-    );
+    this.addProductComponentFlag = false;
+    let promise = new Promise((resolve, reject) => {
+      this._productService.getProducts().subscribe(
+        response => {
+          resolve(response.products);
+        },
+        err => {
+          reject(err.message);
+        }
+      );
+    });
+
+    promise.then((prod: Product[]) => {
+      this.products = prod;
+    });
+
   }
 
   showAddProductForm() {
     this.sectionTaskName = 'Productos';
+    this.addProductComponentFlag = true;
+    this.products = [];
+
   }
 
 }

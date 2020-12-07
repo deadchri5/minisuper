@@ -5,7 +5,15 @@
 
             <div class="products__admin__card">
                 <div class="products__admin__img">
-                    <img src="{{product.Image}}" alt="random">
+
+                    <div *ngIf="product.Image != null; else noimage">
+                        <img src="{{product.Image}}" alt="{{product.Name}}">
+                    </div>
+
+                    <ng-template #noimage>
+                        <img src="../../../assets/images/nopicture/nopictureadm.svg" alt="No hay imagen">
+                    </ng-template>
+                    
                 </div>
                 <div class="products__admin__name">
                     <span class="adm_n">{{product.Name}}</span>
@@ -14,7 +22,7 @@
             </div>
             <div class="products__admin__buttons">
                 <button class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button class="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button class="delete" (click)="deleteProduct(product)"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </div>
 
 

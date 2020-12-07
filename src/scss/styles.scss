@@ -1610,6 +1610,12 @@ body {
 }
 /*card */
 
+/*Add product form*/
+.add__product {
+    color: $mintCream;
+}
+/*End add product form*/
+
 /*Loading container*/
 .loading {
     @include flex-dir(column);

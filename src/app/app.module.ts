@@ -22,6 +22,7 @@ import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdmincardComponent } from './components/admincard/admincard.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AdmincardComponent } from './components/admincard/admincard.component';
     UserinfoComponent,
     RegisterComponent,
     AdminComponent,
-    AdmincardComponent
+    AdmincardComponent,
+    AddproductComponent
   ],
   imports: [
     BrowserModule,
