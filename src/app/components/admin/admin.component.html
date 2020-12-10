@@ -55,7 +55,13 @@
             </div>
 
                 <div *ngIf="this.products != undefined">
-                    <app-admincard class="admin__wrap" [products]="products"></app-admincard>
+
+                    <app-admincard class="admin__wrap" 
+                    [products]="products"
+                    (sendProductData)="recaveProductData($event)"
+                    >
+                    </app-admincard>
+                    
                 </div>
 
                 <div *ngIf="this.addProductComponentFlag == true">
@@ -66,4 +72,13 @@
 
         </div>
     </div>
+
+    <div *ngIf="this.isModalActive == true">
+        <div class="modal-bg" (click)="closeModal()">
+           
+        </div>
+        <app-updateproduct class="modal" [product]="productPrototipe"></app-updateproduct> 
+        
+    </div>
+
 </div>

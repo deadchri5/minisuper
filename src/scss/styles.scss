@@ -1486,6 +1486,7 @@ body {
 /*Admin component*/
 /*https://www.flaticon.com/free-icon/administration_994273*/
 .admin {
+    position: relative;
     &__container {
         @include flex-dir(row);
         margin: auto;
@@ -1610,11 +1611,47 @@ body {
 }
 /*card */
 
-/*Add product form*/
+/*Add product form (extends login form)*/
 .add__product {
     color: $mintCream;
 }
+.txt-ar {
+    height: 5rem;
+}
 /*End add product form*/
+
+/*Update Modal*/
+.modal {
+    position: fixed;
+    transform: translate(-50%, 5%);
+    top: 0;
+    left: 50%;
+}
+.modal-bg {
+    background: $darkPurpleShaded;
+    position: fixed;
+    top: -17rem;
+    width: 100%;
+    height: 71rem;
+}
+.update__product {
+    color: $mintCream;
+    background-color: $darkPurple;
+    padding: 2rem;
+    border-radius: 7px;
+    width: 30rem;
+}
+.id__lock {
+    background-color: $mintCream;
+    margin: 0.5rem 0;
+    color: gray;
+    width: 6rem;
+    border-radius: 5px;
+    padding: 6px;
+    margin-bottom: 1rem;
+    display: block;
+}
+/*End Update Modal*/
 
 /*Loading container*/
 .loading {

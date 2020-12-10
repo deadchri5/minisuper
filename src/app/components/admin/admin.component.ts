@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
 
   //Modelos 
   products: Product[];
+  productPrototipe: Product;
 
   //Strings
   sectionTaskName: string;
@@ -28,6 +29,7 @@ export class AdminComponent implements OnInit {
   addProductComponentFlag: boolean;
   showProductsCounter: number;
   showUsersCounter: number;
+  isModalActive: boolean;
 
   constructor(
     private _productService: ProductService,
@@ -36,6 +38,7 @@ export class AdminComponent implements OnInit {
     this.flagProductsTool = false;
     this.flagUsersTool = false;
     this.addProductComponentFlag = false;
+    this.isModalActive = false;
     this.showProductsCounter = 0;
     this.showUsersCounter = 0;
     this.sectionTaskName = "Panel de administración";
@@ -102,6 +105,15 @@ export class AdminComponent implements OnInit {
     this.addProductComponentFlag = true;
     this.products = [];
 
+  }
+
+  recaveProductData(event) {
+    this.isModalActive = true;
+    this.productPrototipe = event.product;
+  }
+
+  closeModal() {
+    this.isModalActive = false;
   }
 
 }

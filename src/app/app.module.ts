@@ -23,6 +23,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdmincardComponent } from './components/admincard/admincard.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
+import { UpdateproductComponent } from './components/updateproduct/updateproduct.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
     RegisterComponent,
     AdminComponent,
     AdmincardComponent,
-    AddproductComponent
+    AddproductComponent,
+    UpdateproductComponent
   ],
   imports: [
     BrowserModule,

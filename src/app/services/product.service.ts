@@ -40,4 +40,11 @@ export class ProductService {
         return this.http.delete(`${this.url}products/delete`, {params: params, headers: headers});
     }
 
+    updateProduct(product: Object): Observable<any> {
+        let json = JSON.stringify(product);
+        let params = new HttpParams().set('json', json);
+        let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+        return this.http.put(`${this.url}products/update`, params, {headers: headers});
+    }
+
 }

@@ -1,0 +1,20 @@
+<div class="update__product animate__animated animate__bounceIn">
+    <form [formGroup]="updateProductForm" (ngSubmit)="onSubmit(updateProductForm.value)" class="login__form">
+        <label for="id">ID</label>
+        <div *ngIf="this.product != undefined; else productUndefined">
+            <span class="id__lock">{{this.product.ID}}</span>
+        </div>
+        <ng-template #productUndefined>
+            <span class="id__lock">id</span>
+        </ng-template>
+        <label for="ProductName">Nombre</label>
+        <input class="login__input" placeholder="Nombre del producto" type="text" formControlName="Name">
+        <label for="ProductName">Precio</label>
+        <input class="login__input" placeholder="Precio del producto" type="number" formControlName="Price">
+        <label for="ProductName">Stock</label>
+        <input class="login__input" placeholder="Stock del producto" type="number" formControlName="Stock">
+        <label for="ProductName">Descripción</label>
+        <textarea class="login__input txt-ar" placeholder="Descripción del producto" formControlName="Description"></textarea>
+        <button type="submit" [disabled]="updateProductForm.invalid">Actualizar Producto</button>
+    </form>
+</div>
