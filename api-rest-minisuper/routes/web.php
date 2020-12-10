@@ -24,4 +24,5 @@ Route::get('api/user/getData', [UserController::class, 'getUserData']);
 Route::get('api/products/show/{category?}', [ProductController::class, 'showProducts']);
 Route::post('api/products/search', [ProductController::class, 'search']);
 Route::put('api/products/insert', [ProductController::class, 'addProduct'])->middleware('checkPermissions');
+Route::put('api/products/update', [ProductController::class, 'updateProduct'])->middleware('checkPermissions');
 Route::delete('api/products/delete', [ProductController::class, 'deleteProduct'])->middleware('checkPermissions');

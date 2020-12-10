@@ -14,6 +14,17 @@ class Products extends Model
     
     protected $table = 'product';
     
+    protected $fillable = [
+        'ID',
+        'Name',
+        'Price',
+        'Description',
+        'Stock',
+        'Image',
+        'FK_Category'
+    ];
+
+
     /*Many to One relations*/
     public function category() {
         return $this->belongsTo('App\Models\Category', 'FK_Category');

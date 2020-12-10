@@ -62,6 +62,7 @@ class JwtAuth {
                     'email' => $user->Email,
                     'phone' => $user->Phone,
                     'address' => $user->Address,
+                    'type' => $user->FK_TypeUser,
                     'iat' => time(),
                     'exp' => time() + (24 * 60 * 60)
                 );

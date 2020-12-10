@@ -45,110 +45,161 @@ class ProductController extends Controller {
     }
 
     public function search(Request $request) {
-        
+
         $json = $request->input('json', null);
         $params = json_decode($json);
 
         if (!is_null($params)) {
-            
-            $findedProducts = 
-                   Products::where('Name', 'LIKE', '%' . $params->search . '%')
-                   ->orWhere('Description', 'LIKE', '%' . $params->search . '%')
-                   ->get();
+
+            $findedProducts = Products::where('Name', 'LIKE', '%' . $params->search . '%')
+                    ->orWhere('Description', 'LIKE', '%' . $params->search . '%')
+                    ->get();
 
             if (sizeof($findedProducts) > 0) {
                 $response = array(
-                    'code'      =>  200,
-                    'products'  =>  $findedProducts
+                    'code' => 200,
+                    'products' => $findedProducts
                 );
             } else {
                 $response = array(
-                    'code'      =>  400,
-                    'message'   =>  'We cant find the product you are looking for'
+                    'code' => 400,
+                    'message' => 'We cant find the product you are looking for'
                 );
             }
-        } 
-        else {
-            $response = array (
-                'message'   =>  'The search parameter must be dont empty',
-                'code'      =>  400
+        } else {
+            $response = array(
+                'message' => 'The search parameter must be dont empty',
+                'code' => 400
             );
         }
 
         return response()->json($response, $response['code']);
     }
-    
+
     public function addProduct(Request $request) {
-        
+
         $json = $request->input('json', null);
         $params = json_decode($json, true);
-        
+
         if (!empty($params)) {
-            
+
             $validator = Validator::make($params, [
-                'id'    => 'required|unique:product'
+                        'id' => 'required|unique:product'
             ]);
-            
-            if(!$validator->fails()) {
+
+            if (!$validator->fails()) {
                 $product = new Products();
-                $product -> ID = $params['id'];
-                $product -> Name = $params['name'];
-                $product -> Price = $params['price'];
-                $product -> Description = $params['description'];
-                $product -> Stock = $params['stock'];
-                $product -> FK_Category = $params['fk_category'];
-                
-            if (isset($params['image'])) {
-                $product -> Image = $params['image'];
-            }
-            
-            $product->save();
-            
-            $response = array(
-                'message'   =>  'The product has added succesfully',
-                'code'      =>  200,
-                'Product'   => $product
-            );
-            }
-            else {
-                $response = array (
-                    'message' => 'Id field should bee unique',
-                    'code'  => 400
+                $product->ID = $params['id'];
+                $product->Name = $params['name'];
+                $product->Price = $params['price'];
+                $product->Description = $params['description'];
+                $product->Stock = $params['stock'];
+                $product->FK_Category = $params['fk_category'];
+
+                if (isset($params['image'])) {
+                    $product->Image = $params['image'];
+                }
+
+                $product->save();
+
+                $response = array(
+                    'message' => 'The product has added succesfully',
+                    'code' => 200,
+                    'Product' => $product
                 );
-            }   
-        }
-        else {
-            $response = array (
-                'message'   =>  'You should introduce params to fill a product',
-                'status'    =>  'error',
-                'code'      =>  400
+            } else {
+                $response = array(
+                    'message' => 'Id field should bee unique',
+                    'code' => 400
+                );
+            }
+        } else {
+            $response = array(
+                'message' => 'You should introduce params to fill a product',
+                'status' => 'error',
+                'code' => 400
             );
         }
-        
+
         return response()->json($response, $response['code']);
     }
-    
+
+    public function updateProduct(Request $request) {
+        $token = $request->header('Authorization', null);
+        $jwtAuth = new \JwtAuth();
+        $getToken = $jwtAuth->checkToken($token);
+
+        if ($getToken) {
+
+            $json = $request->input('json', null);
+
+            $params = json_decode($json, true);
+
+            if (is_null($params)) {
+                $response = array(
+                    'message' => 'Error del cliente al enviar datos,'
+                    . ' porfavor vuelve a intentarlo.',
+                    'code' => 400
+                );
+
+                return response()->json($response, $response['code']);
+            }
+
+            $validate = Validator::make($params, [
+                        'ID' => 'required|numeric|unique:product,id,'.$params['ID'],
+                        'Name' => 'required',
+                        'Price' => 'required|numeric',
+                        'Description' => 'required',
+                        'Stock' => 'required|numeric'
+            ]);
+
+            if (!$validate->fails()) {
+                
+                $updateProduct = Products::where('ID', $params['ID'])->update($params);
+
+
+                $response = array(
+                    'message' => 'El producto se ha actualizado correctamente.',
+                    'code' => 200
+                );
+                
+            } else {
+
+                $response = array(
+                    'message' => 'Error al validar los datos del producto, revisa los datos ingresados.',
+                    'code' => 400
+                );
+            }
+        } else {
+            $response = array(
+                'message' => 'No tienes autorización para realizar esta acción,'
+                . ' pide ayuda a  un administrador',
+                'code' => 400
+            );
+        }
+
+        return response()->json($response, $response['code']);
+    }
+
     public function deleteProduct(Request $request) {
         $json = $request->input('json', null);
         $params = json_decode($json);
-        
+
         if (!empty($params) && isset($params->id)) {
             $productID = $params->id;
             Products::where('ID', $productID)->delete();
-            
-            $response = array (
-                'message'   =>  'The product with id '. $productID.' is deleted',
-                'code'      =>  200
+
+            $response = array(
+                'message' => 'The product with id ' . $productID . ' is deleted',
+                'code' => 200
             );
-            
-        }
-        else {
-            $response = array (
-                'message'   =>  'Please fill the product id field',
-                'code'      =>  400
+        } else {
+            $response = array(
+                'message' => 'Please fill the product id field',
+                'code' => 400
             );
         }
-        
+
         return response()->json($response, $response['code']);
     }
 
