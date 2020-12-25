@@ -1419,6 +1419,16 @@ body {
         padding: 0 0.5rem;
         background-color: $mintCream;
     }
+    @include media ('<=769px') {
+        &__form {
+            width: 90%
+        }
+    }
+    @include media ('<=431px') {
+        &__form {
+            width: 100%
+        }
+    }
 }
 /*End login component*/
 
@@ -1520,7 +1530,7 @@ body {
         width: 100%;
         height: auto;
         background-color: rgb(63, 63, 63);
-        padding: 1.5rem;
+        padding: 1.5rem 1.5rem 3rem 1.5rem;
     }
     &__icon {
         width: 3rem;
@@ -1552,6 +1562,21 @@ body {
     &__stuff {
         @include flex-dir(row);
     }
+    @include media ('<=761px') {
+        &__options {
+            display: none
+        }
+    }
+    @include media ('<=686px') {
+        &__stuff {
+            @include flex-dir(column);
+        }
+    }
+    @include media ('<=400px') {
+        &__list {
+            padding: 1.5rem 0rem 3rem 0rem;
+        }
+    }
 }
 /*End admin component*/
 
@@ -1559,6 +1584,9 @@ body {
 .admin__wrap {
     display: flex;
     flex-wrap: wrap;
+    @include media ('<=762px') {
+        justify-content: center;
+    }
 }
 .products__admin {
     border-radius: 5px;
@@ -1581,6 +1609,7 @@ body {
         padding: 1rem;
         img {
             width: 6rem;
+            height: 6rem;
             border-radius: 50%;
         }
     }
@@ -1607,6 +1636,60 @@ body {
                 color: $mintCream;
             }
         }
+    }
+    @include media ('<=769px') {
+        width: 278px;
+        &__img {
+            img {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+        &__name {
+            .adm_d {
+                font-size: 0.7rem;
+            }
+        }
+        &__buttons {
+            button {
+                font-size: 1rem;
+                height: 2rem;
+                width: 4rem;
+            }
+        }
+    }
+    @include media ('<=632px') {
+        width: 200px;
+    }
+    @include media ('<=637px') {
+        &__card {
+          @include flex-dir(column);  
+        }
+        &__img {
+            margin: auto;
+            img {
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+        &__name {
+            padding: 0 1rem;
+            height: 6rem;
+        }
+    }
+    @include media ('<=480px') {
+        width: 160px;
+        &__name {
+            .adm_n {
+                font-size: 0.8rem;
+            }
+        }
+    }
+    @include media ('<=400px') {
+        margin: 1rem 2.1px;
+    }
+    @include media ('<=329px') {
+        width: 17rem;
     }
 }
 /*card */
@@ -1640,6 +1723,12 @@ body {
     padding: 2rem;
     border-radius: 7px;
     width: 30rem;
+    @include media ('<=769px') {
+        width: 21rem;
+    }
+    @include media ('<=431px') {
+        width: 17rem;
+    }
 }
 .id__lock {
     background-color: $mintCream;
@@ -1671,6 +1760,152 @@ body {
     }
 }
 /*End loading container*/
+
+/*Mobile admin options (responsive)*/
+.bg-mobile-options {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    background-color: #23001E;
+    width: 100%;
+    display: none;
+    @include media ('<=762px') {
+        display: flex;
+    }
+}
+.mobile-admin-buttons {
+    list-style: none;
+    @include flex-dir(row);
+    color: $mintCream;
+    margin: auto;
+    height: 4rem;
+    transform: translateX(-17px);
+    .adm-btn-el {
+        button {
+            height: 3rem;
+            width: 3rem;
+            margin: 0.5rem 1rem;
+            border-radius: 50%;
+            background-color: $vermilion;
+            color: mintcream;
+            border: 1px solid $mintCream;
+        }
+    }
+}
+/*End of mobile admin options*/
+
+/*Frame of admin component (welcome and instructions)*/
+.admin__frame {
+    width: 47rem;
+    margin: 4rem auto;
+    #frame__mobile {
+        visibility: hidden;
+        display: none;
+        @include media ('<=762px') {
+            visibility: visible;
+            display: initial;
+        }
+    }
+    #frame__desktop {
+        visibility: visible;
+        @include media ('<=762px') {
+            visibility: hidden;
+            display: none;
+        }
+    }
+    &__card {
+        color: #202020;
+        padding: 1rem 7rem;
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    &__image {
+        height: 3rem;
+        width: 3rem;
+        background-image: url('src/assets/images/icons/back-arrow.svg');
+        margin: auto;
+        opacity: 0.5;
+    }
+    &__image__mobile {
+        height: 2rem;
+        width: 2rem;
+        background-image: url('src/assets/images/icons/back-arrow.svg');
+        margin: auto;
+        opacity: 0.5;
+        transform: rotateZ(90deg);
+    }
+    @include media('<=800px') {
+        width: 80%;
+        &__card {
+            font-size: 1rem;
+            padding: 1rem 2rem;
+        }
+    }
+    @include media('<=530px') {
+        width: 90%;
+        &__image {
+            height: 2rem;
+            width: 2rem;
+        }
+    }
+}
+/*End of frame of admin*/
+
+/*Admin table*/
+.admin__table {
+    background-color: $mintCream;
+    border: 1px black solid;
+    border-radius: 5px;
+    width: 90%;
+    margin: 4rem auto;
+    padding: 0.5rem;
+    tr {
+        height: 2rem;
+    }
+    th {
+        border: 1px black solid;
+        border-radius: 4px;
+    }
+}
+/*End admin table*/
+
+/*paginator*/
+.ANGULAR_PAGINATOR_DEFAULT {
+    list-style: none;
+    display: flex;
+    text-decoration: none;  
+}
+.page-item {
+    margin: 0 2px;
+    a {
+        text-decoration: none;
+    }
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: $vermilion;
+    background-color: #303030;
+    border-radius: 5px;
+}
+.pagination-cstm {
+    position: absolute;
+    bottom: 0;
+    left: 52%;
+    width: auto;
+    transform: translateX(-50%);
+}
+
+/*end paginator*/
+
+/*clear fix*/
+.clearfix {
+    clear: both;
+    float: none;
+}
 
 /*Separators styles*/
 .clouds {

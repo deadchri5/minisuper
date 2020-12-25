@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 import { Product } from 'src/app/models/product';
+import { User } from 'src/app/models/user';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -8,7 +10,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
-  providers: [ProductService]
+  providers: [ProductService, UserService]
 })
 export class AdminComponent implements OnInit {
 
@@ -19,6 +21,7 @@ export class AdminComponent implements OnInit {
   //Modelos 
   products: Product[];
   productPrototipe: Product;
+  users: User[];
 
   //Strings
   sectionTaskName: string;
@@ -27,18 +30,24 @@ export class AdminComponent implements OnInit {
   flagProductsTool: boolean;
   flagUsersTool: boolean;
   addProductComponentFlag: boolean;
+  isModalActive: boolean;
+  showAdminFrame: boolean;
+
+  //
   showProductsCounter: number;
   showUsersCounter: number;
-  isModalActive: boolean;
+ 
 
   constructor(
     private _productService: ProductService,
+    private _userService: UserService,
     private _builder: FormBuilder
   ) { 
     this.flagProductsTool = false;
     this.flagUsersTool = false;
     this.addProductComponentFlag = false;
     this.isModalActive = false;
+    this.showAdminFrame = true;
     this.showProductsCounter = 0;
     this.showUsersCounter = 0;
     this.sectionTaskName = "Panel de administración";
@@ -76,11 +85,26 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  showFacturesTool() {
+    this.sectionTaskName = 'Facturas del sistema';
+  }
+
   showUsers() {
+    this.users = null;
+    this.products = null;
+    this.addProductComponentFlag = false;
+    this.showAdminFrame = false;
     this.sectionTaskName = 'Usuarios';
+    this._userService.getUsers(12).subscribe(
+      response => {
+        this.users = response.users;
+      }
+    );
   }
 
   showProducts() {
+    this.users = null;
+    this.showAdminFrame = false;
     this.sectionTaskName = 'Productos';
     this.addProductComponentFlag = false;
     let promise = new Promise((resolve, reject) => {
@@ -101,10 +125,11 @@ export class AdminComponent implements OnInit {
   }
 
   showAddProductForm() {
+    this.products = null;
+    this.users = null;
+    this.showAdminFrame = false;
     this.sectionTaskName = 'Productos';
     this.addProductComponentFlag = true;
-    this.products = [];
-
   }
 
   recaveProductData(event) {

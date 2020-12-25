@@ -7,7 +7,7 @@
                 <div class="products__admin__img">
 
                     <div *ngIf="product.Image != null; else noimage">
-                        <img src="{{product.Image}}" alt="{{product.Name}}">
+                        <img src="{{this.url}}products/getImage/{{product.Image}}" alt="{{product.Name}}">
                     </div>
 
                     <ng-template #noimage>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="products__admin__name">
                     <span class="adm_n">{{product.Name}}</span>
-                    <span>{{product.Description}}</span>
+                    <span class="adm_d">{{product.Description}}</span>
                 </div>
             </div>
             <div class="products__admin__buttons">

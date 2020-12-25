@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { Global } from 'src/app/services/global';
 import { Confirm, Report, Notify } from 'notiflix';
 
 @Component({
@@ -8,21 +9,19 @@ import { Confirm, Report, Notify } from 'notiflix';
   templateUrl: './admincard.component.html',
   styleUrls: ['./admincard.component.scss']
 })
-export class AdmincardComponent implements OnInit {
+export class AdmincardComponent {
 
   @Input() products: Product[];
   @Output() sendProductData = new EventEmitter();
 
   public isActive: boolean;
+  public url: string;
 
   constructor(
     private _productService: ProductService
   ) { 
     this.isActive = false;
-  }
-
-  ngOnInit() {
-    console.log(this.products);
+    this.url = Global.url;
   }
 
   deleteProduct(product){

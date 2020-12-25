@@ -39,4 +39,9 @@ export class UserService {
     return this.http.get(this.url+'user/getData', {headers: headers});
   }
 
+  getUsers(number):Observable<any> {
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+    return this.http.get(`${this.url}user/getUsers/${number}`, {headers: headers});
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-productcard',
@@ -8,12 +9,12 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductcardComponent implements OnInit {
 
-  public name: string;
+  public url: string;
 
   @Input() products: Product[];
 
   constructor() { 
-    this.name = 'hola';
+    this.url = Global.url;
   }
 
   ngOnInit() {

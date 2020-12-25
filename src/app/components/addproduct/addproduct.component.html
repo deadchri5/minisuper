@@ -10,7 +10,7 @@
         <label for="price-product">Precio</label>
         <input type="number" placeholder="Ingresa el precio del producto" formControlName="price" class="login__input">
         <label for="description-product">Descripción</label>
-        <textarea formControlName="description" placeholder="Ingresa una descripción del producto" cols="30" rows="3" class="login__input"></textarea>
+        <textarea formControlName="description" placeholder="Ingresa una descripción del producto" cols="30" rows="3" class="login__input txt-ar"></textarea>
         <label for="Category">Categoría</label>
         <select name="Category"s formControlName="fk_category" class="login__input">
             <option value="1">Bebidas</option>
@@ -22,6 +22,14 @@
             <option value="7">Abarrotes</option>
             <option value="8">Alimentos Básicos</option>
         </select>
+
+        <label for="image">Imágen</label>
+        <angular-file-uploader
+            [config]="afuConfig"
+            [resetUpload]=resetVar
+            (ApiResponse)="DocUpload($event)">
+        </angular-file-uploader>
+
         <button type="submit" [disabled]="addProductForm.invalid">Agregar producto</button>
     </form>
 

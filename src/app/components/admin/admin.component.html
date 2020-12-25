@@ -1,5 +1,12 @@
 <div class="admin">
+    <!--Mobile buttons of admin panel-->
+    <app-mobileadminbuttons class="bg-mobile-options"
+    (showProducts)="showProducts()"
+    (showUsers)="showUsers()">
+    </app-mobileadminbuttons>
+
     <div class="admin__container">
+
         <div class="admin__options">
             <ul class="options">
                 <li>
@@ -10,11 +17,18 @@
                 </li>
                 <li>
                     <button (click)="showUsersTool()">
-                        <img class="admin__icon" src="../../../assets/images/icons/administration.svg"
+                        <img class="admin__icon" src="../../../assets/images/icons/user.svg"
                             alt="Icono Usuarios">Usuarios
                     </button>
                 </li>
+                <li>
+                    <button (click)="showFacturesTool()">
+                        <img class="admin__icon" src="../../../assets/images/icons/factura.svg"
+                            alt="Icono Usuarios">Facturas
+                    </button>
+                </li>
             </ul>
+
             <div *ngIf="this.flagProductsTool">
                 <div class="admin__tools animate__animated animate__fadeInLeft">
                     <ul class="ul__tools">
@@ -34,6 +48,7 @@
 
             </div>
         </div>
+
         <div class="admin__list">
 
             <div class="admin__stuff">
@@ -54,14 +69,28 @@
                 </div>
             </div>
 
-                <div *ngIf="this.products != undefined">
+                <div *ngIf="showAdminFrame == true" class="admin__frame">
+                    <div id="frame__desktop" class="admin__frame__card">
+                        <p>Bienvenido/a al panel de adminstración!, mira las opciones disponibles en los botones de la izquierda.</p>
+                        <div class="admin__frame__image"></div>
+                    </div>
+                    <div id="frame__mobile" class="admin__frame__card">
+                        <p>Bienvenido/a al panel de adminstración!, mira las opciones disponibles en los botones de arriba.</p>
+                        <div class="admin__frame__image__mobile"></div>
+                    </div>
+                </div>
 
+                <div *ngIf="this.users != undefined">
+                  <app-usercard [users]="users"></app-usercard>  
+                </div>
+                
+
+                <div *ngIf="this.products != undefined">
                     <app-admincard class="admin__wrap" 
                     [products]="products"
                     (sendProductData)="recaveProductData($event)"
                     >
                     </app-admincard>
-                    
                 </div>
 
                 <div *ngIf="this.addProductComponentFlag == true">
@@ -72,6 +101,7 @@
 
         </div>
     </div>
+
 
     <div *ngIf="this.isModalActive == true">
         <div class="modal-bg" (click)="closeModal()">

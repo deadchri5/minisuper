@@ -3,7 +3,7 @@
     <div class="product__card">
         <div class="product__card__image">
             <div *ngIf="product.Image; else elseBlock">
-                <img src="{{product.Image}}" alt="{{product.Name}}">
+                <img src="{{this.url}}products/getImage/{{product.Image}}" alt="{{product.Name}}">
             </div>
             <ng-template #elseBlock>
                 <img src="../../../assets/images/nopicture/nopicture.svg" alt="Este articulo no tiene imagen">

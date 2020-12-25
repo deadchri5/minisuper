@@ -1,0 +1,22 @@
+<div style="overflow-x:auto;">
+    <table class="admin__table">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Acción</th>
+        </tr>
+        <tr *ngFor="let user of users; let i = index">
+            <th>{{user.ID}}</th>
+            <th>{{user.Name}}</th>
+            <th>{{user.LastName}}</th>
+            <th>{{user.Email}}</th>
+            <th>{{user.Address}}</th>
+            <th>{{user.Phone}}</th>
+            <th><button (click)="deleteUser(user.ID)">Eliminar</button></th>
+        </tr>
+    </table>
+</div>

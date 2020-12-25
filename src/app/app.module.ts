@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularPaginatorModule } from 'angular-paginator';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdmincardComponent } from './components/admincard/admincard.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { UpdateproductComponent } from './components/updateproduct/updateproduct.component';
+import { UsercardComponent } from './components/usercard/usercard.component';
+import { MobileadminbuttonsComponent } from './components/mobileadminbuttons/mobileadminbuttons.component';
 
 @NgModule({
   declarations: [
@@ -46,13 +50,17 @@ import { UpdateproductComponent } from './components/updateproduct/updateproduct
     AdminComponent,
     AdmincardComponent,
     AddproductComponent,
-    UpdateproductComponent
+    UpdateproductComponent,
+    UsercardComponent,
+    MobileadminbuttonsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularPaginatorModule,
+    AngularFileUploaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
