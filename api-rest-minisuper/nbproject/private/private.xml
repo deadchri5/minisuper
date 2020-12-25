@@ -6,8 +6,8 @@
             <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/app/Models/User.php</file>
             <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/app/Http/Controllers/ProductController.php</file>
             <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/routes/web.php</file>
-            <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/app/Models/Products.php</file>
             <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/app/Helpers/JwtAuth.php</file>
+            <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/config/filesystems.php</file>
             <file>file:/C:/xampp/htdocs/Minisuper/backend/api-rest-minisuper/app/Http/Controllers/UserController.php</file>
         </group>
     </open-files>

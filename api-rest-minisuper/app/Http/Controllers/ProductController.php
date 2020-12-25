@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Products;
 
@@ -201,6 +202,56 @@ class ProductController extends Controller {
         }
 
         return response()->json($response, $response['code']);
+    }
+    
+    public function addImage(Request $request) {
+        
+        $image = $request->file('file0');
+        
+        $validator = Validator::make($request->all(), [
+            'file0' =>  'required|image|mimes:jpg,jpeg,png,gif'
+        ]);
+        
+        if ($request->hasFile('file0') && !$validator->fails()) {
+            
+            $imageName = time().$image->getClientOriginalName();
+            \Storage::disk('products')->put($imageName, \File::get($image));
+            
+            $response = array (
+                'image'     =>  $imageName,
+                'message'   =>  'La imagen se ha guardado correctamente.',
+                'code'      =>  200
+            );
+        }
+        else {
+            $response = array (
+                'message'   =>  'No se subio correctamente la imagen'
+                                . ' comprueba la extención del archivo o intentalo más tarde.',
+                'code'      =>  400
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+        
+    }
+    
+    public function getImage($imageName) {
+        
+        $exists = \Storage::disk('products')->exists($imageName);
+        
+        if ($exists) {
+            $file = \Storage::disk('products')->get($imageName);
+            return new Response($file, 200);
+        }
+        else {
+            $response = array (
+                'message'   => 'No existe la imagen que se desea mostrar.',
+                'code'      =>  400
+            );
+            return response()->json($response, $response['code']);
+        }
+        
+        
     }
 
 }

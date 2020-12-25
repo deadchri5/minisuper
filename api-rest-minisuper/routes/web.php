@@ -19,6 +19,8 @@ Route::post('api/signIn', [UserController::class, 'signIn']);
 Route::post('api/login', [UserController::class, 'login']);
 Route::put('api/user/update', [UserController::class, 'updateUser']);
 Route::get('api/user/getData', [UserController::class, 'getUserData']);
+Route::get('api/user/getUsers/{limit}', [UserController::class, 'getUsers'])->middleware('checkPermissions');
+Route::delete('api/user/deleteUser', [UserController::class, 'deleteuserAdmin'])->middleware('checkPermissions');
 
 //Products routes
 Route::get('api/products/show/{category?}', [ProductController::class, 'showProducts']);
@@ -26,3 +28,5 @@ Route::post('api/products/search', [ProductController::class, 'search']);
 Route::put('api/products/insert', [ProductController::class, 'addProduct'])->middleware('checkPermissions');
 Route::put('api/products/update', [ProductController::class, 'updateProduct'])->middleware('checkPermissions');
 Route::delete('api/products/delete', [ProductController::class, 'deleteProduct'])->middleware('checkPermissions');
+Route::post('api/products/addImage', [ProductController::class, 'addImage'])->middleware('checkPermissions');
+Route::get('api/products/getImage/{image}', [ProductController::class, 'getImage']);

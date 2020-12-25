@@ -198,5 +198,85 @@ class UserController extends Controller {
         
         return response()->json($response, $response['code']);
     }
+    
+    public function getUsers($limit) {
+        
+        if (!is_numeric($limit)) {
+            $response = array (
+                'message'   =>  'El parametro tiene que ser de tipo númerico.',
+                'code'      =>  400
+            );
+           return response()->json($response, $response['code']);
+        }
+        
+        try {
+        $datos = User::select('ID', 'Name', 'LastName', 'Address', 'Email', 'Phone')->limit($limit)->get();
+        
+        $response = array (
+            'message'   =>  'Todo salio bien en la consulta.',
+            'code'      =>  200,
+            'users'     =>  $datos
+        );
+        
+        }
+        catch(\Exception $e) {
+        $datos = 'No se pudieron obtener los datos de los usuarios';
+        
+        $response = array (
+            'error'     =>  $e,
+            'message'   =>  $datos,
+            'code'      =>  400
+        );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
+    
+    public function deleteuserAdmin(Request $request) {
+        $json = $request->input('json', null);
+        $params = json_decode($json, true);
+        
+        if (is_null($params)) {
+            $response = array (
+                'message'   =>  'No se recibio el ID del usuario que se desea'.
+                                ' eliminar',
+                'code'      =>  400
+            );
+            
+            return response()->json($response, $response['code']);
+        }
+        
+        //Id of the user to delete
+        $ID = $params['ID'];
+        
+        try {
+            
+            $user = User::where('ID', $ID)->get();
+            
+            if (sizeof($user) == 0) {
+                $response = array (
+                'message'   =>  'No existe ningún usuario con el id: '. $ID,
+                'code'  =>  200
+                );
+                return response()->json($response, $response['code']);
+            }
+            
+            User::where('ID', $ID)->delete();
+            
+            $response = array (
+                'message'   =>  'Se ha borrado el usuario con el id: '. $ID,
+                'code'  =>  200
+            );
+        }
+        catch(\Exception $e) {
+            $response = array (
+                'error'     =>  $e,
+                'message'   =>  'No se ha podido eliminar al usuario.',
+                'code'  =>  400
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
 
 }
