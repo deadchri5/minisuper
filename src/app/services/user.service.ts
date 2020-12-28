@@ -39,9 +39,27 @@ export class UserService {
     return this.http.get(this.url+'user/getData', {headers: headers});
   }
 
-  getUsers(number):Observable<any> {
+  getUsers(params):Observable<any> {
     let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
-    return this.http.get(`${this.url}user/getUsers/${number}`, {headers: headers});
+    if (params.limitOfQuerys == undefined) {
+      return this.http.get(`${this.url}user/getUsers/10`, {headers: headers});
+    }
+    else {
+      if (params.param != '') {
+        return this.http.get(`${this.url}user/getUsers/${params.limitOfQuerys}/${params.param}`, {headers: headers});
+      }
+      else {
+        return this.http.get(`${this.url}user/getUsers/${params.limitOfQuerys}`, {headers: headers});
+      }
+    }
+  }
+
+  deleteUser(user): Observable<any> {
+    let json = JSON.stringify(user);
+    console.log(json);
+    let params = new HttpParams().set('json', json);
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+    return this.http.delete(`${this.url}user/deleteUser`, {headers: headers, params: params});
   }
 
 }

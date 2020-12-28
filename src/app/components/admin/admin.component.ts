@@ -95,7 +95,7 @@ export class AdminComponent implements OnInit {
     this.addProductComponentFlag = false;
     this.showAdminFrame = false;
     this.sectionTaskName = 'Usuarios';
-    this._userService.getUsers(12).subscribe(
+    this._userService.getUsers(10).subscribe(
       response => {
         this.users = response.users;
       }

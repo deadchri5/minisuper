@@ -1780,16 +1780,38 @@ body {
     margin: auto;
     height: 4rem;
     transform: translateX(-17px);
-    .adm-btn-el {
-        button {
-            height: 3rem;
-            width: 3rem;
-            margin: 0.5rem 1rem;
-            border-radius: 50%;
-            background-color: $vermilion;
-            color: mintcream;
-            border: 1px solid $mintCream;
-        }
+}
+.adm-btn-el {
+    button {
+        height: 3rem;
+        width: 3rem;
+        margin: 0.5rem 1rem;
+        border-radius: 50%;
+        background-color: $vermilion;
+        color: mintcream;
+        border: 1px solid $mintCream;
+    }
+}
+#floating-btns {
+    position: absolute;
+    bottom: -63px;
+    margin: auto;
+    transform: translate(25%);
+}
+.btn-view {
+    &::after {
+        content: "Ver"; 
+        position: absolute;
+        bottom: -12px;
+        transform: translate(-23px);
+    }
+}
+.btn-add {
+    &::after {
+        content: "Agregar"; 
+        position: absolute;
+        bottom: -12px;
+        transform: translate(-36px);
     }
 }
 /*End of mobile admin options*/
@@ -1861,6 +1883,9 @@ body {
     padding: 0.5rem;
     tr {
         height: 2rem;
+        &:nth-child(even) {
+            background-color: #ccc;
+        }
     }
     th {
         border: 1px black solid;
@@ -1868,6 +1893,41 @@ body {
     }
 }
 /*End admin table*/
+
+/*Search users (in table)*/
+.user__search {
+    color: $mintCream;
+    justify-content: center;
+    @include flex-dir(row);
+    &__select {
+        width: 3rem;
+        height: 1.8rem;
+        margin: 0.5rem 0;
+    }
+    &__input {
+        width: 20rem;
+        height: 1.8rem;
+        margin: 0.5rem 0;
+    }
+    &__col {
+        @include flex-dir(column);
+        margin: 0 3rem;
+    }
+    button {
+        height: 1.8rem;
+        background-color: $buttons;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 1.7rem;
+        &:hover {
+            cursor: pointer;
+            background-color: $mintCream;
+            color: $buttons;
+            transition: ease 0.3s;
+        }
+    }
+}
+/*End Search users (in table)*/
 
 /*paginator*/
 .ANGULAR_PAGINATOR_DEFAULT {
