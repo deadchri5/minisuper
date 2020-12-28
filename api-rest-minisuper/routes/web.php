@@ -19,7 +19,7 @@ Route::post('api/signIn', [UserController::class, 'signIn']);
 Route::post('api/login', [UserController::class, 'login']);
 Route::put('api/user/update', [UserController::class, 'updateUser']);
 Route::get('api/user/getData', [UserController::class, 'getUserData']);
-Route::get('api/user/getUsers/{limit}', [UserController::class, 'getUsers'])->middleware('checkPermissions');
+Route::get('api/user/getUsers/{limit}/{param?}', [UserController::class, 'getUsers'])->middleware('checkPermissions');
 Route::delete('api/user/deleteUser', [UserController::class, 'deleteuserAdmin'])->middleware('checkPermissions');
 
 //Products routes

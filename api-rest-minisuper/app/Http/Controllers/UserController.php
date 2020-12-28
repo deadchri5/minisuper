@@ -199,7 +199,11 @@ class UserController extends Controller {
         return response()->json($response, $response['code']);
     }
     
-    public function getUsers($limit) {
+    /*
+     * param $limit is the limit of the SQL statement
+     * param $param is the Name, LastName, ID, Adress or some property of model of users
+    */
+    public function getUsers($limit, $param = "") {
         
         if (!is_numeric($limit)) {
             $response = array (
@@ -210,7 +214,15 @@ class UserController extends Controller {
         }
         
         try {
-        $datos = User::select('ID', 'Name', 'LastName', 'Address', 'Email', 'Phone')->limit($limit)->get();
+        $datos = User::select('ID', 'Name', 'LastName', 'Address', 'Email', 'Phone')
+                ->where('Name', 'LIKE', "%".$param."%")
+                ->orWhere('ID', 'LIKE', "%".$param."%")
+                ->orWhere('LastName', 'LIKE', "%".$param."%")
+                ->orWhere('Address', 'LIKE', "%".$param."%")
+                ->orWhere('Email', 'LIKE', "%".$param."%")
+                ->orWhere('Phone', 'LIKE', "%".$param."%")
+                ->limit($limit)
+                ->get();
         
         $response = array (
             'message'   =>  'Todo salio bien en la consulta.',
