@@ -221,6 +221,7 @@ class UserController extends Controller {
                 ->orWhere('Address', 'LIKE', "%".$param."%")
                 ->orWhere('Email', 'LIKE', "%".$param."%")
                 ->orWhere('Phone', 'LIKE', "%".$param."%")
+                ->orderBy('created_at', 'DESC')
                 ->limit($limit)
                 ->get();
         

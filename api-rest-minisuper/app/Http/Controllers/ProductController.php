@@ -34,7 +34,7 @@ class ProductController extends Controller {
             }
         } else {
 
-            $productsDisplayed = Products::all();
+            $productsDisplayed = Products::select("*")->inRandomOrder()->get();
 
             $response = array(
                 'code' => '200',
