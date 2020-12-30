@@ -1,23 +1,25 @@
-<form [formGroup] = "formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="user__search">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="user__search">
 
-    <div class="user__search__col">
-        <label for="limit">Limite de la busqueda</label>
-        <select formControlName="limitOfQuerys" class="user__search__select">
-            <option value="1">1</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-        </select>
-    </div>
-    
+    <div class="user__search__flex">
+        <div class="user__search__col">
+            <label for="limit">Limite de busqueda</label>
+            <select formControlName="limitOfQuerys" class="user__search__select">
+                <option value="1">1</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>
+        </div>
 
-    <div class="user__search__col">
-       <label for="searchForUsers">Busca un usuario</label>
-        <input type="text" placeholder="Nombre, apellido, etc..." formControlName="param" class="user__search__input"> 
+
+        <div class="user__search__col">
+            <label for="searchForUsers">Busca un usuario</label>
+            <input type="text" placeholder="ID, Nombre, apellido, etc..." formControlName="param"
+                class="user__search__input">
+        </div>
     </div>
-    
 
     <button>Buscar</button>
 

@@ -1891,14 +1891,19 @@ body {
         border: 1px black solid;
         border-radius: 4px;
     }
+    @include media ('<=1004px') {
+        font-size: 0.7rem;
+    }
 }
 /*End admin table*/
 
 /*Search users (in table)*/
 .user__search {
     color: $mintCream;
-    justify-content: center;
-    @include flex-dir(row);
+    @include flex-dir(column);
+    &__flex {
+        @include flex-dir(row);
+    }
     &__select {
         width: 3rem;
         height: 1.8rem;
@@ -1911,19 +1916,41 @@ body {
     }
     &__col {
         @include flex-dir(column);
-        margin: 0 3rem;
+        margin: auto;
     }
     button {
         height: 1.8rem;
         background-color: $buttons;
         border: 1px solid black;
         border-radius: 5px;
-        margin-top: 1.7rem;
+        margin: 1.7rem auto auto;
+        width: 80%;
         &:hover {
             cursor: pointer;
             background-color: $mintCream;
             color: $buttons;
             transition: ease 0.3s;
+        }
+    }
+    @include media ('<=949px') {
+        width: 90%;
+        &__col {
+            font-size: 0.7rem;
+        }
+    }
+    @include media ('<=506px') {
+        &__flex {
+           @include flex-dir(column); 
+        }
+        &__col {
+            margin: 0 1.5rem;
+        }
+        &__input {
+            width: 90%;
+        }
+        button {
+            width: 24%;
+            margin: 1rem 1.5rem 0;
         }
     }
 }

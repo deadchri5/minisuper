@@ -54,20 +54,6 @@
 
             <div class="admin__stuff">
                 <h3 class="admin__task">{{this.sectionTaskName}}</h3>
-
-                <div class="search">
-                    <div class="search__component">
-
-                        <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
-                            <input class="search__field" id="search" type="text"
-                                aria-label="Ingresa lo que deseas buscar" formControlName="search"
-                                placeholder="Buscar...">
-
-                            <button type="submit" [disabled]="searchForm.invalid" class="search__button"><i
-                                    class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                </div>
             </div>
 
                 <div *ngIf="showAdminFrame == true" class="admin__frame">
