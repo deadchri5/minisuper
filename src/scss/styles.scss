@@ -1956,6 +1956,130 @@ body {
 }
 /*End Search users (in table)*/
 
+/*Shopping cart page*/
+.s__car__container {
+    @include flex-dir(row);
+    width: 90%;
+    margin: 2rem auto 2rem;
+
+    &__main {
+        @include flex-dir(column);
+        background-color: $white;
+        width: 75%;
+    }
+
+    &__header {
+        border: 1.5px solid #eeeeee;
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        font-size: 1.5rem;
+        p {
+            margin: 0.6rem 0;
+        }
+    }
+
+    &__products {
+        margin-top: 2rem;
+    }
+
+    &__info {
+        background-color: $white;
+        width: 25%;
+        border: 1.5px solid #eeeeee;
+        margin: 0 1rem;
+        font-size: 14px;
+        height: max-content;
+        button {
+            display: block;
+            margin: 2rem auto;
+            height: 2rem;
+            width: 80%;
+            background-color: $darkPurple;
+            color: $mintCream;
+            border: none;
+            font-size: 17px;
+            &:hover {
+                transition: ease 0.3s;
+                cursor: pointer;
+                background-color: $darkPurpleShaded;
+            }
+        }
+    }
+    &__details {
+        padding: 15px;
+        span {
+            letter-spacing: 0.5px;
+        }
+    }
+    .s_price {
+        float: right;
+    }
+
+    #ship-price, #iva-price {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            background: #ccc;
+            height: 1px;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+        }
+    }
+}
+
+.s__card {
+    border: 1.5px solid #eeeeee;
+    @include flex-dir(row);
+    img {
+        width: 8rem;
+        height: 8rem;
+        padding: 1.5rem;
+    }
+    &__info {
+        padding: 1.5rem;
+        p {
+            margin: 13px 0;
+        }
+    }
+    &__quantitysel {
+        padding: 1.5rem;
+        display: flex;
+        &__interactive {
+            background-color: black;
+            color: $mintCream;
+            &:hover {
+                transition: ease 0.3s;
+                color: $vermilion;
+                cursor: pointer;
+            }
+        }
+        &__val {
+            width: max-content;
+            margin: 0 5px;
+        }
+        span {
+            padding: 5px;
+            border-radius: 2px;
+        }
+    }
+    &__delbtn {
+        padding: 1.5rem;
+        text-align: center;
+        margin: auto;
+        font-size: 2rem;
+        &:hover {
+            transition: ease 0.3s;
+            color: $vermilion;
+            cursor: pointer;
+        }
+    }
+}
+
+/*End of shopping cart page*/
+
 /*paginator*/
 .ANGULAR_PAGINATOR_DEFAULT {
     list-style: none;

@@ -28,6 +28,8 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { UpdateproductComponent } from './components/updateproduct/updateproduct.component';
 import { UsercardComponent } from './components/usercard/usercard.component';
 import { MobileadminbuttonsComponent } from './components/mobileadminbuttons/mobileadminbuttons.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { ShoppingcardComponent } from './components/shoppingcard/shoppingcard.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { MobileadminbuttonsComponent } from './components/mobileadminbuttons/mob
     AddproductComponent,
     UpdateproductComponent,
     UsercardComponent,
-    MobileadminbuttonsComponent
+    MobileadminbuttonsComponent,
+    ShoppingcartComponent,
+    ShoppingcardComponent
   ],
   imports: [
     BrowserModule,
