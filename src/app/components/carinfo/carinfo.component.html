@@ -1,0 +1,22 @@
+<section class="s__car__container__info">
+    <div id="subtotal" class="s__car__container__details">
+        <span>{{totalItems}} articulos</span>
+        <span class="s_price">${{totalPrice}}</span>
+    </div>
+    <div id="ship-price" class="s__car__container__details">
+        <span>Envío</span>
+        <span class="s_price">$10</span>
+    </div>
+    <div id="iva-price" class="s__car__container__details">
+        <span>Total (IVA incluido)</span>
+        <span class="s_price">${{subTotal}}</span>
+    </div>
+    <div id="promo" class="s__car__container__promocode">
+        <label for="discount">¿Tienes un código?</label>
+        <input type="text" placeholder="Código de descuento">
+    </div>
+    <button>Pagar</button>
+</section>
+
+<button class="s__car__container__btn-back" routerLink="/products" routerLinkActive="active"> <i
+        class="fa fa-arrow-left" aria-hidden="true"></i> Seguir comprando </button>

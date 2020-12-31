@@ -30,6 +30,7 @@ import { UsercardComponent } from './components/usercard/usercard.component';
 import { MobileadminbuttonsComponent } from './components/mobileadminbuttons/mobileadminbuttons.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { ShoppingcardComponent } from './components/shoppingcard/shoppingcard.component';
+import { CarinfoComponent } from './components/carinfo/carinfo.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ShoppingcardComponent } from './components/shoppingcard/shoppingcard.co
     UsercardComponent,
     MobileadminbuttonsComponent,
     ShoppingcartComponent,
-    ShoppingcardComponent
+    ShoppingcardComponent,
+    CarinfoComponent
   ],
   imports: [
     BrowserModule,

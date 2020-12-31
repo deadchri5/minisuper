@@ -1968,6 +1968,22 @@ body {
         width: 75%;
     }
 
+    &__btn-back {
+        height: 2rem;
+        width: 20rem;
+        margin: auto;
+        display: block;
+        margin-top: 1rem;
+        background-color: $darkPurple;
+        color: $mintCream;
+        border: 1px solid #ccc;
+        &:hover {
+            transition: 0.3s ease;
+            cursor: pointer;
+            background-color: $darkPurpleShaded;
+        }
+    }
+
     &__header {
         border: 1.5px solid #eeeeee;
         width: 100%;
@@ -1985,7 +2001,7 @@ body {
 
     &__info {
         background-color: $white;
-        width: 25%;
+        width: 20rem;
         border: 1.5px solid #eeeeee;
         margin: 0 1rem;
         font-size: 14px;
@@ -2010,6 +2026,29 @@ body {
         padding: 15px;
         span {
             letter-spacing: 0.5px;
+        }
+    }
+    &__promocode {
+        margin-top: 2rem;
+        label {
+            font-size: 1.1rem;
+            margin: auto;
+            margin-bottom: 1rem;
+            display: block;
+            width: max-content;
+        }
+        input {
+            font-size: 1.1rem;
+            height: 2rem; 
+            margin: auto;
+            display: block;
+            text-transform: uppercase;
+            padding: 0px 20px;
+            box-sizing: border-box;
+            border: 1.5px solid #ccc;
+            &:focus {
+                border: 2px solid #ccc;
+            }
         }
     }
     .s_price {
@@ -2040,6 +2079,7 @@ body {
     }
     &__info {
         padding: 1.5rem;
+        width: 15rem;
         p {
             margin: 13px 0;
         }
@@ -2047,6 +2087,7 @@ body {
     &__quantitysel {
         padding: 1.5rem;
         display: flex;
+        flex-direction: column;
         &__interactive {
             background-color: black;
             color: $mintCream;
@@ -2074,6 +2115,15 @@ body {
             transition: ease 0.3s;
             color: $vermilion;
             cursor: pointer;
+        }
+    }
+    &__sub {
+        &__price {
+            display: flex;
+            justify-content: center;
+            &::before {
+                content: "$";
+            }
         }
     }
 }
