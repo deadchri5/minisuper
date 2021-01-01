@@ -30,3 +30,4 @@ Route::put('api/products/update', [ProductController::class, 'updateProduct'])->
 Route::delete('api/products/delete', [ProductController::class, 'deleteProduct'])->middleware('checkPermissions');
 Route::post('api/products/addImage', [ProductController::class, 'addImage'])->middleware('checkPermissions');
 Route::get('api/products/getImage/{image}', [ProductController::class, 'getImage']);
+Route::get('api/products/getProductFromId/{id?}', [ProductController::class, 'showProductWithIdField']);

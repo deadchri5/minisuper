@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Products;
+use App\Models\Category;
 
 class ProductController extends Controller {
 
@@ -74,6 +75,36 @@ class ProductController extends Controller {
             );
         }
 
+        return response()->json($response, $response['code']);
+    }
+    
+    public function showProductWithIdField ($id = "") {
+        if ( $id != "" && is_numeric($id)) {
+            
+            try {
+                $product = Products::where('ID', $id)->first();
+                $category = Products::where('ID', $id)->first()->category->Name;
+                $response = array (
+                    'product'   =>  $product,
+                    'category'  =>  $category,
+                    'code'  =>  200
+                ); 
+            }
+            catch (\Exception $e) {
+                $response = array (
+                    'message'   =>  'Error en la consulta SQL, porfavor intentalo de nuevo',
+                    'code'  =>  500
+                );  
+            }
+            
+        }
+        else {
+            $response = array (
+                'message' => 'No se obtuvo el parametro de ningun producto',
+                'code'  =>  400
+            );
+        }
+        
         return response()->json($response, $response['code']);
     }
 
