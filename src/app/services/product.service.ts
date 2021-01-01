@@ -20,6 +20,10 @@ export class ProductService {
         return this.http.get(this.url+'products/show');
     }
 
+    getProductWithID(id):Observable<any> {
+        return this.http.get(`${this.url}products/getProductFromId/${id}`);
+    }
+
     searchProducts(search: Object):Observable<any> {
         let jsonParam = JSON.stringify(search);
         let params = new HttpParams().set('json', jsonParam);

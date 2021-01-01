@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { Global } from 'src/app/services/global';
 
@@ -7,7 +7,7 @@ import { Global } from 'src/app/services/global';
   templateUrl: './productcard.component.html',
   styleUrls: ['./productcard.component.scss']
 })
-export class ProductcardComponent implements OnInit {
+export class ProductcardComponent {
 
   public url: string;
 
@@ -15,9 +15,6 @@ export class ProductcardComponent implements OnInit {
 
   constructor() { 
     this.url = Global.url;
-  }
-
-  ngOnInit() {
   }
 
 }

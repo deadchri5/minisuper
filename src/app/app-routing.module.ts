@@ -12,6 +12,7 @@ import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent }  from './components/admin/admin.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'shoppingCart', component: ShoppingcartComponent },
+  { path: 'view/product/:id', component: ViewofproductComponent },
   { path: '**', component: ProductsComponent }
 ];
 

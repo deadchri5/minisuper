@@ -25,6 +25,10 @@ export class ShoppingcartComponent {
     {
       name: 'gansito marinela',
       price: 10
+    },
+    {
+      name: 'Perrito bruno',
+      price: 50
     }
   ];
 

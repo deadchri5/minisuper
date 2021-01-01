@@ -31,6 +31,7 @@ import { MobileadminbuttonsComponent } from './components/mobileadminbuttons/mob
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { ShoppingcardComponent } from './components/shoppingcard/shoppingcard.component';
 import { CarinfoComponent } from './components/carinfo/carinfo.component';
+import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CarinfoComponent } from './components/carinfo/carinfo.component';
     MobileadminbuttonsComponent,
     ShoppingcartComponent,
     ShoppingcardComponent,
-    CarinfoComponent
+    CarinfoComponent,
+    ViewofproductComponent
   ],
   imports: [
     BrowserModule,
