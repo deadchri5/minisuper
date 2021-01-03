@@ -1,3 +1,59 @@
-<div *ngIf = "product != undefined">
-    <h1>{{product.product.Name}}</h1>
+<div *ngIf = "product != undefined" class="view__container">
+    
+    <div class="view__product">
+
+        <section class="view__product__info">
+            
+            <div class="view__product__info__img">
+                <img src="{{this.url}}products/getImage/{{product.product.Image}}" alt="{{product.product.Name}}">
+            </div>
+
+            <div class="view__product__info__desc">
+                <p class="view__product__info__desc__tl">Descripción del producto</p>
+                <p class="view__product__info__desc__dsc">{{product.product.Description}}</p>
+            </div>
+
+        </section>
+
+        <div class="view__product__c">
+
+            <section class="view__product__options">
+
+                <h2 class="view__product__options__title">{{product.product.Name}}</h2>
+    
+                <span class="view__product__options__price">{{product.product.Price}}</span>
+    
+                <div class="view__product__options__category">
+                    <span><i class="fa fa-tag" aria-hidden="true"></i> {{product.category}}</span>
+                </div>
+
+                <div class="view__product__options__stock">
+                    <div *ngIf="product.product.Stock == 0; else haveProducts">
+                        <span class="view__product__options__stock__np">Sin stock</span>
+                    </div>
+                    <ng-template #haveProducts>
+                       <span>{{product.product.Stock}} en stock.</span> 
+                    </ng-template>
+                    
+                </div>
+    
+                <div class="view__product__options__sep">
+                    <button class="view__product__options__btn">Agregar al carrito</button>
+                </div>
+                
+    
+            </section>
+    
+            <button class="view__product__options__btn-b" routerLink="/products" routerLinkActive="active">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a la tienda
+            </button>
+
+        </div>
+
+    </div>
+
+    <aside class="related__products">
+        <app-relatedproducts [relatedProducts]="relatedProducts"></app-relatedproducts>
+    </aside>
+
 </div>

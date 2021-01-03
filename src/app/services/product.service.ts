@@ -24,6 +24,10 @@ export class ProductService {
         return this.http.get(`${this.url}products/getProductFromId/${id}`);
     }
 
+    getRelatedroduct(category: number, limit: number, exclude: number) {
+        return this.http.get(`${this.url}products/getRelatedProducts/${category}/${limit}/${exclude}`);
+    }
+
     searchProducts(search: Object):Observable<any> {
         let jsonParam = JSON.stringify(search);
         let params = new HttpParams().set('json', jsonParam);

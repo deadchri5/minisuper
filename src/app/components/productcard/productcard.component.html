@@ -15,15 +15,12 @@
                 <p>{{product.Name}}</p>
             </div>
             <div class="product__card__price">
-                <span>${{product.Price}}.00</span>
-            </div>
-            <div class="product__card__description">
-                <p>{{product.Description}}</p>
+                <span>$ {{product.Price}}.00</span>
             </div>
         </div>
 
         <div class="product__card__button">
-            <button [routerLink]="['/view/product/', product.ID]" >Ver Producto</button>
+            <button  (click)="navigate(product.ID)">Ver Producto</button>
         </div>
     </div>
 

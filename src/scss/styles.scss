@@ -1164,7 +1164,7 @@ body {
 }
 .product__card {
     width: 17.5rem;
-    height: 20rem;
+    height: 17.5rem;
     background-color: white;
     border-radius: 5px;
     text-align: center;
@@ -1180,11 +1180,7 @@ body {
         font-weight: 700;
     }
     &__price {
-        font-size: 0.9rem;
-    }
-    &__description {
-        font-size: 0.8rem;
-        text-align: left;
+        font-size: 1.1rem;
     }
     &__image {
         position: relative;
@@ -1229,6 +1225,7 @@ body {
 
     @include media ('<=1160px') {
         width: 12rem;
+        height: 16rem;
         margin: 0.5rem;
         &__button {
             button {
@@ -1248,11 +1245,9 @@ body {
 
     @include media ('<=480px') {
         width: 9rem;
+        height: 15rem;
         &__name {
             font-size: 11px;
-        }
-        &__description {
-            font-size: 0.7rem;
         }
         &__button {
             button {
@@ -1264,6 +1259,7 @@ body {
 
     @include media ('<=384px') {
         width: 15rem;
+        height: 15rem;
         &__button {
             button {
                 left: 68px;
@@ -1271,9 +1267,6 @@ body {
         }
         &__name {
             font-size: 15px;
-        }
-        &__description {
-            font-size: 0.9rem;
         }
     }
 }
@@ -2129,6 +2122,143 @@ body {
 }
 
 /*End of shopping cart page*/
+
+/*Previous view of product*/
+.view__container {
+    margin: auto;
+    width: 90%;
+}
+.view__product {
+    @include flex-dir(row);
+    &__info {
+        @include flex-dir(column);
+        width: 60%;
+        padding: 3rem;
+        background-color: white;
+        border: 1px solid #eee;
+        margin: 1rem 0;
+        &__img {
+            position: relative;
+            img {
+                width: 30rem;
+                height: 30rem;
+                margin: 1.5rem auto;
+                display: block;
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                height: 2px;
+                width: 100%;
+                background-color: #eee;
+                bottom: -10px;
+            }
+        }
+        &__desc {
+            &__tl {
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-top: 3rem;
+            }
+            &__dsc {
+                letter-spacing: 0.5px;
+                line-height: 2rem;
+            }
+        }
+    }
+    &__c {
+        width: 28%;
+        margin: 1rem
+    }
+    &__options {
+        @include flex-dir(column);
+        background-color: white;
+        border: 1px solid #eee;
+        height: max-content;
+        padding: 1.2rem;
+        &__title {
+            font-size: 1.5rem;
+            font-weight: lighter;
+        }
+        &__price {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-weight: bolder;
+            &::before {
+                content: "$ ";
+            }
+        }
+        &__category {
+            margin: 1rem 0;
+            background-color: #16a03f;
+            width: max-content;
+            border-radius: 5px;
+            padding: 6px;
+        }
+        &__stock {
+            margin: 1rem 0;
+            &__np {
+                color: $vermilion;
+            }
+        }
+        &__sep {
+            justify-content: center;
+            display: flex;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                height: 2px;
+                width: 100%;
+                background-color: #eee;
+            }
+        }
+        &__btn {
+            width: 15rem;
+            margin: auto;
+            margin-top: 2rem;
+            height: 3rem;
+            font-size: 1.3rem;
+            border: none;
+            background-color: $darkPurple;
+            color: $mintCream;
+            &:hover {
+                transition: 0.3s ease;
+                cursor: pointer;
+                background-color: $darkPurpleShaded;
+            }
+        }
+        &__btn-b {
+            background-color: $darkPurple;
+            height: 2.5rem;
+            font-size: 1.3rem;
+            border: none;
+            color: #EDF9F5;
+            margin: auto;
+            display: block;
+            margin-top: 2rem;
+            width: 100%;
+            color: $mintCream;
+            &:hover {
+                transition: 0.3s ease;
+                cursor: pointer;
+                background-color: $darkPurpleShaded;
+            }
+        }
+    }
+}
+/*End previous view*/
+
+/*Related Products*/
+.rel__products {
+    h3 {
+        font-size: 1.5rem;
+    }
+    &__dir {
+        @include flex-dir(row);
+    }
+}
+/*End Related products*/
 
 /*paginator*/
 .ANGULAR_PAGINATOR_DEFAULT {

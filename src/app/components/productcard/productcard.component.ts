@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { Router } from '@angular/router';
 import { Global } from 'src/app/services/global';
 
 @Component({
@@ -13,8 +14,12 @@ export class ProductcardComponent {
 
   @Input() products: Product[];
 
-  constructor() { 
+  constructor(private _router: Router) { 
     this.url = Global.url;
+  }
+
+  navigate (id) {
+    this._router.navigateByUrl(`/view/product/${id}`);
   }
 
 }
