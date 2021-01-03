@@ -45,6 +45,41 @@ class ProductController extends Controller {
 
         return response()->json($response, $response['code']);
     }
+    
+    public function showRelatedProducts ($category, $limit, $ignore) {
+        if (is_numeric($category) && is_numeric($limit) && is_numeric($ignore)) {
+            
+            
+            try {
+             $query = Products::where('FK_Category', $category)
+                     ->where('ID', '!=', $ignore)
+                     ->limit($limit)
+                     ->inRandomOrder()
+                     ->get();
+            }
+            catch (\Exception $e) {
+                $response = array (
+                    'message'   =>  'Error en la consulta SQL.',
+                    'code'  =>  500
+                );
+            }
+            
+            $response = array (
+                 'products' =>  $query,
+                 'code' =>  200
+             );
+            
+        }
+        else {
+            $response = array (
+                'message'   =>  'Los parametros deben de ser numéricos.',
+                'code'  =>  400
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+        
+    }
 
     public function search(Request $request) {
 
@@ -92,8 +127,8 @@ class ProductController extends Controller {
             }
             catch (\Exception $e) {
                 $response = array (
-                    'message'   =>  'Error en la consulta SQL, porfavor intentalo de nuevo',
-                    'code'  =>  500
+                    'message'   =>  'La ruta con el producto '. $id. ' No existe.',
+                    'code'  =>  400
                 );  
             }
             

@@ -31,3 +31,4 @@ Route::delete('api/products/delete', [ProductController::class, 'deleteProduct']
 Route::post('api/products/addImage', [ProductController::class, 'addImage'])->middleware('checkPermissions');
 Route::get('api/products/getImage/{image}', [ProductController::class, 'getImage']);
 Route::get('api/products/getProductFromId/{id?}', [ProductController::class, 'showProductWithIdField']);
+Route::get('api/products/getRelatedProducts/{category}/{limit}/{id}', [ProductController::class, 'showRelatedProducts']);
