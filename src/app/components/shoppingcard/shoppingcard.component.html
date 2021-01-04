@@ -1,27 +1,35 @@
 <div class="s__card">
 
-    <img src="https://picsum.photos/200" alt="imagen de ejemplo">
+    <div class="s__card__f-node">
+        <img src="https://picsum.photos/200" alt="imagen de ejemplo">
 
-    <div class="s__card__info">
-        <p>{{ejemplo.name}}</p>
-        <p>${{priceOfItem}}</p>
-    </div>
-
-    <div class="s__card__quantitysel">
-        <div style="margin: auto; border: 1px solid; border-radius: 4px; display: flex;">
-            <span class="s__card__quantitysel__interactive" (click)="decreaseItm()"><i class="fa fa-chevron-down"
-                    aria-hidden="true"></i></span>
-            <span class="s__card__quantitysel__val">{{numberOfItems}}</span>
-            <span class="s__card__quantitysel__interactive" (click)="increaseItm()"><i class="fa fa-chevron-up"
-                    aria-hidden="true"></i></span>
+        <div class="s__card__info">
+            <p>{{ejemplo.name}}</p>
+            <p>${{priceOfItem}}</p>
         </div>
-        <div class="s__card__sub">
-            <span class="s__card__sub__price">{{priceTemporal}}</span>
-        </div>
+
     </div>
 
-    <div class="s__card__delbtn">
-        <i class="fa fa-trash" aria-hidden="true"></i>
+    <div class="s__card__s-node">
+
+        <div class="s__card__quantitysel">
+            <div style="margin: auto; border: 1px solid; border-radius: 4px; display: flex;">
+                <span class="s__card__quantitysel__interactive" (click)="decreaseItm()"><i class="fa fa-chevron-down"
+                        aria-hidden="true"></i></span>
+                <span class="s__card__quantitysel__val">{{numberOfItems}}</span>
+                <span class="s__card__quantitysel__interactive" (click)="increaseItm()"><i class="fa fa-chevron-up"
+                        aria-hidden="true"></i></span>
+            </div>
+            <div class="s__card__sub">
+                <span class="s__card__sub__price">{{priceTemporal}}</span>
+            </div>
+        </div>
+    
+        <div class="s__card__delbtn">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
+
     </div>
+
 
 </div>
