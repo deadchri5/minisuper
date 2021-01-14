@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
-import { Loading } from 'notiflix';
+import { Loading, Report, Notify } from 'notiflix';
 import { Product } from 'src/app/models/product';
 import { Global } from 'src/app/services/global';
 
@@ -93,6 +93,55 @@ export class ViewofproductComponent implements OnInit {
     })
 
 
+  }
+
+  addToCar(newProduct) {
+
+    const products = newProduct.product;
+    const { ID, Name, Price, Image } = products;
+    let productsArray = [];
+
+    const newProdObj = {
+      ID: ID,
+      Name: Name,
+      Price: Price,
+      Image: Image
+    };
+
+    //If sessionStorage value is empty
+    if (sessionStorage.getItem('products') == null) {
+        productsArray.push(newProdObj);
+        sessionStorage.setItem('products', JSON.stringify(productsArray));
+        Notify.Success(`${Name} se ha agregado al carrito de compras.`);
+    }
+    //if sessionStorage is not empty
+    else {
+      let auxArray: object[] = JSON.parse(sessionStorage.getItem('products'));
+
+      if (this.checkIfObjectExists(auxArray, newProdObj)) {
+        Report.Info (
+          'Elemento ya esta en su carrito',
+          `El producto ${Name} ya ha sido agregado a su carrito de compras.`,
+          'Confirmar'
+        );
+        return;
+      }
+
+      //Add to sessionStorage if the item dont exists already
+      auxArray.push(newProdObj)
+      sessionStorage.setItem('products', JSON.stringify(auxArray));
+      Notify.Success(`${Name} se ha agregado al carrito de compras.`);
+    }
+    
+  }
+
+  checkIfObjectExists(arr, obj):boolean {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].ID === obj.ID) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

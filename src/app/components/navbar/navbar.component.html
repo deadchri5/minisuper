@@ -1,72 +1,33 @@
 <!--Desktop navbar-->
-<nav class="nav__desktop">
-    <aside class="nav__color-band"></aside>
-    <div class="nav__content">
-        <span class="nav__logo">
-            <img src="../../../assets/images/logoMobile.png" alt="Logo">
-        </span>
-        <ul>
-            <li class="li-element"> <a class="a_elem" routerLink="/" routerLinkActive="active">Inicio</a> </li>
-            <li class="li-element"> <a class="a_elem" routerLink="/products" routerLinkActive="active">Productos</a> </li>
-            <li class="li-element"> <a class="a_elem" routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
-            <li class="li-element"> <a class="a_elem" routerLink="/services" routerLinkActive="active">Servicios</a> </li>
-            <li class="li-element"> <a class="a_elem" routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
+
+<nav id="navbar" class="nav__desktop">
+
+    <span class="nav__desktop__logo" routerLink="/" routerLinkActive="active">
+        <img src="../../../assets/images/logoMobile.png" alt="Logo Minisuper Topacio">
+    </span>
+
+    <section class="nav__desktop__utilities">
+        <div class="nav__desktop__utilities__icon">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </div>
+        <div id="icon-cart" class="nav__desktop__utilities__icon" routerLink="/shoppingCart" routerLinkActive="active">
+            <i class="fa fa-shopping-cart alert-car" aria-hidden="true"></i>
+        </div>
+        <div class="nav__desktop__utilities__icon">
+            <span class="menu-btn" (click)="showOrHiddenMenu()"></span>
+        </div>
+    </section>
+
+    <section class="nav__desktop__menu  animate__animated hidden">
+        <ul class="nav__desktop__menu__ul">
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/" routerLinkActive="active">Inicio 🏘️</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/products" routerLinkActive="active">Productos 🎉</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"  ><a routerLink="/breakfasts" routerLinkActive="active">Desayunos 🥞</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/services" routerLinkActive="active">Servicios 💵</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/about" routerLinkActive="active">Nosotros ✌️</a></li>
         </ul>
-        
-        <span class="nav__location">
-            <div *ngIf="this.user == undefined; else loggedUser">
-                <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
-            </div>
+    </section>
 
-            <ng-template #loggedUser>
-                <div class="userUtilities">
-                    <button class="userUtilities__button" (click)="showUtilities()">
-                        <span class="userUtilities__info">
-                            {{this.user.name}}
-                        </span>
-                    </button>
-                  <ul id="list-utilities" class="dont-show">
-                    <li><a routerLink="/userinfo" routerLinkActive="active">Mi información</a></li>
-                    <div *ngIf="this.user.type == 1">
-                        <li><a routerLink="/admin" routerLinkActive="active">Panel de administración</a></li>
-                    </div>
-                    <li> <a routerLink="/shoppingCart" routerLinkActive="active">Carrito</a></li>
-                    <li><span (click)="logOut()">Cerrar sesión</span></li>
-                  </ul>  
-                </div>
-                
-            </ng-template>
-            
-        </span>
-
-    </div>
 </nav>
 
 <!--End Desktop navbar-->
-
-<!--Mobile navbar-->
-
-<nav class="nav__mobile">
-    <span class="nav__mobile__logo">
-        <img src="../../../assets/images/logoMobile.png" alt="Logo">
-    </span>
-    <span class="nav__mobile__menu" (click)="mostrarMenu()">
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </span>
-    <ul id="options" class="animate__animated">
-        <div *ngIf="this.user == undefined; else loggedUserMovile">
-            <li><a routerLink="/login" routerLinkActive="active">Iniciar sesión</a></li>
-        </div>
-        <ng-template #loggedUserMovile>
-            <li> <a routerLink="/userinfo" routerLinkActive="active">{{this.user.name}}</a> </li>
-        </ng-template>
-        
-        <li> <a routerLink="/" routerLinkActive="active">Inicio</a> </li>
-        <li> <a routerLink="/products" routerLinkActive="active">Productos</a> </li>
-        <li> <a routerLink="/breakfasts" routerLinkActive="active">Desayunos</a> </li>
-        <li> <a routerLink="/services" routerLinkActive="active">Servicios</a> </li>
-        <li> <a routerLink="/about" routerLinkActive="active">Nosotros</a> </li>
-    </ul>
-</nav>
-
-<!--End mobile navbar-->

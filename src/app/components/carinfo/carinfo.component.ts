@@ -13,6 +13,8 @@ export class CarinfoComponent implements OnChanges {
 
   subTotal: number;
 
+  noShipCost: boolean = false; //By default the ship cost is apply for any purchase
+
   constructor() { 
     this.totalPrice = 0;
     this.subTotal = 0;
@@ -20,7 +22,26 @@ export class CarinfoComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.subTotal = this.totalPrice + 10;
+
+    this.noShipCost = this.checkIfShipIsFree();
+
+    if (!this.noShipCost) {
+      this.subTotal = this.totalPrice + 30;
+    }
+    else {
+      this.subTotal = this.totalPrice;
+    }
+
+    
+  }
+
+  checkIfShipIsFree(): boolean {
+    if (this.totalPrice >= 200) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 

@@ -35,6 +35,7 @@
             "scripts": [
               "src/assets/js/glider.js",
               "src/assets/js/app.js",
+              "src/assets/js/stickynavbar.js",
               "./node_modules/notiflix/dist/notiflix-2.6.0.min.js"
             ]
           },

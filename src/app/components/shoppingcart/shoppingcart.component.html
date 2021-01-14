@@ -4,19 +4,34 @@
         <div class="s__car__container__header">
             <p>Carrito de compras</p>
         </div>
-        <div class="s__car__container__products">
+
+        <div *ngIf="productsOfSessionStorage != null ; else noProductsTag" class="s__car__container__products">
             <div class="s__car__container__card">
-                <div *ngFor="let item of items">
+                <div *ngFor="let item of productsOfSessionStorage">
                     <app-shoppingcard 
                     (increasePrice)="increasePrice($event)"
                     (decrementPrice)="decreasePrice($event)"
-                    [ejemplo]="item">
+                    (reloadParentCompoenent)="reloadThisComponent()"
+                    [products]="item">
                     </app-shoppingcard>
                 </div>
             </div>
         </div>
+
+        <ng-template #noProductsTag>
+            <div class="s__car__container__noItems-car">
+               <img src="../../../assets/images/icons/085-shopping-cart-5.svg" alt="Carrito de compras">
+               <p>No hay elementos en su carrito.</p>
+            </div>
+            
+        </ng-template>
+
     </div>
 
-    <app-carinfo [totalPrice]="totalPrice" [totalItems]="numberOfItems"></app-carinfo>
+    <div *ngIf="productsOfSessionStorage != null">
+        <app-carinfo [totalPrice]="totalPrice" [totalItems]="numberOfItems"></app-carinfo>
+    </div>
+    
+    
 
 </div>

@@ -5,7 +5,12 @@
     </div>
     <div id="ship-price" class="s__car__container__details">
         <span>Envío</span>
-        <span class="s_price">$10</span>
+
+        <span *ngIf="noShipCost; else shipIsNoFree" class="s_freeship">GRATIS</span>
+        <ng-template #shipIsNoFree>
+            <span class="s_price">$30</span>
+        </ng-template>
+        
     </div>
     <div id="iva-price" class="s__car__container__details">
         <span>Total (IVA incluido)</span>

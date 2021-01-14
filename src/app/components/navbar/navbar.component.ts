@@ -1,51 +1,37 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { UserService } from 'src/app/services/user.service'
-import { User } from 'src/app/models/user';
+import { Component, OnInit } from '@angular/core';
+
+declare const stickyNavbar: any;
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
 
-  constructor(private _userService: UserService) { }
+export class NavbarComponent implements OnInit{
 
-  public flag: boolean = true;
-  public user: User;
+  constructor() { }
 
-  mostrarMenu() {
-    document.getElementById('options').classList.toggle('animate__fadeInRight');
-    document.getElementById('options').classList.toggle('nav__mobile__options');
-    if (this.flag) {
-      document.getElementById('options').style.display = 'block';
-      this.flag = false;
-    }
-    else {
-      document.getElementById('options').style.display = 'none';
-      this.flag = true;
-    }
-  }
 
   ngOnInit() {
-    this._userService.getUserInfo().subscribe(
-      response => {
-        this.user = response.user;
-      }
-    );
+    stickyNavbar();
   }
 
-  onChanges() {
-    console.log('log from navbar changes method');
-  }
 
-  showUtilities() {
-    document.getElementById('list-utilities').classList.toggle('show-utilities');
-  }
-
-  logOut() {
-    localStorage.removeItem('token');
-    location.href="/login";
+  showOrHiddenMenu() {
+    const menu = document.querySelector('.nav__desktop__menu');
+    if (menu.classList.contains('hidden')){
+        menu.classList.remove('hidden');
+        menu.classList.remove('animate__bounceOutRight');
+        menu.classList.add('animate__bounceInRight');
+    }
+    else {
+      menu.classList.remove('animate__bounceInRight');
+      menu.classList.add('animate__bounceOutRight');
+      setTimeout( function() {
+        menu.classList.add('hidden');
+      }, 600);
+    }
   }
 
 }

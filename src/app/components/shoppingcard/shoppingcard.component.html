@@ -1,10 +1,10 @@
 <div class="s__card">
 
     <div class="s__card__f-node">
-        <img src="https://picsum.photos/200" alt="imagen de ejemplo">
+        <img src="{{this.url}}products/getImage/{{products.Image}}" alt="imagen de ejemplo">
 
         <div class="s__card__info">
-            <p>{{ejemplo.name}}</p>
+            <p>{{products.Name}}</p>
             <p>${{priceOfItem}}</p>
         </div>
 
@@ -13,6 +13,10 @@
     <div class="s__card__s-node">
 
         <div class="s__card__quantitysel">
+            <span class="s__card__msj">
+                {{msjStock}}
+            </span>
+            
             <div style="margin: auto; border: 1px solid; border-radius: 4px; display: flex;">
                 <span class="s__card__quantitysel__interactive" (click)="decreaseItm()"><i class="fa fa-chevron-down"
                         aria-hidden="true"></i></span>
@@ -25,7 +29,7 @@
             </div>
         </div>
     
-        <div class="s__card__delbtn">
+        <div class="s__card__delbtn" (click)="deleteItem(products.ID)">
             <i class="fa fa-trash" aria-hidden="true"></i>
         </div>
 
