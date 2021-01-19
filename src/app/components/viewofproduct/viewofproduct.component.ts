@@ -33,6 +33,8 @@ export class ViewofproductComponent implements OnInit {
       svgColor: '#E41912',
     });
 
+    Notify.Init({ position:"right-bottom" }); 
+
   }
 
   ngOnInit() {

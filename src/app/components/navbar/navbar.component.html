@@ -7,7 +7,7 @@
     </span>
 
     <section class="nav__desktop__utilities">
-        <div class="nav__desktop__utilities__icon">
+        <div class="nav__desktop__utilities__icon" (click)="showOrHiddenUserUtilities()">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
         </div>
         <div id="icon-cart" class="nav__desktop__utilities__icon" routerLink="/shoppingCart" routerLinkActive="active">
@@ -16,15 +16,44 @@
         <div class="nav__desktop__utilities__icon">
             <span class="menu-btn" (click)="showOrHiddenMenu()"></span>
         </div>
+
+
+    </section>
+
+
+    <section id="nav-float-menu" class="nav__user-options hidden">
+
+        <div class="nav__user-options__info" *ngIf="isUserLogged">
+            <img src="https://source.unsplash.com/random" alt="Imagen de usuario">
+            <span class="nav__user-options__info__span">{{userData.name}}</span>
+            <span class="nav__user-options__info__span__e">{{userData.email}}</span>
+        </div>
+
+        <ul class="nav__user-options__ul">
+            <li class="nav__user-options__ul__li" (click)="showOrHiddenUserUtilities()" routerLink="/login"
+                routerLinkActive="active" *ngIf="!isUserLogged">Iniciar sesión</li>
+            <div *ngIf="isUserLogged">
+                <li class="nav__user-options__ul__li" routerLink="/userinfo" routerLinkActive="active">Mis datos</li>
+                <li class="nav__user-options__ul__li" *ngIf="isAdmin" routerLink="/admin" routerLinkActive="active">Administrar</li>
+                <li class="nav__user-options__ul__li" (click)="logOut()" >Cerrar sesión</li>
+            </div>
+        </ul>
+
+
     </section>
 
     <section class="nav__desktop__menu  animate__animated hidden">
         <ul class="nav__desktop__menu__ul">
-            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/" routerLinkActive="active">Inicio 🏘️</a></li>
-            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/products" routerLinkActive="active">Productos 🎉</a></li>
-            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"  ><a routerLink="/breakfasts" routerLinkActive="active">Desayunos 🥞</a></li>
-            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/services" routerLinkActive="active">Servicios 💵</a></li>
-            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()" ><a routerLink="/about" routerLinkActive="active">Nosotros ✌️</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"><a routerLink="/"
+                    routerLinkActive="active">Inicio 🏘️</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"><a routerLink="/products"
+                    routerLinkActive="active">Productos 🎉</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"><a routerLink="/breakfasts"
+                    routerLinkActive="active">Desayunos 🥞</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"><a routerLink="/services"
+                    routerLinkActive="active">Servicios 💵</a></li>
+            <li class="nav__desktop__menu__ul__li" (click)="showOrHiddenMenu()"><a routerLink="/about"
+                    routerLinkActive="active">Nosotros ✌️</a></li>
         </ul>
     </section>
 

@@ -33,6 +33,7 @@ import { ShoppingcardComponent } from './components/shoppingcard/shoppingcard.co
 import { CarinfoComponent } from './components/carinfo/carinfo.component';
 import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
 import { RelatedproductsComponent } from './components/relatedproducts/relatedproducts.component';
+import { Error404Component } from './components/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RelatedproductsComponent } from './components/relatedproducts/relatedpr
     ShoppingcardComponent,
     CarinfoComponent,
     ViewofproductComponent,
-    RelatedproductsComponent
+    RelatedproductsComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

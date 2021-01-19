@@ -18,4 +18,8 @@ export class ShoppingcartService {
     return this.http.get(`${this.url}ShoppingCart/${id}`);
   }
 
+  getDiscount(code: string): Observable<any> {
+    return this.http.get(`${this.url}ShoppingCart/reedem/${code}`);
+  }
+
 }

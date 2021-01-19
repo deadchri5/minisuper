@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   searchForm: FormGroup;
   formControl: FormControl;
 
-  //Modelos 
+  //Models 
   products: Product[];
   productPrototipe: Product;
   users: User[];
@@ -57,6 +57,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    alert('hola');
   }
 
   showProductsTool(): void {

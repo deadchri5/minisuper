@@ -1,20 +1,69 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarObject } from 'src/app/models/navbarObject';
+import { UserService } from 'src/app/services/user.service';
 
 declare const stickyNavbar: any;
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  providers: [UserService]
 })
 
 export class NavbarComponent implements OnInit{
 
-  constructor() { }
+  isUserLogged: boolean;
+  isAdmin: boolean;
+  
+  userData = {
+    'name': '',
+    'email': ''
+  }
+
+  constructor(private _userService: UserService) {
+    this.isUserLogged = false;
+    this.isAdmin = false;
+   }
 
 
   ngOnInit() {
     stickyNavbar();
+    this.getLogginInfo();
+  }
+
+  getLogginInfo() {
+
+    if (localStorage.getItem('token') != null) {
+
+      let promise = new Promise ((resolve, rejected) => {
+        this._userService.getUserInfo().subscribe(
+          response => {
+            resolve(response.user)
+          },
+          error => {
+            rejected(error)
+          }
+        )
+      })
+
+      promise.then( (res: NavbarObject) => {
+        this.userData.name = res.name;
+        this.userData.email = res.email;
+        this.isAdmin = this.checkIfUserIsAdmin(res);
+        this.isUserLogged = true;
+      } )
+
+      promise.catch ( (err) => {
+        console.log(err)
+      } )
+
+    }
+
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    location.href="/";
   }
 
 
@@ -32,6 +81,23 @@ export class NavbarComponent implements OnInit{
         menu.classList.add('hidden');
       }, 600);
     }
+  }
+
+  showOrHiddenUserUtilities(): void {
+    const userUtilities = document.getElementById('nav-float-menu');
+    if (userUtilities.classList.contains('hidden')) {
+      userUtilities.classList.remove('hidden');
+    }
+    else {
+      userUtilities.classList.add('hidden');
+    }
+  }
+
+  checkIfUserIsAdmin (user: NavbarObject): boolean {
+    if (user.type == 1) {
+      return true
+    }
+    return false;
   }
 
 }

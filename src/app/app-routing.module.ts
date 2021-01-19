@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent }  from './components/admin/admin.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
+import { Error404Component } from './components/error404/error404.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'shoppingCart', component: ShoppingcartComponent },
   { path: 'view/product/:id', component: ViewofproductComponent },
-  { path: '**', component: ProductsComponent }
+  { path: '**', component: Error404Component }
 ];
 
 @NgModule({

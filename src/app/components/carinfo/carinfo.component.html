@@ -1,25 +1,32 @@
 <section class="s__car__container__info">
     <div id="subtotal" class="s__car__container__details">
         <span>{{totalItems}} articulos</span>
-        <span class="s_price">${{totalPrice}}</span>
+        <span class="s_price">{{totalPrice | currency:'MXN' }}</span>
     </div>
     <div id="ship-price" class="s__car__container__details">
         <span>Envío</span>
 
         <span *ngIf="noShipCost; else shipIsNoFree" class="s_freeship">GRATIS</span>
         <ng-template #shipIsNoFree>
-            <span class="s_price">$30</span>
+            <span class="s_price">{{ 30 | currency:'MXN' }}</span>
         </ng-template>
         
     </div>
+
     <div id="iva-price" class="s__car__container__details">
         <span>Total (IVA incluido)</span>
-        <span class="s_price">${{subTotal}}</span>
+        <span id="subtotal_price" class="s_price">{{subTotal | currency:'MXN'}}</span>
     </div>
+
+    <div id="new-price-block">
+    </div>
+
     <div id="promo" class="s__car__container__promocode">
         <label for="discount">¿Tienes un código?</label>
-        <input type="text" placeholder="Código de descuento">
+        <input id="txt-discount" type="text" placeholder="Código de descuento"/>
+        <span class="s__car__container__promocode__span">{{discountText}}</span>
     </div>
+
     <button>Pagar</button>
 </section>
 
