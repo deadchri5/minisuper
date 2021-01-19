@@ -23,6 +23,7 @@ class UserController extends Controller {
         if ($params != NULL) {
             $params = json_decode($json);
             $jwt = new \JwtAuth();
+            
             return $jwt->signIn($params->email, $params->password);
         }
         else {

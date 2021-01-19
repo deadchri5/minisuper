@@ -4,6 +4,7 @@
 use App\Http\Controllers\Pruebas;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,6 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('pruebas/{num}', [Pruebas::class, 'testOrm']);
+
 
 //User routes
 Route::get('api/userTests', [UserController::class, 'test']);
@@ -32,3 +34,8 @@ Route::post('api/products/addImage', [ProductController::class, 'addImage'])->mi
 Route::get('api/products/getImage/{image}', [ProductController::class, 'getImage']);
 Route::get('api/products/getProductFromId/{id?}', [ProductController::class, 'showProductWithIdField']);
 Route::get('api/products/getRelatedProducts/{category}/{limit}/{id}', [ProductController::class, 'showRelatedProducts']);
+
+//CarShopping routes
+
+Route::get('api/ShoppingCart/{id?}', [ShoppingCarController::class, 'getProdcutStockFromTheDataBase']);
+Route::get('api/ShoppingCart/reedem/{code?}', [ShoppingCarController::class, 'discountApply']);
