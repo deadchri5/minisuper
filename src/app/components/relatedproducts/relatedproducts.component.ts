@@ -3,8 +3,7 @@ import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-relatedproducts',
-  templateUrl: './relatedproducts.component.html',
-  styleUrls: ['./relatedproducts.component.scss']
+  templateUrl: './relatedproducts.component.html'
 })
 export class RelatedproductsComponent implements OnChanges{
 

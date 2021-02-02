@@ -5,14 +5,13 @@ import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-productcard',
-  templateUrl: './productcard.component.html',
-  styleUrls: ['./productcard.component.scss']
+  templateUrl: './productcard.component.html'
 })
 export class ProductcardComponent {
 
-  public url: string;
+  public url: string
 
-  @Input() products: Product[];
+  @Input() products: Product[]
 
   constructor(private _router: Router) { 
     this.url = Global.url;

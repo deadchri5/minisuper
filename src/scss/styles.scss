@@ -4,6 +4,8 @@
 @import '../scss/functions';
 @import '../scss/breakpoints';
 @import '../scss/responsive';
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 
 body {
     background-color: $mintCream;
@@ -65,6 +67,11 @@ body {
                 color: $darkPurple;
             }
         }
+        &__profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
     }
 
     &__menu {
@@ -102,6 +109,9 @@ body {
                 letter-spacing: 1px;
             }
         }
+        @include media ('<=578px') {
+            top: 112px;
+        }
         @include media ('<=360px') {
             &__ul__li {
                 margin: 3rem -1rem;
@@ -130,6 +140,75 @@ body {
         &:hover:after {
             transform: translateY(-10px) rotate(-45deg);
         }
+    }
+
+    &__search {
+        width: 100%;
+        position: fixed;
+        top: 16px;
+        &__container {
+            width: 36%;
+            margin: auto;
+            background-color: white;
+            border-radius: 5px;
+            @include flex-dir(row);
+        }
+        &__container__text-field {
+            height: 2rem;
+            width: 30rem;
+            padding: 0.3rem 0.5rem;
+            background-color: transparent;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            border: none;
+            outline: none;
+            &:focus {
+                transition: 100ms ease-in all;
+                box-shadow:inset 0 0 3px 2px #ccc;
+            }
+        }
+        &__container__button {
+            background-color: transparent;
+            border: none;
+            opacity: 0.5;
+            font-size: 18px;
+            margin-left: 8px;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                width: 1px;
+                height: 30px;
+                background-color: $darkPurple;
+                left: -4px;
+                top: 5px;
+            }
+        }
+        @include media ('<=813px') {
+            transform: translateX(-44px);
+            &__container__text-field {
+                width: 100%;
+            }
+        }
+        @include media ('<=631px'){
+            &__container__text-field{
+                font-size: 0.8rem;
+            }
+        }
+        @include media ('<=577px'){
+            z-index: 200;
+            transform: translateY(49px);
+            &__container {
+                width: 19rem;
+            }
+            &__container__text-field{
+                height: 1.7rem;
+            }
+        }
+    }
+
+    @include media ('<=577px'){ 
+        height: 7rem;
     }
 
     @include media ('<=419px') {
@@ -185,8 +264,12 @@ body {
         }
         &__span {
             margin: auto;
+            max-width: 30ch;
+            text-align: center;
+            line-height: 1.5rem;
             &__e {
                 font-size: 12px;
+                max-width: 30ch;
                 margin: 0.5rem auto;
             }
         }
@@ -199,6 +282,9 @@ body {
             bottom: -13px;
             opacity: 0.2;
         }
+    }
+    @include media ('<=578px') {
+        top: 112px;
     }
 }
 
@@ -1153,12 +1239,56 @@ body {
 }
 /*End services component*/
 
+.cat__wrap {
+    @include flex-dir(row);
+    width: 95%;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__element{
+        @include flex-dir(row);
+        color: $darkPurple;
+        font-weight: 600;
+        border: 1px solid #ccc;
+        padding: 8px;
+        width: 14rem;
+        margin: 6px 3px;
+        border-radius: 40px;
+        background: $redGradient;
+        img {
+            width: 60px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        span {
+            margin: auto;
+            padding: 17px;
+            font-size: 12px
+        }
+        &:hover {
+            transition: 400ms ease-in all;
+            cursor: pointer;
+            background: $lighterRedGradient;
+            color: $mintCream;
+        }
+    }
+    @include media ('<=769px') {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: start;
+        &__element span {
+            padding: 10px;
+            width: 7rem;
+        }
+    }
+}
+
 /*Product card component*/
 .product__card__container{
     @include flex-dir(row);
     flex-wrap: wrap;
-    padding: 1rem 4rem;
-    justify-content: flex-start;
+    justify-content: center;
 
     @include media ('<=848px') {
         padding: 1rem 0rem;
@@ -1166,13 +1296,14 @@ body {
 }
 .product__card {
     width: 17.5rem;
-    height: 17.5rem;
+    height: 16rem;
     background-color: white;
     border-radius: 5px;
     text-align: center;
-    margin: 1rem;
-    padding: 1rem;
+    margin: 0.3rem 1rem;
+    padding: 0.4rem;
     position: relative;
+    border: 1px solid rgba(204, 204, 204, 0.575);
     &__content {
         margin: auto;
         width: 80%;
@@ -1198,27 +1329,16 @@ body {
             left: 0;
         }
         img {
-            width: 10rem;
+            width: 9rem;
             height: 9rem;
         }
     }
-    &__button {
-        button {
-            background-color: $buttons;
-            height: 2.3rem;
-            border: none;
-            border-radius: 6px;
-            color: $mintCream;
-            position: absolute;
-            bottom: 14px;
-            left: 79px;
-            &:hover {
-                background-color: #1a6be6;
-                cursor: pointer;
-                transition: 0.4s ease;
-            }
-        }
+    &:hover {
+        transition: 300ms ease-in all;
+        cursor: pointer;
+        background-color: rgba(204, 204, 204, 0.116);
     }
+
     @include media ('<=1504px') {
         &__container {
             justify-content: center;
@@ -1329,28 +1449,64 @@ body {
 
 /*Products container*/
 .products__container {
-    h4 {
-        font-size: 2rem;
-        margin: 1rem 4rem 1rem;
-        span {
-            position: relative;
-            &::after {
-                content: "";
-                background-color: $vermilion;
-                width: 100%;
-                height: 1.7px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                top: 40px
-            }  
-        }
-        
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 43px;
+    &__inf{
+        @include flex-dir(row);
     }
-    @include media ('<=tablet') {
-        h4 {
-            font-size: 1.2rem;
-            margin: 1rem 2rem 1rem;
+    &__h2 {
+        font-size: 2rem;
+        letter-spacing: 0.6px;
+        margin: 1.5rem 1rem;
+        position: relative;
+        width: max-content;
+        &::after {
+            content: "";
+            position: absolute;
+            background-color: #E41912;
+            height: 1.3px;
+            left: 0;
+                bottom: -7px;
+            width: 100%;
+        }
+    }
+    &__span{
+        font-size: 15px;
+        color: rgb(161, 161, 161);
+        margin: auto 0;
+    }
+    &__bread {
+        position: relative;
+        &__btn {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: $vermilion;
+            &:hover {
+                transition: 100ms ease-in all;
+                cursor: pointer;
+            }
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            height: 0.8px;
+            width: 100%;
+            background-color: rgba(204, 204, 204, 0.568);
+            left: 0;
+            bottom: -15px;
+        }
+    }
+    @include media ('<=769px') {
+        padding: 17px;
+    }
+    @include media ('<=539px') {
+        padding: 10px;
+        &__h2 {
+            font-size: 1.3rem;
         }
     }
 }
@@ -1463,6 +1619,39 @@ body {
         bottom: 6px;
         &:hover {
             cursor: pointer;
+        }
+    }
+    &__m__container {
+        position: absolute;
+        width: 100%;
+        transform: translateX(-2rem);
+        &__psw-field {
+            @include flex-dir(column);
+            background-color: $darkPurple;
+            color: $mintCream;
+            border-radius: 5px;
+            margin: 7rem auto;
+            width: max-content;
+            padding: 2rem;
+            input {
+                height: 1.5rem;
+                padding: 3px 8px;
+            }
+            label, button, input {
+                margin: 7px 0;
+            }
+        }
+        @include media ('<=597px') {
+            &__psw-field {
+                width: 13rem;
+                font-size: 15px;
+            }
+        }
+        @include media ('<=363px') {
+            &__psw-field {
+                width: 10rem;
+                font-size: 12px;
+            }
         }
     }
 }
@@ -2303,6 +2492,25 @@ body {
                 color: $vermilion;
             }
         }
+        &__gotocar {
+            justify-content: center;
+            display: flex;
+            &__btn {
+                color: $mintCream;
+                background-color: #16a03f;
+                width: 15rem;
+                margin: auto;
+                margin-top: 2rem;
+                height: 3rem;
+                font-size: 1.3rem;
+                border: none;
+                &:hover {
+                    transition: 0.3s ease;
+                    cursor: pointer;
+                    background-color: $darkPurpleShaded;
+                }
+            }
+        }
         &__sep {
             justify-content: center;
             display: flex;
@@ -2434,6 +2642,7 @@ body {
     width: 90%;
     margin: auto;
     &__info {
+        border: 0.3px solid #ccc;
         margin: 3rem auto;
         background-color: white;
         width: 30rem;
@@ -2506,6 +2715,45 @@ body {
 }
 /*End 404 error page*/
 
+/*Product don't found*/
+.dont-found-products-container {
+    margin: 7rem auto;
+    width: 22rem;
+    text-align: center;
+    letter-spacing: 0.3px;
+    &__p {
+        font-size: 16px;
+        line-height: 25px;
+    }
+    &__img {
+        width: 7rem;
+    }
+    &__btn {
+        background-color: $buttons;
+        border: none;
+        color: $mintCream;
+        font-size: 14px;
+        padding: 11px;
+        border-radius: 3px;
+        &:hover {
+            transition: 100ms ease-in-out all;
+            cursor: pointer;
+            background-color: #3483fae5;
+        }
+    }
+    @include media ('<=491px') {
+        width: 16rem;
+        &__p {
+            font-size: 12px;
+            line-height: 21px;
+        }
+        &__btn {
+            padding: 10px;
+        }
+    }
+}
+/*End Product don't found*/
+
 /*paginator*/
 .ANGULAR_PAGINATOR_DEFAULT {
     list-style: none;
@@ -2542,6 +2790,18 @@ body {
 .clearfix {
     clear: both;
     float: none;
+}
+
+/*Arrow button slider*/
+.arr__custom {
+    color: $vermilion;
+    font-size: 2rem;
+}
+.glide__arrow--left {
+    left: 1em;
+}
+.glide__arrow--right {
+    right: 1em;
 }
 
 /*Separators styles*/

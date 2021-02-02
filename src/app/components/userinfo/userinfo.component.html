@@ -4,7 +4,7 @@
         <h2>Tu información</h2>
         <form class="userinfo__form" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
             <label for="name">Nombre</label>
-            <input class="userinfo__input" type="text" placeholder="Ingresa tu nombre" formControlName="Name" value="xd">
+            <input class="userinfo__input" type="text" placeholder="Ingresa tu nombre" formControlName="Name">
             <label for="lastname">Apellido</label>
             <input class="userinfo__input" type="text" placeholder="Ingresa tu apellido" formControlName="LastName">
             <label for="email">Email</label>
@@ -13,7 +13,16 @@
             <input class="userinfo__input" type="number" placeholder="Ingresa tu telefóno" formControlName="Phone">
             <label for="address">Dirección</label>
             <input class="userinfo__input" type="text" placeholder="Dirección de entrega" formControlName="Address">
-            <button class="userinfo__btn" type="submit" [disabled]="formGroup.invalid">Guardar</button>
+            <button class="userinfo__btn" (click)="showPasswordValidation($event)">Guardar</button>
+
+            <div id="psw-val" class="userinfo__m__container hidden" (click)="showPasswordValidation($event)">
+                <div class="userinfo__m__container__psw-field" (click)="preventDef($event)">
+                   <label for="password">Ingresa tu contraseña para guardar los cambios.</label>
+                    <input type="password" placeholder="Confirma tu contraseña." formControlName="Password"> 
+                    <button type="submit" [disabled]="formGroup.invalid">Confirmar</button>
+                </div>
+            </div>
+
         </form>
 
     </div>

@@ -1,6 +1,6 @@
 <div *ngFor="let product of products; let i = index">
 
-    <div class="product__card">
+    <div class="product__card" (click)="navigate(product.ID)">
         <div class="product__card__image">
             <div *ngIf="product.Image; else elseBlock">
                 <img src="{{this.url}}products/getImage/{{product.Image}}" alt="{{product.Name}}">
@@ -19,9 +19,6 @@
             </div>
         </div>
 
-        <div class="product__card__button">
-            <button  (click)="navigate(product.ID)">Ver Producto</button>
-        </div>
     </div>
 
 

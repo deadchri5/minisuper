@@ -100,8 +100,17 @@ export class ViewofproductComponent implements OnInit {
   addToCar(newProduct) {
 
     const products = newProduct.product;
-    const { ID, Name, Price, Image } = products;
+    const { ID, Name, Price, Image, Stock } = products;
     let productsArray = [];
+
+    if (Stock <= 0) {
+      Report.Info (
+        'Producto sin existencia.',
+        `El producto ${Name} por el momento esta agotado.`,
+        'Confirmar'
+      );
+      return;
+    }
 
     const newProdObj = {
       ID: ID,
@@ -121,6 +130,7 @@ export class ViewofproductComponent implements OnInit {
       let auxArray: object[] = JSON.parse(sessionStorage.getItem('products'));
 
       if (this.checkIfObjectExists(auxArray, newProdObj)) {
+        this.showCarButton()
         Report.Info (
           'Elemento ya esta en su carrito',
           `El producto ${Name} ya ha sido agregado a su carrito de compras.`,
@@ -134,6 +144,7 @@ export class ViewofproductComponent implements OnInit {
       sessionStorage.setItem('products', JSON.stringify(auxArray));
       Notify.Success(`${Name} se ha agregado al carrito de compras.`);
     }
+    this.showCarButton();
     
   }
 
@@ -144,6 +155,22 @@ export class ViewofproductComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  showCarButton() {
+    const addButtonGoToCar = document.getElementById('gtcar')
+    addButtonGoToCar.innerHTML = `
+    <div id="btn-gotocar" class="view__product__options__gotocar animate__animated animate__jackInTheBox">
+    <button class="view__product__options__gotocar__btn">Ver carrito</button>
+    </div>`
+    const buttonGoToCar = document.getElementById('btn-gotocar')
+    buttonGoToCar.addEventListener('click', () => {
+      this.goToCar();
+    })
+  }
+
+  goToCar() {
+    this._router.navigate(['/shoppingCart'])
   }
 
 }

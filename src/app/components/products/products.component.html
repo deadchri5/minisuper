@@ -1,22 +1,16 @@
-<div class="search">
-    <div class="search__component">
-
-        <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
-            <input class="search__field" id="search" type="text" aria-label="Ingresa lo que deseas buscar"
-                formControlName="search" placeholder="Busca algún producto o marca...">
-
-            <button type="submit" [disabled]="searchForm.invalid" class="search__button"><i class="fa fa-search"
-                    aria-hidden="true"></i></button>
-        </form>
-
-
-    </div>
-</div>
-
 <div class="products__container">
+
+    <h2 class="products__container__h2">Categorías</h2>
+
+    <app-categories-wrap></app-categories-wrap>
+
+    <h2 class="products__container__h2">Lo más vendido 🔥</h2>
+
+    <app-glide-carousel [products]="products"></app-glide-carousel>
+
     <div *ngIf="products != undefined; else loadingProducts">
 
-        <h4>
+        <h4 class="products__container__h2">
             <span>
                 {{searchText}}
             </span>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -13,17 +12,11 @@ export class ProductsComponent implements OnInit {
 
   public searchText: string;
   public products: Product[];
-  public searchForm: FormGroup;
-  public formControl: FormControl;
 
   constructor (
-    private _productService: ProductService,
-    private _builder: FormBuilder,
+    private _productService: ProductService
     ) { 
-    this.searchText = 'Agregado recientemente';
-    this.searchForm = this._builder.group({
-      search: ['', Validators.required],
-    });
+    this.searchText = 'Quizas te puede interesar';
   }
 
   ngOnInit() {

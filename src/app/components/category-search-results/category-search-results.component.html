@@ -1,0 +1,31 @@
+<div class="products__container">
+
+    <div class="products__container__bread">
+        <button class="products__container__bread__btn" (click)="backToProductsView()">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>  Regresar
+        </button>
+    </div>
+
+    <div *ngIf="componentHaveProducts; else showProductsEmptyView">
+        <div class="products__container__inf">
+            <h2 class="products__container__h2">{{categoryTag}}</h2>
+            <span class="products__container__span">{{productsInCategory}} productos</span>
+        </div>
+        
+       <app-productcard [products]="products" class="product__card__container"></app-productcard> 
+    </div>
+    
+    <ng-template #showProductsEmptyView>
+        <div class="dont-found-products-container">
+            <img class="dont-found-products-container__img" src="../../../assets/images/icons/failed-search.svg"
+                alt="Producto no encontrado">
+            <p class="dont-found-products-container__p">Por el momento no hay productos registrados en la categoria
+                <strong>"{{categoryTag}}."</strong> </p>
+            <p class="dont-found-products-container__p">
+                Porfavor, intentelo de nuevo más tarde.
+            </p>
+            <button class="dont-found-products-container__btn" (click)="backToProductsView()">Volver al inicio</button>
+        </div>
+    </ng-template>
+
+</div>

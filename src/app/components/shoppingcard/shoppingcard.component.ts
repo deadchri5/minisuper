@@ -9,14 +9,13 @@ import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
   styleUrls: ['./shoppingcard.component.scss'],
   providers: [ShoppingcartService]
 })
-export class ShoppingcardComponent implements OnInit{
+export class ShoppingcardComponent implements OnInit {
 
   @Input() products: CarProduct;
   @Output() increasePrice = new EventEmitter();
   @Output() decrementPrice = new EventEmitter();
-  @Output() reloadParentCompoenent = new EventEmitter();
+  @Output() reloadParentComponent = new EventEmitter();
 
-  //Temporal
   priceOfItem: number;
   numberOfItems: number;
   subTotal: number;
@@ -38,7 +37,7 @@ export class ShoppingcardComponent implements OnInit{
     this.sendPriceIncreasedToParent(); //Linea de codigo problematica
     this.checkItemStock();
   }
-
+  
   checkItemStock() {
     this._shoppingcartService.getProductStock(this.products.ID).subscribe(
       res => {
@@ -81,6 +80,7 @@ export class ShoppingcardComponent implements OnInit{
   }
 
   deleteItem(idOfProductToDelete: number): void {
+    
     let ProductList: CarProduct[] = JSON.parse(sessionStorage.getItem('products'));
 
     ProductList.forEach( (product, index) => {
@@ -90,13 +90,16 @@ export class ShoppingcardComponent implements OnInit{
     } );
   
     if (ProductList.length <= 0){
-      sessionStorage.clear();
+      sessionStorage.removeItem('products')
     }
     else {
       sessionStorage.setItem('products', JSON.stringify(ProductList));
     }
     
-    this.reloadParentCompoenent.emit();
+    this.reloadParentComponent.emit({
+      cost: this.priceTemporal,
+      numberOfItems: this.numberOfItems
+    });
 
   }
 

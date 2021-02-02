@@ -18,6 +18,10 @@ $font-weights: (
     "bold": 700
 );
 
+/*Gradient*/
+$redGradient:  rgba(0, 0, 0, 0) linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43)) repeat scroll 0% 0%;
+$lighterRedGradient: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(203, 45, 62), rgb(239, 71, 58)) repeat scroll 0% 0%;
+
 /*Images*/
 $breakfastsBanner: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80";
 $servicesBanner: "https://images.unsplash.com/photo-1500576992153-0271099def59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";

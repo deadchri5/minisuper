@@ -24,6 +24,10 @@ export class ProductService {
         return this.http.get(`${this.url}products/getProductFromId/${id}`);
     }
 
+    getProductsForCategory(category):Observable<any> {
+        return this.http.get(`${this.url}products/show/${category}`)
+    }
+
     getRelatedroduct(category: number, limit: number, exclude: number) {
         return this.http.get(`${this.url}products/getRelatedProducts/${category}/${limit}/${exclude}`);
     }

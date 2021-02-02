@@ -14,6 +14,9 @@ import { AdminComponent }  from './components/admin/admin.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
 import { Error404Component } from './components/error404/error404.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ResultsSearchViewComponent } from './components/results-search-view/results-search-view.component';
+import { CategorySearchResultsComponent } from './components/category-search-results/category-search-results.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +30,9 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'shoppingCart', component: ShoppingcartComponent },
   { path: 'view/product/:id', component: ViewofproductComponent },
+  { path: 'products/:search', component: ResultsSearchViewComponent },
+  { path: 'products/category/:category', component: CategorySearchResultsComponent },
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: '**', component: Error404Component }
 ];
 

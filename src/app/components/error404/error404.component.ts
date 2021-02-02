@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-error404',
-  templateUrl: './error404.component.html',
-  styleUrls: ['./error404.component.scss']
+  templateUrl: './error404.component.html'
 })
-export class Error404Component implements OnInit {
 
-  constructor() { }
+export class Error404Component {
 
-  ngOnInit() {
+  errMsj: string
+  img: string
+
+  constructor() {
+    this.errMsj = 'La página solicitada no existe en el servidor.'
+    this.img = '../../../assets/images/icons/082-shopping-bag-5.svg'
   }
 
 }

@@ -7,11 +7,11 @@
 
         <div *ngIf="productsOfSessionStorage != null ; else noProductsTag" class="s__car__container__products">
             <div class="s__car__container__card">
-                <div *ngFor="let item of productsOfSessionStorage">
-                    <app-shoppingcard 
+                <div *ngFor="let item of productsOfSessionStorage; let i = index">
+                    <app-shoppingcard id="product{{i}}"
                     (increasePrice)="increasePrice($event)"
                     (decrementPrice)="decreasePrice($event)"
-                    (reloadParentCompoenent)="reloadThisComponent()"
+                    (reloadParentComponent)="reloadThisComponent($event)"
                     [products]="item">
                     </app-shoppingcard>
                 </div>
@@ -23,7 +23,6 @@
                <img src="../../../assets/images/icons/085-shopping-cart-5.svg" alt="Carrito de compras">
                <p>No hay elementos en su carrito.</p>
             </div>
-            
         </ng-template>
 
     </div>

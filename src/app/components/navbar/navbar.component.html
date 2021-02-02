@@ -6,9 +6,24 @@
         <img src="../../../assets/images/logoMobile.png" alt="Logo Minisuper Topacio">
     </span>
 
+    <section class="nav__desktop__search">
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm.value)">
+           <div class="nav__desktop__search__container" >
+            <input class="nav__desktop__search__container__text-field" type="text" 
+            placeholder="Busca tus productos" formControlName="search">
+            <button class="nav__desktop__search__container__button" type="submit" [disabled]="searchForm.invalid">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            </div> 
+        </form>
+        
+    </section>
+
     <section class="nav__desktop__utilities">
         <div class="nav__desktop__utilities__icon" (click)="showOrHiddenUserUtilities()">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <i *ngIf="!isUserLogged" class="fa fa-user-circle" aria-hidden="true"></i>
+            <img class="nav__desktop__utilities__profile-pic" *ngIf="isUserLogged"
+                src="https://source.unsplash.com/random" alt="imagen de perfil">
         </div>
         <div id="icon-cart" class="nav__desktop__utilities__icon" routerLink="/shoppingCart" routerLinkActive="active">
             <i class="fa fa-shopping-cart alert-car" aria-hidden="true"></i>
@@ -16,8 +31,6 @@
         <div class="nav__desktop__utilities__icon">
             <span class="menu-btn" (click)="showOrHiddenMenu()"></span>
         </div>
-
-
     </section>
 
 
@@ -33,9 +46,13 @@
             <li class="nav__user-options__ul__li" (click)="showOrHiddenUserUtilities()" routerLink="/login"
                 routerLinkActive="active" *ngIf="!isUserLogged">Iniciar sesión</li>
             <div *ngIf="isUserLogged">
-                <li class="nav__user-options__ul__li" routerLink="/userinfo" routerLinkActive="active">Mis datos</li>
-                <li class="nav__user-options__ul__li" *ngIf="isAdmin" routerLink="/admin" routerLinkActive="active">Administrar</li>
-                <li class="nav__user-options__ul__li" (click)="logOut()" >Cerrar sesión</li>
+                <li class="nav__user-options__ul__li" routerLink="/userinfo" routerLinkActive="active"
+                    (click)="showOrHiddenUserUtilities()">
+                    Mis datos</li>
+                <li class="nav__user-options__ul__li" *ngIf="isAdmin" routerLink="/admin" routerLinkActive="active"
+                    (click)="showOrHiddenUserUtilities()">
+                    Administrar</li>
+                <li class="nav__user-options__ul__li" (click)="logOut()">Cerrar sesión</li>
             </div>
         </ul>
 

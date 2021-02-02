@@ -56,10 +56,16 @@ export class UserService {
 
   deleteUser(user): Observable<any> {
     let json = JSON.stringify(user);
-    console.log(json);
     let params = new HttpParams().set('json', json);
     let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
     return this.http.delete(`${this.url}user/deleteUser`, {headers: headers, params: params});
+  }
+
+  verifyPassword(password: object): Observable<any> {
+    let json = JSON.stringify(password)
+    let params = new HttpParams().set('json', json)
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'))
+    return this.http.post(`${this.url}user/verifyPassword`, params, {headers: headers})
   }
 
 }

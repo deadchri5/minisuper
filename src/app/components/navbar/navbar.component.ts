@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarObject } from 'src/app/models/navbarObject';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { Global } from 'src/app/services/global';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 declare const stickyNavbar: any;
 
@@ -12,17 +15,29 @@ declare const stickyNavbar: any;
 
 export class NavbarComponent implements OnInit{
 
+  public url: string;
+
   isUserLogged: boolean;
   isAdmin: boolean;
+  public searchForm: FormGroup;
+  public formControl: FormControl;
   
   userData = {
     'name': '',
     'email': ''
   }
 
-  constructor(private _userService: UserService) {
+  constructor(
+    private _userService: UserService,
+    private _builder: FormBuilder,
+    private _router: Router
+    ) {
+    this.url = Global.url;
     this.isUserLogged = false;
     this.isAdmin = false;
+    this.searchForm = this._builder.group({
+      search: ['', [Validators.required] ]
+    });
    }
 
 
@@ -98,6 +113,11 @@ export class NavbarComponent implements OnInit{
       return true
     }
     return false;
+  }
+
+  onSearch(searchObject: any) {
+    let { search } = searchObject
+    this._router.navigateByUrl(`/products/${search}`)
   }
 
 }

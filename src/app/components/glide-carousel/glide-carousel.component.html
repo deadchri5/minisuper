@@ -1,0 +1,37 @@
+<div class="glide">
+    <div data-glide-el="track" class="glide__track">
+        <ul class="glide__slides">
+            <li class="glide__slide" *ngFor="let product of products">
+                <div class="product__card" (click)="navigate(product.ID)">
+                    <div class="product__card__image">
+                        <div *ngIf="product.Image; else elseBlock">
+                            <img src="{{this.url}}products/getImage/{{product.Image}}" alt="{{product.Name}}">
+                        </div>
+                        <ng-template #elseBlock>
+                            <img src="../../../assets/images/nopicture/nopicture.svg"
+                                alt="Este articulo no tiene imagen">
+                        </ng-template>
+
+                    </div>
+                    <div class="product__card__content">
+                        <div class="product__card__name">
+                            <p>{{product.Name}}</p>
+                        </div>
+                        <div class="product__card__price">
+                            <span>$ {{product.Price}}.00</span>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left arr__custom" data-glide-dir="<">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        </button>
+        <button class="glide__arrow glide__arrow--right arr__custom" data-glide-dir=">">
+            <i class="fa fa-arrow-circle-right"aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

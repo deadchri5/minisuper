@@ -3,7 +3,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Loading } from 'notiflix';
 
 
 @Component({
@@ -41,7 +43,8 @@ export class AdminComponent implements OnInit {
   constructor(
     private _productService: ProductService,
     private _userService: UserService,
-    private _builder: FormBuilder
+    private _builder: FormBuilder,
+    private _router: Router
   ) { 
     this.flagProductsTool = false;
     this.flagUsersTool = false;
@@ -54,10 +57,49 @@ export class AdminComponent implements OnInit {
     this.searchForm = this._builder.group({
       search: ['', Validators.required],
     });
+    Loading.Init({
+      svgColor: '#E41912',
+    });
   }
 
   ngOnInit() {
-    alert('hola');
+
+    this.checkCredentials();
+
+  }
+
+  async checkCredentials() {
+
+    Loading.Dots('Verificando credenciales...');
+
+    if (localStorage.getItem('token') != null) {
+
+      let promise = new Promise ((resolve) => {
+        this._userService.getUserInfo().subscribe(
+          res => {
+            let { type } = res.user
+            resolve(type)
+          }
+        )
+      })
+
+      let userType = await promise;
+
+      if (userType == 1) {
+        Loading.Remove();
+      }
+      else{
+        this._router.navigate(['/forbidden']);
+        Loading.Remove();
+      }
+      
+
+  }
+  else {
+    this._router.navigate(['/forbidden']);
+    Loading.Remove();
+  }
+
   }
 
   showProductsTool(): void {

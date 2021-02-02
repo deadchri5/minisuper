@@ -41,10 +41,11 @@ export class ShoppingcartComponent implements OnInit {
     this.numberOfItems--;
   }
 
-  reloadThisComponent() {
-    this.totalPrice = 0;
-    this.numberOfItems = 0;
-    this.ngOnInit();
+  reloadThisComponent(removeInfo) {
+    let { cost, numberOfItems } = removeInfo
+    this.totalPrice -= cost
+    this.numberOfItems -= numberOfItems
+    this.ngOnInit()
   }
 
 }

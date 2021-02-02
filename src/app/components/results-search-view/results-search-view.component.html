@@ -1,0 +1,26 @@
+<div class="products__container">
+
+    <div *ngIf="products != undefined && activateDontFoundView == false">
+
+        <h4 class="products__container__h2">
+            <span>
+                {{searchText}}
+            </span>
+        </h4>
+
+        <app-productcard [products]="products" class="product__card__container"></app-productcard>
+
+
+    </div>
+
+    <div *ngIf="activateDontFoundView">
+        <div class="dont-found-products-container">
+            <img class="dont-found-products-container__img" src="../../../assets/images/icons/binoculars.svg"
+                alt="Producto no encontrado">
+            <p class="dont-found-products-container__p">{{errReasontxt}} <strong>"{{searchText}}"</strong> </p>
+            <p class="dont-found-products-container__p">{{recomendActionstxt}}</p>
+            <button class="dont-found-products-container__btn" (click)="backToProducts()">Volver al inicio</button>
+        </div>
+    </div>
+
+</div>

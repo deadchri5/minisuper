@@ -34,6 +34,11 @@ import { CarinfoComponent } from './components/carinfo/carinfo.component';
 import { ViewofproductComponent } from './components/viewofproduct/viewofproduct.component';
 import { RelatedproductsComponent } from './components/relatedproducts/relatedproducts.component';
 import { Error404Component } from './components/error404/error404.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { CategoriesWrapComponent } from './components/categories-wrap/categories-wrap.component';
+import { GlideCarouselComponent } from './components/glide-carousel/glide-carousel.component';
+import { ResultsSearchViewComponent } from './components/results-search-view/results-search-view.component';
+import { CategorySearchResultsComponent } from './components/category-search-results/category-search-results.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +69,12 @@ import { Error404Component } from './components/error404/error404.component';
     CarinfoComponent,
     ViewofproductComponent,
     RelatedproductsComponent,
-    Error404Component
+    Error404Component,
+    ForbiddenComponent,
+    CategoriesWrapComponent,
+    GlideCarouselComponent,
+    ResultsSearchViewComponent,
+    CategorySearchResultsComponent
   ],
   imports: [
     BrowserModule,
