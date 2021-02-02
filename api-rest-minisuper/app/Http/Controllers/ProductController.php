@@ -20,15 +20,20 @@ class ProductController extends Controller {
         if (isset($category) && !is_null($category) && is_numeric($category)) {
 
             $productsDisplayed = Products::where('FK_Category', $category)->get();
-
+            
             if (sizeof($productsDisplayed) != 0) {
+                $cat = Products::where('FK_Category', $category)->first()->category->Name;
                 $response = array(
                     'code' => 200,
+                    'category'  =>  $cat,
+                    'size'  =>  sizeof($productsDisplayed),
                     'products' => $productsDisplayed
                 );
             } else {
+                $category = Category::where('ID', $category)->first('Name');
                 $response = array(
                     'code' => 400,
+                    'category'  =>  $category,
                     'message' => 'The category dont exists in the database or '
                     . 'there are not products already'
                 );

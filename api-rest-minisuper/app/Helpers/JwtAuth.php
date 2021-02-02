@@ -30,7 +30,7 @@ class JwtAuth {
      * @return type $decryptedPassword or error json response
      * return the desencrypted password of user
      */
-    private function decryptPassword($password) {
+    public function decryptPassword($password) {
         try {
             $decryptPassword = Crypt::decryptString($password);
             return $decryptPassword;
@@ -63,6 +63,7 @@ class JwtAuth {
                     'phone' => $user->Phone,
                     'address' => $user->Address,
                     'type' => $user->FK_TypeUser,
+                    'password' => $user->Password,
                     'iat' => time(),
                     'exp' => time() + (24 * 60 * 60)
                 );

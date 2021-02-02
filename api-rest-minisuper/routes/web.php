@@ -23,6 +23,7 @@ Route::put('api/user/update', [UserController::class, 'updateUser']);
 Route::get('api/user/getData', [UserController::class, 'getUserData']);
 Route::get('api/user/getUsers/{limit}/{param?}', [UserController::class, 'getUsers'])->middleware('checkPermissions');
 Route::delete('api/user/deleteUser', [UserController::class, 'deleteuserAdmin'])->middleware('checkPermissions');
+Route::post('api/user/verifyPassword', [UserController::class, 'verifyPassword'])->middleware('veryfyWebToken');
 
 //Products routes
 Route::get('api/products/show/{category?}', [ProductController::class, 'showProducts']);

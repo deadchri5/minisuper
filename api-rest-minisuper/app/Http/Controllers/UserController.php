@@ -65,8 +65,8 @@ class UserController extends Controller {
         if (!empty($params)) {
             //validate user data
             $validateData = Validator::make($params, [
-                        'name'      =>  'required|alpha',
-                        'lastName'  =>  'required|alpha',
+                        'name'      =>  'required|regex:/^[\pL\s\-]+$/u',
+                        'lastName'  =>  'required|regex:/^[\pL\s\-]+$/u',
                         'email'     =>  'required|email|unique:user',
                         'address'   =>  'required',
                         'phone'     =>  'required|numeric|unique:user',
@@ -127,8 +127,8 @@ class UserController extends Controller {
                 $userLoggedData = $JwtAuth->checkToken($token, true);
                 
                 $validate = Validator::make($params, [
-                    'Name'      =>  'required|alpha',
-                    'LastName'  =>  'required|alpha',
+                    'Name'      =>  'required|regex:/^[\pL\s\-]+$/u',
+                    'LastName'  =>  'required|regex:/^[\pL\s\-]+$/u',
                     'Email'     =>  'required|email|unique:user,email,'.$userLoggedData->id,
                     'Phone'     =>  'required|numeric|unique:user,phone,'.$userLoggedData->id
                 ]);
@@ -140,7 +140,7 @@ class UserController extends Controller {
                 unset($params['Password']);
                 
                 if (!$validate->fails()) {
-                    $userUpdate = User::where('ID', $userLoggedData->id)->update($params);
+                    User::where('ID', $userLoggedData->id)->update($params);
                     //update data
                     $response = array (
                         'message'   => 'Your profile has been update successfully',
@@ -150,7 +150,6 @@ class UserController extends Controller {
                 }
                 else {
                     echo 'The entry data is not correct please fill again.';
-                    die();
                     return response()->json($validate->errors(), 400);
                 }
                 
@@ -286,6 +285,47 @@ class UserController extends Controller {
             $response = array (
                 'error'     =>  $e,
                 'message'   =>  'No se ha podido eliminar al usuario.',
+                'code'  =>  400
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
+    
+    public function verifyPassword(Request $request) {
+        
+        $token = $request->header('Authorization');
+        $json = $request->input('json', null);
+        $params = json_decode($json, false);
+        
+        if( isset($params->password) ) {
+            
+            $jwtAuth = new \JwtAuth();
+            $data = $jwtAuth->checkToken($token, true);
+            $encryptedPsw = $data->password;
+            $decryptedPsw = $jwtAuth->decryptPassword($encryptedPsw);
+            
+            if($params->password == $decryptedPsw) {
+                $response = array (
+                'message'  =>  'Usuario verificado.',
+                'status'    =>  true,
+                'code'  =>  200
+                );
+            }
+            else {
+                $response = array (
+                'message'  =>  'Las credenciales no son correctas, intenta de nuevo.',
+                'status'    =>  false,
+                'code'  =>  400
+                );
+                
+            }
+            
+        }
+        else {
+            $response = array (
+                'message'   =>  'No se mandaron los datos correctamente',
+                'status'    =>  false,
                 'code'  =>  400
             );
         }
