@@ -5,14 +5,13 @@
             <p>Carrito de compras</p>
         </div>
 
-        <div *ngIf="productsOfSessionStorage != null ; else noProductsTag" class="s__car__container__products">
+        <div *ngIf="ShoppingCartItems != null ; else noProductsTag" class="s__car__container__products">
             <div class="s__car__container__card">
-                <div *ngFor="let item of productsOfSessionStorage; let i = index">
-                    <app-shoppingcard id="product{{i}}"
-                    (increasePrice)="increasePrice($event)"
-                    (decrementPrice)="decreasePrice($event)"
-                    (reloadParentComponent)="reloadThisComponent($event)"
-                    [products]="item">
+                <div *ngFor="let item of ShoppingCartItems; let i = index">
+                    <app-shoppingcard 
+                    [products]="item"
+                    (reloadComponent)="getProductsFromDB()"
+                    >
                     </app-shoppingcard>
                 </div>
             </div>
@@ -27,8 +26,8 @@
 
     </div>
 
-    <div *ngIf="productsOfSessionStorage != null">
-        <app-carinfo [totalPrice]="totalPrice" [totalItems]="numberOfItems"></app-carinfo>
+    <div *ngIf="ShoppingCartItems != null">
+        <app-carinfo [products]="ShoppingCartItems"></app-carinfo>
     </div>
     
     

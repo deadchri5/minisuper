@@ -22,4 +22,21 @@ export class ShoppingcartService {
     return this.http.get(`${this.url}ShoppingCart/reedem/${code}`);
   }
 
+  getCarItems(): Observable<any> {
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+    return this.http.get(`${this.url}user/getCarProducts`, {headers: headers});
+  }
+
+  modifyItemsQuantity(product: string): Observable<any> {
+    let params = new HttpParams().set('json', product);
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+    return this.http.post(`${this.url}user/addToCart`,  params, {headers: headers})
+  }
+
+  deleteCarProduct(json: string): Observable<any> {
+    let params = new HttpParams().set('json', json)
+    let headers = new HttpHeaders().append('Authorization', localStorage.getItem('token'))
+    return this.http.delete(`${this.url}ShoppingCart/delete`, {headers: headers, params:params})
+  }
+
 }

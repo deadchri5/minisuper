@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
 import { Loading, Report, Notify } from 'notiflix';
 import { Product } from 'src/app/models/product';
 import { Global } from 'src/app/services/global';
@@ -9,7 +10,7 @@ import { Global } from 'src/app/services/global';
   selector: 'app-viewofproduct',
   templateUrl: './viewofproduct.component.html',
   styleUrls: ['./viewofproduct.component.scss'],
-  providers: [ProductService]
+  providers: [ProductService, ShoppingcartService]
 })
 export class ViewofproductComponent implements OnInit {
 
@@ -22,10 +23,13 @@ export class ViewofproductComponent implements OnInit {
   idProductToExcludeOfQuery: number;
   relatedProducts: Product[];
 
+  public counter: number = 0
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _shoppingCartService: ShoppingcartService
   ) {
     this.url = Global.url;
 
@@ -97,65 +101,38 @@ export class ViewofproductComponent implements OnInit {
 
   }
 
-  addToCar(newProduct) {
-
-    const products = newProduct.product;
-    const { ID, Name, Price, Image, Stock } = products;
-    let productsArray = [];
-
-    if (Stock <= 0) {
-      Report.Info (
-        'Producto sin existencia.',
-        `El producto ${Name} por el momento esta agotado.`,
-        'Confirmar'
-      );
-      return;
-    }
-
-    const newProdObj = {
-      ID: ID,
-      Name: Name,
-      Price: Price,
-      Image: Image
-    };
-
-    //If sessionStorage value is empty
-    if (sessionStorage.getItem('products') == null) {
-        productsArray.push(newProdObj);
-        sessionStorage.setItem('products', JSON.stringify(productsArray));
-        Notify.Success(`${Name} se ha agregado al carrito de compras.`);
-    }
-    //if sessionStorage is not empty
-    else {
-      let auxArray: object[] = JSON.parse(sessionStorage.getItem('products'));
-
-      if (this.checkIfObjectExists(auxArray, newProdObj)) {
-        this.showCarButton()
-        Report.Info (
-          'Elemento ya esta en su carrito',
-          `El producto ${Name} ya ha sido agregado a su carrito de compras.`,
-          'Confirmar'
-        );
-        return;
-      }
-
-      //Add to sessionStorage if the item dont exists already
-      auxArray.push(newProdObj)
-      sessionStorage.setItem('products', JSON.stringify(auxArray));
-      Notify.Success(`${Name} se ha agregado al carrito de compras.`);
-    }
-    this.showCarButton();
-    
+  addToCar(product: any) {
+    let { ID }= product.product
+    this.counter++
+    let str = this.formJsonString(ID, this.counter)
+    this.submitQueryToDataBase(str)
   }
 
-  checkIfObjectExists(arr, obj):boolean {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].ID === obj.ID) {
-        return true;
-      }
-    }
-    return false;
+  formJsonString(ID, Quantity): string {
+    return `{"productID":"${ID}","quantity":"${Quantity}"}`
   }
+
+  submitQueryToDataBase(str: string): void {
+    let promise = new Promise<any> ( (resolved, rejected) => {
+      this._shoppingCartService.modifyItemsQuantity(str).subscribe(
+        res => resolved(res),
+        err => rejected(err)
+      )
+    })
+
+    promise.then((res)=>{
+      Notify.Success(res.message)
+      this.showCarButton()
+    })
+    .catch((err)=> {
+      Loading.Remove()
+      Report.Failure( 'Ocurrio un error', 
+      err.error.message,
+      'Aceptar' )
+    })
+
+  }
+
 
   showCarButton() {
     const addButtonGoToCar = document.getElementById('gtcar')

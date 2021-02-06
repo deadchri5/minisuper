@@ -2,105 +2,122 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CarProduct } from 'src/app/models/CarProduct';
 import { Global } from 'src/app/services/global';
 import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
+import { Report, Notify, Loading } from 'notiflix';
 
 @Component({
   selector: 'app-shoppingcard',
   templateUrl: './shoppingcard.component.html',
-  styleUrls: ['./shoppingcard.component.scss'],
   providers: [ShoppingcartService]
 })
+
 export class ShoppingcardComponent implements OnInit {
 
-  @Input() products: CarProduct;
-  @Output() increasePrice = new EventEmitter();
-  @Output() decrementPrice = new EventEmitter();
-  @Output() reloadParentComponent = new EventEmitter();
+  @Output() reloadComponent = new EventEmitter()
+  @Input() products: CarProduct
 
-  priceOfItem: number;
-  numberOfItems: number;
-  subTotal: number;
-  priceTemporal: number;
-  stock: number;
-  url: string;
+  public url: string
+  public NoStockAdvice: string
+  public totalProductPrice: number
+  public inStock: number
 
-  msjStock: string;
-
-  constructor(private _shoppingcartService: ShoppingcartService) {
-    this.numberOfItems = 1;
-    this.url = Global.url;
+  constructor(
+    private _shoppingCartService: ShoppingcartService
+  ) {
+    this.url = Global.url
+    Notify.Init({
+      position: 'right-bottom'
+    })
   }
 
   ngOnInit() {
-    this.priceOfItem = this.products.Price;
-    this.priceTemporal = this.priceOfItem;
-    this.numberOfItems = 1;
-    this.sendPriceIncreasedToParent(); //Linea de codigo problematica
-    this.checkItemStock();
+    this.getProductStock(this.products.ID)
+    this.getTotalCost()
   }
-  
-  checkItemStock() {
-    this._shoppingcartService.getProductStock(this.products.ID).subscribe(
-      res => {
-        this.stock =  res.item.inStock
+
+  getTotalCost(): void {
+    if (this.products != null)
+      this.totalProductPrice = this.products.Price * this.products.Quantity
+  }
+
+  ModifyItm(product: CarProduct, type: boolean): void {
+    Loading.Circle();
+    if (type) {
+      if (product.Quantity >= this.inStock){
+        Loading.Remove()
+        this.NoStockAdvice = 'No hay mas stock'
+        return
       }
-    );
-  }
-
-  increaseItm() {
-    if (this.numberOfItems >= this.stock) {
-      this.msjStock = "No hay más stock.";
-      return;
-    }
-    this.numberOfItems++;
-    this.priceTemporal = this.priceOfItem * this.numberOfItems;
-    this.sendPriceIncreasedToParent();
-  }
-
-  decreaseItm() {
-    if (this.numberOfItems == 1) {
-      return;
-    }
-    this.msjStock = "";
-    this.numberOfItems--;
-    this.priceTemporal = this.priceOfItem * this.numberOfItems;
-    this.sendPriceDecrementToParent();
-  }
-
-  sendPriceIncreasedToParent() {
-    this.increasePrice.emit({
-      price: this.priceOfItem,
-      items: this.numberOfItems
-    });
-  }
-
-  sendPriceDecrementToParent() {
-    this.decrementPrice.emit({
-      price: this.priceOfItem
-    });
-  }
-
-  deleteItem(idOfProductToDelete: number): void {
-    
-    let ProductList: CarProduct[] = JSON.parse(sessionStorage.getItem('products'));
-
-    ProductList.forEach( (product, index) => {
-      if (product.ID === idOfProductToDelete) {
-        ProductList.splice(index, 1);
-      }
-    } );
-  
-    if (ProductList.length <= 0){
-      sessionStorage.removeItem('products')
+      product.Quantity++
+      let str = this.formJsonString(product)
+      this.submitQueryToDataBase(str)
     }
     else {
-      sessionStorage.setItem('products', JSON.stringify(ProductList));
+      if (product.Quantity <= 1){
+        Loading.Remove()
+        return
+      }
+      product.Quantity--
+      this.NoStockAdvice = ''
+      let str = this.formJsonString(product)
+      this.submitQueryToDataBase(str)
     }
-    
-    this.reloadParentComponent.emit({
-      cost: this.priceTemporal,
-      numberOfItems: this.numberOfItems
-    });
+  }
 
+  formJsonString(product: CarProduct): string {
+    return `{"productID":"${product.ID}","quantity":"${product.Quantity}"}`
+  }
+
+  submitQueryToDataBase(str: string): void {
+    let promise = new Promise<any> ( (resolved, rejected) => {
+      this._shoppingCartService.modifyItemsQuantity(str).subscribe(
+        res => resolved(res),
+        err => rejected(err)
+      )
+    })
+
+    promise.then((res)=>{
+      Loading.Remove()
+      this.reloadComponent.emit()
+    })
+    .catch((err)=> {
+      Loading.Remove()
+      Report.Failure( 'Ocurrio un error', 
+      err.error.message,
+      'Aceptar' )
+    })
+
+  }
+
+  getProductStock(ID: number) {
+    let promise = new Promise<any>((resolved, rejected) => {
+      this._shoppingCartService.getProductStock(ID).subscribe(
+        res => resolved(res),
+        err => rejected(err)
+      )
+    })
+    promise.then((res) => {
+      this.inStock = res.item.inStock
+    })
+    .catch( () => {
+      location.href="/shoppingCart"
+    })
+  }
+
+  deleteItem(ID: number) {
+    let str: string = `{"productID":${ID}}`
+    let promise = new Promise<any>((resolved, rejected) => {
+      this._shoppingCartService.deleteCarProduct(str).subscribe(
+        res => resolved(res),
+        err => rejected(err)
+      )
+    })
+    promise.then((res)=>{
+      Notify.Success(res.message)
+      this.reloadComponent.emit()
+    })
+    .catch((err)=>{
+      Notify.Failure(err.error.message)
+    })
   }
 
 }

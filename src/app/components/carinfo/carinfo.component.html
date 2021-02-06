@@ -1,6 +1,6 @@
 <section class="s__car__container__info">
     <div id="subtotal" class="s__car__container__details">
-        <span>{{totalItems}} articulos</span>
+        <span>{{totalProducts}} articulos</span>
         <span class="s_price">{{totalPrice | currency:'MXN' }}</span>
     </div>
     <div id="ship-price" class="s__car__container__details">
@@ -8,7 +8,7 @@
 
         <span *ngIf="noShipCost; else shipIsNoFree" class="s_freeship">GRATIS</span>
         <ng-template #shipIsNoFree>
-            <span class="s_price">{{ 30 | currency:'MXN' }}</span>
+            <span class="s_price">{{ 15 | currency:'MXN' }}</span>
         </ng-template>
         
     </div>

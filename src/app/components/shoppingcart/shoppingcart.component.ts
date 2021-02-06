@@ -1,51 +1,41 @@
 import { Component, OnInit} from '@angular/core';
 import { CarProduct } from 'src/app/models/CarProduct';
+import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
 
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
-  styleUrls: ['./shoppingcart.component.scss']
+  providers: [ShoppingcartService]
 })
+
 export class ShoppingcartComponent implements OnInit {
 
-  numberOfItems: number;
-  totalPrice: number;
+  public ShoppingCartItems: CarProduct[]
 
-  productsOfSessionStorage: CarProduct[];
-
-  constructor() { 
-    this.productsOfSessionStorage = [];
+  constructor(
+    private _shoppingCartService: ShoppingcartService
+  ) { 
   }
 
   ngOnInit() {
-    window.scroll(0, 0);
-    this.productsOfSessionStorage = JSON.parse(sessionStorage.getItem('products'));
+    this.getProductsFromDB();
   }
 
-  increasePrice(itmsInfo) {
-    let tempPrice: number = itmsInfo.price;
-    let tempNumberOfItems: number = itmsInfo.items;
-    if (this.totalPrice == undefined) {
-      this.totalPrice = tempPrice;
-      this.numberOfItems = tempNumberOfItems;
-    }
-    else {
-      this.totalPrice += tempPrice;
-      this.numberOfItems++;
-    }
+  getProductsFromDB() {
+    let promise = new Promise<any>( (resolved, rejected) => {
+      this._shoppingCartService.getCarItems().subscribe(
+        res => resolved(res),
+        err => rejected(err)
+      )
+    } )
+    promise.then((res)=> {
+      let { productos } = res
+      this.ShoppingCartItems = productos
+    })
+    .catch((err)=> {
+      console.log(err)
+    })
   }
 
-  decreasePrice(priceInfo) {
-    let tempValueToDecrease: number = priceInfo.price;
-    this.totalPrice -= tempValueToDecrease;
-    this.numberOfItems--;
-  }
-
-  reloadThisComponent(removeInfo) {
-    let { cost, numberOfItems } = removeInfo
-    this.totalPrice -= cost
-    this.numberOfItems -= numberOfItems
-    this.ngOnInit()
-  }
 
 }

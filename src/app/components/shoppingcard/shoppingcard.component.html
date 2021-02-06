@@ -1,11 +1,11 @@
 <div class="s__card">
 
     <div class="s__card__f-node">
-        <img src="{{this.url}}products/getImage/{{products.Image}}" alt="imagen de ejemplo">
+        <img src="{{this.url}}products/getImage/{{products.Image}}" alt="Imagen {{products.Name}}">
 
         <div class="s__card__info">
             <p>{{products.Name}}</p>
-            <p>{{priceOfItem | currency:'MXN' }}</p>
+            <p>{{products.Price | currency:'MXN' }}</p>
         </div>
 
     </div>
@@ -14,18 +14,18 @@
 
         <div class="s__card__quantitysel">
             <span class="s__card__msj">
-                {{msjStock}}
+                {{NoStockAdvice}}
             </span>
             
             <div style="margin: auto; border: 1px solid; border-radius: 4px; display: flex;">
-                <span class="s__card__quantitysel__interactive" (click)="decreaseItm()"><i class="fa fa-chevron-down"
+                <span class="s__card__quantitysel__interactive" (click)="ModifyItm(products, false)"><i class="fa fa-chevron-down"
                         aria-hidden="true"></i></span>
-                <span class="s__card__quantitysel__val">{{numberOfItems}}</span>
-                <span class="s__card__quantitysel__interactive" (click)="increaseItm()"><i class="fa fa-chevron-up"
+                <span class="s__card__quantitysel__val">{{products.Quantity}}</span>
+                <span class="s__card__quantitysel__interactive" (click)="ModifyItm(products, true)"><i class="fa fa-chevron-up"
                         aria-hidden="true"></i></span>
             </div>
             <div class="s__card__sub">
-                <span class="s__card__sub__price">{{priceTemporal | currency:'MXN'}}</span>
+                <span class="s__card__sub__price">{{totalProductPrice | currency:'MXN'}}</span>
             </div>
         </div>
     

@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
+import { CarProduct } from 'src/app/models/CarProduct';
 
 @Component({
   selector: 'app-carinfo',
@@ -8,39 +9,59 @@ import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
 })
 export class CarinfoComponent implements OnInit, OnChanges {
 
-  @Input() totalPrice: number;
-  @Input() totalItems: number;
+  @Input() products: CarProduct[]
 
+  public totalPrice: number
+  public totalProducts: number
+  public subTotal: number
+
+  public noShipCost: boolean
   discountText: string = '';
 
-  subTotal: number;
-
-  noShipCost: boolean = false; //By default the ship cost is apply for any purchase
-
-  constructor(private _shoppingCartService: ShoppingcartService) { 
-    this.totalPrice = 0;
-    this.subTotal = 0;
-    this.totalItems = 0;
+  constructor(
+    private _shoppingCartService: ShoppingcartService
+  ) { 
   }
 
-  ngOnInit() {
-    this.runDiscountCodeScript();
+  ngOnInit(){
+    this.totalPrice = this.obtainTotalPrice()
+    this.totalProducts = this.obtainTotalProducts()
+    this.checkDiscount()
+    this.runDiscountCodeScript()
   }
 
   ngOnChanges() {
+    this.ngOnInit()
+    const discountCode = (<HTMLInputElement>document.getElementById('txt-discount')).value;
+    if (discountCode != '')
+    this.consultDiscount(discountCode);
+  }
 
+  obtainTotalPrice(): number {
+    let totalPrice: number = 0
+    this.products.forEach(product => {
+      totalPrice += product.Quantity * product.Price
+    })
+    return totalPrice
+  }
+
+  obtainTotalProducts(): number {
+    let totalProducts: number = 0
+    this.products.forEach(product => {
+      totalProducts += product.Quantity
+    })
+    return totalProducts
+  }
+
+  checkDiscount(){
     this.noShipCost = this.checkIfShipIsFree();
 
     if (!this.noShipCost) {
-      this.subTotal = this.totalPrice + 30;
+      this.subTotal = this.totalPrice + 15;
     }
     else {
       this.subTotal = this.totalPrice;
     }
-
-    const discountCode = (<HTMLInputElement>document.getElementById('txt-discount')).value;
-    if (discountCode != '')
-    this.consultDiscount(discountCode);
   }
 
   checkIfShipIsFree(): boolean {
@@ -114,6 +135,5 @@ export class CarinfoComponent implements OnInit, OnChanges {
     }
     
   }
-
 
 }
