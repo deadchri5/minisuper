@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Crypt;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 //Import User Model
 use App\Models\User;
+use App\Models\Cart;
 
 class UserController extends Controller {
 
@@ -86,7 +87,6 @@ class UserController extends Controller {
                 $user->ID = $id;
                 $user->Name = $params['name'];
                 $user->LastName = $params['lastName'];
-                $user->Age = 18;
                 $user->Email = $params['email'];
                 $user->Address = $params['address'];
                 $user->Phone = $params['phone'];
@@ -332,5 +332,99 @@ class UserController extends Controller {
         
         return response()->json($response, $response['code']);
     }
+    
+    public function addToCart(Request $request) {
+        $token = $request->header('Authorization');
+        $json = $request->input('json', null);
+        $params = json_decode($json, false);
+        
+        $jwtAuth = new \JwtAuth();
+        $userID = $jwtAuth->checkToken($token, true)->id;
+        
+        if (!is_null($params)) {
+            
+            $productInCart = Cart::where('FK_product', $params->productID)
+                    ->where('FK_user', $userID)
+                    ->first();
+            
+            if (!is_null($productInCart)) {
+                try{
+                    Cart::where('FK_product', $params->productID)
+                    ->where('FK_user', $userID)
+                    ->update((['Quantity'=>$params->quantity]));
+                    $response = array (
+                    'message'   =>  'Se actualizo la cantidad del producto.',
+                    'code'  =>  200
+                    );
+                }
+                catch (\Illuminate\Database\QueryException $e){
+                    $response = array (
+                    'message'   =>  'Se ha producido un error al guardar en BD.',
+                    'error' => $e,
+                    'code'  =>  500
+                    );
+                }
+            }
+            else {
+                $cart = new Cart();
+                $cart->FK_user = $userID;
+                $cart->FK_product = $params->productID;
+                $cart->Quantity = $params->quantity;
+                $cart->save();
+                $response = array (
+                    'product'   =>  $cart,
+                    'message'   =>  'Se ha añadido el producto al carrito.',
+                    'code'  =>  200
+                );
+            }
+            
+        }
+        else {
+            $response = array (
+                'message'   =>  'No se recibieron los parametros necesarios '
+                . 'para realizar esta operación.',
+                'code'  =>  400
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
 
+    public function getCartItems(Request $request) {
+        $token = $request->header('Authorization');
+        $jwtAuth = new \JwtAuth();
+        $userID = $jwtAuth->checkToken($token, true)->id;
+        
+        try{
+        $query = Cart::join('product', 'cart.FK_product', '=', 'product.ID')
+                ->select('cart.Quantity' ,'product.ID', 'product.Name',
+                        'product.Price', 'product.Image')
+                ->where('FK_user', $userID)
+                ->get();
+        }
+        catch (\Illuminate\Database\QueryException $e){
+            $response = array (
+                'message'   =>  'Se ha producido un error durante la consulta en la BD.',
+                'error' => $e,
+                'code'  =>  500
+            );
+        }
+        
+        if (sizeof($query) > 0) {
+            $response = array (
+                'message'   =>  'Elementos en el carrito.',
+                'productos' =>  $query,
+                'code'  =>  200
+            );
+        }
+        else {
+            $response = array (
+                'message' => 'Su carrito de compras está vacio.',
+                'code'  =>  200
+            );
+        }
+        
+        return response()->json($response, $response['code']);
+    }
+    
 }

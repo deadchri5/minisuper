@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Discount;
+use App\Models\Cart;
 
 class ShoppingCarController extends Controller
 {
@@ -68,5 +69,65 @@ class ShoppingCarController extends Controller
         }
     }
     return response()->json($response, $response['code']);
+    }
+
+    public function deleteProduct(Request $request) {
+        $token = $request->header('Authorization');
+        $json = $request->input('json', null);
+        $params = json_decode($json, false);
+
+        if (isset($params->productID) && is_numeric($params->productID)){
+            $jwtAuth = new \JwtAuth();
+            $userID = $jwtAuth->checkToken($token, true)->id;
+
+            try{
+                Cart::where('FK_product', $params->productID)
+                            ->where('FK_user', $userID)
+                            ->delete();
+            }
+            catch(\Illuminate\Database\QueryException $e){
+                $response = array (
+                    'message' => 'ocurrio un error durante la ejecución de la consulta',
+                    'error' =>  $e,
+                    'code'  =>  500
+                );
+            }
+
+            $response = array (
+                'message' => 'Elemento eliminado con exito del carrito',
+                'code'  =>  200
+            );
+
+        }
+        else{
+            $response = array (
+                'message' => 'No se mandaron los parametros necesarios.',
+                'code'  =>  400
+            );
+        }
+
+        return response()->json($response, $response['code']);
+
+    }
+
+    public function cleanCart(Request $request) {
+        $token = $request->header('Authorization');
+        $jwtAuth = new \JwtAuth();
+        $userID = $jwtAuth->checkToken($token, true)->id;
+        try{
+            Cart::where('FK_user', $userID)->delete();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            $response = array (
+                'message' => 'ocurrio un error durante la ejecución de la consulta',
+                'error' =>  $e,
+                'code'  =>  500
+            );
+        }
+        $response = array (
+            'message' => 'Se ha vaciado el carrito de compras.',
+            'code'  =>  200
+        );
+        return response()->json($response, $response['code']);
     }
 }

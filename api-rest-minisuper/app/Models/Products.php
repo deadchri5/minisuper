@@ -29,4 +29,9 @@ class Products extends Model
     public function category() {
         return $this->belongsTo('App\Models\Category', 'FK_Category');
     }
+    
+    /*Many to many relation*/
+    public function cart() {
+        return $this->belongsToMany('App\Models\Cart');
+    }
 }

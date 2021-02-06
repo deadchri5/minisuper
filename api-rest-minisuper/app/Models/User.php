@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,5 +53,10 @@ class User extends Authenticatable
     //Many to one relation
     public function typeUser() {
         return $this->belongsTo('App\Models\TypeUser', 'FK_TypeUser');
+    }
+    
+    //Many to many relation
+    public function cart() {
+        return $this->belongsToMany('App\Models\Cart');
     }
 }
